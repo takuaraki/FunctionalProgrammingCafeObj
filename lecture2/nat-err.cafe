@@ -1,0 +1,40 @@
+mod! NAT-ERR {
+  -- モジュールのインポート. pr, ex, us
+  pr(NAT)
+
+  -- ソートの宣言
+  -- Nat と ErrNat を包含する Nat&Err を定義
+  [Nat ErrNat < Nat&Err]
+
+  -- 関数の宣言. op
+  op errNat : -> ErrNat {constr}
+  op p_ : Zero -> ErrNat
+  op p_ : ErrNat -> ErrNat
+  op p_ : Nat&Err -> Nat&Err
+  op _quo_ : Nat&Err Zero -> ErrNat
+  op _quo_ : Nat&Err ErrNat -> ErrNat
+  op _quo_ : ErrNat Nat&Err -> ErrNat
+  op _quo_ : Nat&Err Nat&Err -> Nat&Err
+
+  -- 変数の宣言. var, vars
+  var NE : Nat&Err
+
+  -- 式の宣言. eq
+  eq p 0 = errNat .
+  eq p errNat = errNat .
+  eq NE quo 0 = errNat .
+  eq NE quo errNat = errNat .
+  eq errNat quo NE = errNat .
+}
+
+-- 検証用コード
+open NAT-ERR .
+  red p 1 .
+  red p 0 .
+  red p errNat .
+  red 10 quo 3 .
+  red 10 quo 0 .
+  red 10 quo errNat .
+  red errNat quo 3 .
+  red errNat quo errNat .
+close

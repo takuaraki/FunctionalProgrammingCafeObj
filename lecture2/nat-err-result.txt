@@ -1,0 +1,30 @@
+CafeOBJ> in nat-err
+
+processing input : ./nat-err.cafe
+
+-- defining module! NAT-ERR
+-- opening module NAT-ERR
+-- reduce in %NAT-ERR : (p 1):Nat
+(0):Zero
+(0.0000 sec for parse, 0.0000 sec for 1 rewrites + 1 matches)
+-- reduce in %NAT-ERR : (p 0):ErrNat
+(errNat):ErrNat
+(0.0000 sec for parse, 0.0000 sec for 1 rewrites + 1 matches)
+-- reduce in %NAT-ERR : (p errNat):ErrNat
+(errNat):ErrNat
+(0.0000 sec for parse, 0.0000 sec for 1 rewrites + 1 matches)
+-- reduce in %NAT-ERR : (10 quo 3):Nat
+(3):NzNat
+(0.0000 sec for parse, 0.0000 sec for 1 rewrites + 1 matches)
+-- reduce in %NAT-ERR : (10 quo 0):ErrNat
+(errNat):ErrNat
+(0.0000 sec for parse, 0.0000 sec for 1 rewrites + 1 matches)
+-- reduce in %NAT-ERR : (10 quo errNat):ErrNat
+(errNat):ErrNat
+(0.0000 sec for parse, 0.0000 sec for 1 rewrites + 1 matches)
+-- reduce in %NAT-ERR : (errNat quo 3):ErrNat
+(errNat):ErrNat
+(0.0000 sec for parse, 0.0000 sec for 1 rewrites + 1 matches)
+-- reduce in %NAT-ERR : (errNat quo errNat):?Nat&Err
+(errNat quo errNat):?Nat&Err
+(0.0000 sec for parse, 0.0000 sec for 0 rewrites + 0 matches)
