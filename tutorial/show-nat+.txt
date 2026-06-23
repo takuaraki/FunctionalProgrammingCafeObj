@@ -1,0 +1,18 @@
+CafeOBJ上の実行結果を記載したテキストファイルです。コードではありません。
+
+CafeOBJ> show NAT+
+module! NAT+
+{
+  imports {
+    protecting (SIMPLE-NAT)
+  }
+  signature {
+    op _ + _ : Nat Nat -> Nat { strat: (1 0 2) prec: 41 }
+  }
+  axioms {
+    eq (0 + M:Nat) = M .
+    eq (s(N:Nat) + M:Nat) = s((N + M)) .
+  }
+}
+
+コメント：なんか構造わかって嬉しいかもしれん
