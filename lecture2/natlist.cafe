@@ -1,0 +1,82 @@
+mod! NATLIST {
+  -- モジュールのインポート. pr, ex, us
+  -- NATはNAT-ERRでインポート済み
+  pr(NAT-ERR)
+
+  -- ソートの宣言
+  -- NatList は空のリストと空じゃないリストを包含
+  [Nil NnNatList < NatList]
+
+  -- 関数の宣言. op
+  -- nilは空のリスト
+  op nil : -> Nil {constr}
+  -- NatListに要素がついたものは絶対空じゃない
+  op _|_ : Nat NatList -> NnNatList {constr}
+
+  -- 先頭を取り出す関数 hd
+  -- 空のリストからは取り出せないのでエラー
+  op hd : Nil -> ErrNat
+  -- 空じゃないリストからは取り出せる
+  op hd : NnNatList -> Nat
+  -- 空かどうかわからなかったら、取り出せるorエラー
+  op hd : NatList -> Nat&Err
+
+  -- 先頭以外を返す関数 tl
+  -- 先頭はあるかないかわからないが、先頭以外は必ずあるのでErrNatは出ない
+  op tl : NatList -> NatList
+
+  -- リストを繋げる演算子 @
+  op _@_ : NatList NatList -> NatList
+
+  -- 区間リスト生成
+  op [_.._] : Nat Nat -> NatList
+
+  -- if で NatList を扱う
+  op if_then {_} else {_} : Bool NatList NatList -> NatList
+
+  -- 変数の宣言. var, vars
+  vars X Y : Nat
+  vars L L2 : NatList
+
+  -- 式の宣言. eq
+  eq hd(nil) = errNat .
+  eq hd(X | L) = X .
+  eq tl(nil) = nil .
+  eq tl(X | L) = L .
+  eq nil @ L2 = L2 .
+  eq (X | L) @ L2 = X | (L @ L2) . -- 例: (1 | nil) @ (2 | nil) -> 1 | (nil @ (2 | nil)) -> 1 | 2 | nil
+  eq [X .. Y] = if X > Y then {nil} else {X | [X + 1 .. Y]} .
+  eq if true then {L} else {L2} = L .
+  eq if false then {L} else {L2} = L2 .
+}
+
+-- 検証用コード
+open NATLIST .
+  --> ***** hd *****
+  red hd(nil) .
+  red hd(0 | nil) .
+  red hd(1 | 0 | nil) .
+  --> 
+  --> ***** tl *****
+  red tl(nil) .
+  red tl(0 | nil) .
+  red tl(1 | 0 | nil) .
+  --> 
+  --> ***** @ *****
+  red nil @ nil .
+  red nil @ (1 | 0 | nil) .
+  red (3 | 2 | nil) @ (1 | 0 | nil) .
+  --> 
+  --> ***** [_.._] *****
+  red [5 .. 2] .
+  red [2 .. 5] .
+  --> 
+  --> ***** if *****
+  red if 3 > 2 then {1 | nil} else {0 | nil} .
+  red if 2 > 3 then {1 | nil} else {0 | nil} .
+  --> 
+  --> ***** complex *****
+  red hd(tl(nil)) .
+  red hd(tl(0 | nil)) .
+  red hd(tl(1 | 0 | nil)) .
+close
