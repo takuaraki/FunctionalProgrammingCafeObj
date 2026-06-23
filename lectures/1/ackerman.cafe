@@ -1,0 +1,27 @@
+mod! ACKERMAN {
+  -- モジュールのインポート. pr, ex, us
+  pr(NAT)
+
+  -- 関数の宣言. op
+  op ack : Nat Nat -> Nat
+
+  -- 変数の宣言. var, vars
+  var Y : Nat
+  vars NzX NzY : NzNat
+
+  -- 式の宣言. eq
+  eq ack(0, Y) = Y + 1 .
+  eq ack(NzX, 0) = ack(p NzX, 1) .
+  eq ack(NzX, NzY) = ack(p NzX, ack(NzX, p NzY)) .
+}
+
+-- 検証用コード
+open ACKERMAN .
+  red ack(0, 0) .
+  red ack(1, 1) .
+  red ack(2, 2) .
+  red ack(3, 2) .
+  red ack(3, 3) .
+
+  -- red ack(4, 3) . -- エラーになった。Control stack guard page unprotected
+close

@@ -1,0 +1,37 @@
+mod! FIBONACCI {
+  -- モジュールのインポート. pr, ex, us
+  pr(NAT)
+
+  -- 関数の宣言. op
+  op fib : Nat -> Nat
+  op sfib : Nat -> Nat
+
+  -- 変数の宣言. var, vars
+  var NzX : NzNat
+
+  -- 式の宣言. eq
+  -- fib
+  eq fib(0) = 0 .
+  eq fib(NzX) = sfib(p NzX) .
+  -- sfib. 補助関数. fibとの相互再帰になっている
+  eq sfib(0) = 1 .
+  eq sfib(NzX) = fib(NzX) + fib(p NzX) .
+}
+
+-- 検証用コード
+open FIBONACCI .
+  red fib(10) .
+  red fib(20) .
+  red fib(30) .
+close
+
+"
+  なぜこんな書き方なのか？ChatGPTに聞きながら考えてみた
+  p X を使う時に、X が 0 ではないことを保証する必要がある
+  たとえば、フィボナッチ数列の定義(F(n+2)=F(n)+F(n+1), F(n)=F(n-1)+F(n-2))に基づいて
+  eq fib(NzX) = fib(p NzX) + fib(p (p NzX)) .
+  と書くと、fib(1)の場合に p (p 1) が現れる
+  しかし p 1 = 0 なので、未定義の p 0 が発生してしまう。←講義で言ってた2つ前を参照できない状態
+  なので、補助関数で2つ前が参照できる時だけF(n-1)+F(n-2)としている
+  2つ前が参照できない時(fib(1)の時)は、sfib(0)=1とすることでfib(1)=sfib(0)=1とできる
+"

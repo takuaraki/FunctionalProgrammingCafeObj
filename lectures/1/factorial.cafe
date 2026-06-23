@@ -1,0 +1,29 @@
+mod! FACTORIAL {
+  -- NATモジュールをインポート
+  pr(NAT)
+
+  -- 関数factの宣言
+  op fact : Nat -> Nat
+
+  -- 変数NzXの宣言
+  var NzX : NzNat
+
+  -- 式の宣言
+  -- 0! = 0
+  eq fact(0) = 1 .
+  -- k! = k * (k-1)!
+  eq fact(NzX) = NzX * fact(p NzX) .
+}
+
+-- 以下は検証用
+open FACTORIAL .
+  red fact(0) .
+  red fact(1) .
+  red fact(10) .
+  red fact(100) .
+  red fact(1000) .
+
+  -- 10000はStack Over Flowになる。以下のメッセージが出た
+  -- reduce in %NAT : (fact(10000)):NatINFO: Control stack guard page unprotected
+  -- red fact(10000) . 
+close

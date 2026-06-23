@@ -1,0 +1,16 @@
+CafeOBJ> in fibonacci
+
+processing input : ./fibonacci.cafe
+
+-- defining module! FIBONACCI
+[Warning]: Redefining module FIBONACCI 
+-- opening module FIBONACCI
+-- reduce in %FIBONACCI : (fib(10)):Nat
+(55):NzNat
+(0.0000 sec for parse, 0.0009 sec for 639 rewrites + 870 matches)
+-- reduce in %FIBONACCI : (fib(20)):Nat
+(6765):NzNat
+(0.0000 sec for parse, 0.0503 sec for 79201 rewrites + 107856 matches)
+-- reduce in %FIBONACCI : (fib(30)):Nat
+(832040):NzNat
+(0.0000 sec for parse, 3.1707 sec for 9741689 rewrites + 13266265 matches)
