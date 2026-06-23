@@ -1,0 +1,25 @@
+mod! FACTORIAL-MIX-OP {
+  -- NATモジュールをインポート
+  pr(NAT)
+
+  -- 関数factの宣言
+  op _! : Nat -> Nat
+
+  -- 変数NzXの宣言
+  var NzX : NzNat
+
+  -- 式の宣言
+  -- 0! = 0
+  eq 0 ! = 1 .
+  -- k! = k * (k-1)!
+  eq NzX ! = NzX * ((p NzX) !) .
+}
+
+-- 以下は検証用
+open FACTORIAL-MIX-OP .
+  red 0 ! .
+  red 1 ! .
+  red 10 ! .
+  red 100 ! .
+  red 1000 ! .
+close
