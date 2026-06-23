@@ -1,0 +1,31 @@
+mod! OEDC-FACT-MIX-OP {
+  -- モジュールのインポート
+  pr(NAT)
+
+  -- 関数の宣言. op
+  op if_then {_} else {_} : Bool Nat Nat -> Nat
+  op g : Nat Nat -> Nat
+  op _! : Nat -> Nat
+
+  -- 変数の宣言. var, vars
+  vars X Y : Nat
+  var NzX : NzNat
+
+  -- 式の宣言. eq
+  -- if then else.
+  eq if true then {X} else {Y} = X .
+  eq if false then {X} else {Y} = Y .
+  -- g 
+  eq g(X,Y) = if X > Y then {g(X, 2 * Y) * g(sd(X, Y), 2 * Y)} else {X} .
+  -- _!
+  eq 0 ! = 1 .
+  eq NzX ! = g(NzX, 1) .
+}
+
+-- 検証用コード
+open OEDC-FACT-MIX-OP .
+  red 100 ! .
+
+  -- 10000でもStack Over Flowにならない
+  red 10000 ! .
+close
