@@ -1,0 +1,23 @@
+mod! GCD {
+  -- モジュールのインポート. pr, ex, us
+  pr(NAT)
+
+  -- 関数の宣言. op
+  op gcd : Nat Zero -> Nat
+  op gcd : Nat NzNat -> Nat
+  op gcd : Nat Nat -> Nat
+
+  -- 変数の宣言. var, vars
+  var X : Nat
+  var NzY : NzNat
+
+  -- 式の宣言. eq
+  eq gcd(X, 0) = X .
+  eq gcd(X, NzY) = gcd(NzY, X rem NzY) .
+}
+
+-- 検証用コード
+open GCD .
+  red gcd(24, 36) .
+  red gcd(2015, 31031) .
+close

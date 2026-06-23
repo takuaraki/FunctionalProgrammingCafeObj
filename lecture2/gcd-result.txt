@@ -1,0 +1,7 @@
+-- opening module GCD
+-- reduce in %GCD : (gcd(24,36)):Nat
+(12):NzNat
+(0.0000 sec for parse, 0.0000 sec for 7 rewrites + 7 matches)
+-- reduce in %GCD : (gcd(2015,31031)):Nat
+(403):NzNat
+(0.0000 sec for parse, 0.0000 sec for 9 rewrites + 9 matches)
