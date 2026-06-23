@@ -1,0 +1,23 @@
+mod! LCM {
+  -- モジュールのインポート. pr, ex, us
+  pr(GCD)
+
+  -- 関数の宣言. op
+  op lcm : Nat Zero -> Zero
+  op lcm : Nat NzNat -> Nat
+  op lcm : Nat Nat -> Nat
+
+  -- 変数の宣言. var, vars
+  var X : Nat
+  var NzY : NzNat
+
+  -- 式の宣言. eq
+  eq lcm(X, 0) = 0 .
+  eq lcm(X, NzY) = (X quo gcd(X, NzY)) * NzY .
+}
+
+-- 検証用コード
+open LCM .
+  red lcm(24, 36) .
+  red lcm(2015, 31031) .
+close
