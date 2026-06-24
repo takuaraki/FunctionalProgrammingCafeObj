@@ -1,0 +1,33 @@
+mod! ERATOSTHENES-SIEVE {
+  -- モジュールのインポート. pr, ex, us
+  pr(NATLIST)
+
+  -- 関数の宣言. op
+  op primesUpto : Nat -> NatList
+  op sieve : NatList -> NatList
+  op check : Nat NatList -> NatList
+
+  -- 変数の宣言. var, vars
+  vars X Y : Nat
+  var NzX : NzNat
+  var L : NatList
+
+  -- 式の宣言. eq
+  -- primesUpto
+  eq primesUpto(X) = sieve([2 .. X]) .
+  -- sieve
+  eq sieve(nil) = nil .
+  eq sieve(X | L) = X | sieve(check(X, L)) .
+  -- check
+  eq check(0, L) = L .
+  eq check(NzX, nil) = nil .
+  eq check(NzX, Y | L) = if NzX divides Y then {check(NzX, L)} else {Y | check(NzX, L)} .
+}
+
+-- 検証用コード
+open ERATOSTHENES-SIEVE .
+  red primesUpto(10) .
+  red primesUpto(20) .
+  red primesUpto(50) .
+  red primesUpto(100) .
+close

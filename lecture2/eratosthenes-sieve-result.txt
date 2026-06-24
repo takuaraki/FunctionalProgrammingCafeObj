@@ -1,0 +1,13 @@
+-- opening module ERATOSTHENES-SIEVE
+-- reduce in %ERATOSTHENES-SIEVE : (primesUpto(10)):NatList
+(2 | (3 | (5 | (7 | nil)))):NnNatList
+(0.0000 sec for parse, 0.0005 sec for 85 rewrites + 133 matches)
+-- reduce in %ERATOSTHENES-SIEVE : (primesUpto(20)):NatList
+(2 | (3 | (5 | (7 | (11 | (13 | (17 | (19 | nil)))))))):NnNatList
+(0.0000 sec for parse, 0.0013 sec for 220 rewrites + 367 matches)
+-- reduce in %ERATOSTHENES-SIEVE : (primesUpto(50)):NatList
+(2 | (3 | (5 | (7 | (11 | (13 | (17 | (19 | (23 | (29 | (31 | (37 | (41 | (43 | (47 | nil))))))))))))))):NnNatList
+(0.0000 sec for parse, 0.0067 sec for 690 rewrites + 1194 matches)
+-- reduce in %ERATOSTHENES-SIEVE : (primesUpto(100)):NatList
+(2 | (3 | (5 | (7 | (11 | (13 | (17 | (19 | (23 | (29 | (31 | (37 | (41 | (43 | (47 | (53 | (59 | (61 | (67 | (71 | (73 | (79 | (83 | (89 | (97 | nil))))))))))))))))))))))))):NnNatList
+(0.0000 sec for parse, 0.0181 sec for 1684 rewrites + 2992 matches)
