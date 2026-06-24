@@ -1,0 +1,62 @@
+mod! MSORT {
+  -- モジュールのインポート. pr, ex, us
+  pr(NATLIST)
+
+  -- 関数の宣言. op
+  op msort : NatList -> NatList
+  op split : NatList NatList NatList -> NatList
+  op merge : NatList NatList -> NatList
+
+  -- 変数の宣言. var, vars
+  vars X Y : Nat
+  vars L LL RL : NatList
+
+  -- 式の宣言. eq
+  -- msort
+  eq msort(nil) = nil . -- msort1. 要素0個. 終了
+  eq msort(X | nil) = X | nil . -- msort2. 要素1個. 終了
+  eq msort(X | Y | L) = split(L, X | nil, Y | nil) . -- msrot3. 要素2個以上. 分割開始. すでにこのタイミングで分割を1つ進めている
+  -- split
+  eq split(nil, LL, RL) = merge(msort(LL), msort(RL)) . -- split1. 第1引数の要素0個. 分割終了&マージ開始（msort対象の要素数が偶数の場合）
+  eq split(X | nil, LL, RL) = merge(msort(X | LL), msort(RL)) . -- split2. 第1引数の要素1個. 分割終了&マージ開始（msort対象の要素数が奇数の場合）
+  eq split(X | Y | L, LL, RL) = split(L, X | LL, Y | RL) . -- split3. 第1引数の要素2個以上. 分割を1つ進める
+  -- merge
+  eq merge(nil, nil) = nil . -- 下のメモのmergeD
+  eq merge(LL, nil) = LL . -- mergeB
+  eq merge(nil, RL) = RL . -- mergeC
+  eq merge(X | LL, Y | RL) = if X < Y then {X | merge(LL, Y | RL)} else {Y | merge(X | LL, RL)} . -- mergeA
+}
+
+-- 検証用コード
+open MSORT .
+  red msort(4 | 7 | 5 | 1 | 0 | 3 | 6 | 2 | nil) .
+
+"
+  ＜メモ＞
+  -- redの流れからmergeがすべきことを考えてみる
+  -- ~適用したeq~
+  msort(4 | 1 | 0 | 3 | 2 | nil) -- X=4, Y=1, L=(0 | 3 | 2 | nil)
+  ~msort3~ split(0 | 3 | 2 | nil, 4 | nil, 1 | nil) -- 先頭から1個目をLLの先頭に, 2個目をRLの先頭に追加
+  ~split3~ split(2 | nil, 0 | 4 | nil, 3 | 1 | nil)
+  ~split2~ merge(msort(2 | 0 | 4 | nil), msort(3 | 1 | nil))
+  ~msort3, msort3~ merge(split(4 | nil, 2 | nil, 0 | nil), split(nil, 3 | nil, 1 | nil))
+  ~split2, split1~ merge(merge(msort(4 | 2 | nil), msort(0 | nil)), merge(msort(3 | nil), msort(1 | nil)))
+  ~msort3, msort2, msort2, msort2~ merge(merge(split(nil, 4 | nil, 2 | nil), 0 | nil), merge(3 | nil, 1 | nil))
+  ~split1~ merge(merge(merge(msort(4 | nil), msort(2 | nil)), 0 | nil), merge(3 | nil, 1 | nil))
+  ~msort2, msort2~ merge(merge(merge(4 | nil, 2 | nil), 0 | nil), merge(3 | nil, 1 | nil))
+  ~mergeA, mergeA~ merge(merge(2 | merge(4 | nil, nil), 0 | nil), 1 | merge(3 | nil, nil)) -- LLもRLも要素数1個以上の場合のマージ. merge(X | LL, Y | RL) = if ... みたいに書けそう.
+  ~mergeB, mergeB~ merge(merge(2 | 4 | nil, 0 | nil), 1 | 3 | nil) -- RLがnilの場合のマージ. そのままLLを返せば良さそう
+  ~mergeA~ merge(0 | merge(2 | 4 | nil, nil), 1 | 3 | nil) -- LLもRLも要素数1個以上の場合のマージ
+  ~mergeB~ merge(0 | 2 | 4 | nil, 1 | 3 | nil) -- RLがnilの場合のマージ. そのままLLを返せば良さそう
+  ~mergeA~ 0 | merge(2 | 4 | nil, 1 | 3 | nil)
+  ~mergeA~ 0 | 1 | merge(2 | 4 | nil, 3 | nil)
+  ~mergeA~ 0 | 1 | 2 | merge(4 | nil, 3 | nil)
+  ~mergeA~ 0 | 1 | 2 | 3 | merge(4 | nil, nil)
+  ~mergeB~ 0 | 1 | 2 | 3 | 4 | nil
+
+  -- LLがnilの場合のmergeCもありそう
+  -- merge(nil, nil) は考慮必要？あり得ない？msort→splitの流れではあり得なそうだが、split単体で使う場合にsplit(nil, nil, nil)=merge(msort(nil), msort(nil))=merge(nil, nil)はあり得るから定義必要そう
+    -- そもそもmergeの引数はNatListとしか言ってないのでLLもRLもnilの場合は考慮必要そう
+    -- なのでLLもRLもnilのmergeDの定義必要そう
+"
+close
