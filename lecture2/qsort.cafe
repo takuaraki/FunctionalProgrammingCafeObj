@@ -1,0 +1,26 @@
+mod! QSORT {
+  -- モジュールのインポート. pr, ex, us
+  pr(NATLIST)
+
+  -- 関数の宣言. op
+  op qsort : NatList -> NatList
+  op partition : Nat NatList NatList NatList -> NatList
+
+  -- 変数の宣言. var, vars
+  vars X Y : Nat
+  vars L LL RL : NatList
+
+  -- 式の宣言. eq
+  -- qsort
+  eq qsort(nil) = nil .
+  eq qsort(X | nil) = X | nil .
+  eq qsort(X | Y | L) = partition(X, Y | L, nil, nil) .
+  -- partition
+  eq partition(X, nil, LL, RL) = qsort(LL) @ (X | qsort(RL)) .
+  eq partition(X, Y | L, LL, RL) = if Y < X then {partition(X, L, Y | LL, RL)} else {partition(X, L, LL, Y | RL)} .
+}
+
+-- 検証用コード
+open QSORT .
+  red qsort(4 | 7 | 5 | 1 | 0 | 3 | 6 | 2 | nil) .
+close
