@@ -29,7 +29,7 @@ mod! MSORT {
 "
   -- 以下のような書き方でも動いたが、なんか気持ち悪いのでやめた
   eq merge(LL, nil) = LL . -- merge(nil, nil) もこれで計算されそう
-  eq merge(nil, RL) = RL . -- これも merge(nil, nil) をカバーできてしまうのが気持ち悪い
+  eq merge(nil, RL) = RL . -- これも merge(nil, nil) をカバーできてしまうのが気持ち悪い. redの際に書き換え規則が一意に定まらないことが気持ち悪いのかも
   eq merge(X | LL, Y | RL) = if X < Y then {X | merge(LL, Y | RL)} else {Y | merge(X | LL, RL)} .
 "
 }
@@ -37,6 +37,23 @@ mod! MSORT {
 -- 検証用コード
 open MSORT .
   red msort(4 | 7 | 5 | 1 | 0 | 3 | 6 | 2 | nil) .
+
+  --> ***** merge の検証 *****
+  -- merge(nil, nil) = nil
+  red merge(nil, nil) .
+  -- merge(X | LL, nil) = X | LL
+  red merge(1 | 0 | nil, nil) .
+  -- merge(nil, X | RL) = X | RL
+  red merge(nil, 1 | 0 | nil) .
+  -- merge(X | LL, Y | RL) 
+  -- case: X < Y
+  red merge(1 | 3 | nil, 4 | 7 | nil) .
+  -- case: X > Y
+  red merge(4 | 7 | nil, 1 | 3 | nil) .
+  -- case: X = Y
+  red merge(2 | 5 | nil, 2 | 6 | nil) .
+  -- 複雑な例
+  red merge(2 | 4 | 8 | nil, 1 | 3 | 5 | nil) .
 
 "
   ＜メモ＞
