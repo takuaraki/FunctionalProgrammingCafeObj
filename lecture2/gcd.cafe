@@ -4,7 +4,7 @@ mod! GCD {
 
   -- 関数の宣言. op
   op gcd : Nat Zero -> Nat
-  op gcd : Nat NzNat -> Nat
+  op gcd : Nat NzNat -> NzNat
   op gcd : Nat Nat -> Nat
 
   -- 変数の宣言. var, vars
