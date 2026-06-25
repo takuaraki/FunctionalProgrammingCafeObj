@@ -36,6 +36,7 @@ mod! MSORT {
 
 -- 検証用コード
 open MSORT .
+  --> ***** msort の検証 *****
   red msort(4 | 7 | 5 | 1 | 0 | 3 | 6 | 2 | nil) .
 
   --> ***** merge の検証 *****
