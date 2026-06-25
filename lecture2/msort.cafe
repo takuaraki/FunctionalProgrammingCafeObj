@@ -21,10 +21,10 @@ mod! MSORT {
   eq split(X | nil, LL, RL) = merge(msort(X | LL), msort(RL)) . -- split2. 第1引数の要素1個. 分割終了&マージ開始（msort対象の要素数が奇数の場合）
   eq split(X | Y | L, LL, RL) = split(L, X | LL, Y | RL) . -- split3. 第1引数の要素2個以上. 分割を1つ進める
   -- merge
-  eq merge(nil, nil) = nil . -- 下のメモのmergeD
-  eq merge(LL, nil) = LL . -- mergeB
-  eq merge(nil, RL) = RL . -- mergeC
-  eq merge(X | LL, Y | RL) = if X < Y then {X | merge(LL, Y | RL)} else {Y | merge(X | LL, RL)} . -- mergeA
+  eq merge(nil, nil) = nil . -- 下のメモのmergeD. 要素数0, 0
+  eq merge(X | LL, nil) = X | LL . -- mergeB. 要素数1個以上, 0
+  eq merge(nil, X | RL) = X | RL . -- mergeC. 要素数0, 1個以上
+  eq merge(X | LL, Y | RL) = if X < Y then {X | merge(LL, Y | RL)} else {Y | merge(X | LL, RL)} . -- mergeA. 要素数1個以上, 要素数1個以上
 }
 
 -- 検証用コード
@@ -45,7 +45,7 @@ open MSORT .
   ~split1~ merge(merge(merge(msort(4 | nil), msort(2 | nil)), 0 | nil), merge(3 | nil, 1 | nil))
   ~msort2, msort2~ merge(merge(merge(4 | nil, 2 | nil), 0 | nil), merge(3 | nil, 1 | nil))
   ~mergeA, mergeA~ merge(merge(2 | merge(4 | nil, nil), 0 | nil), 1 | merge(3 | nil, nil)) -- LLもRLも要素数1個以上の場合のマージ. merge(X | LL, Y | RL) = if ... みたいに書けそう.
-  ~mergeB, mergeB~ merge(merge(2 | 4 | nil, 0 | nil), 1 | 3 | nil) -- RLがnilの場合のマージ. そのままLLを返せば良さそう
+  ~mergeB, mergeB~ merge(merge(2 | 4 | nil, 0 | nil), 1 | 3 | nil) -- LLが要素数1個以上, RLがnilの場合のマージ. そのままLLを返せば良さそう
   ~mergeA~ merge(0 | merge(2 | 4 | nil, nil), 1 | 3 | nil) -- LLもRLも要素数1個以上の場合のマージ
   ~mergeB~ merge(0 | 2 | 4 | nil, 1 | 3 | nil) -- RLがnilの場合のマージ. そのままLLを返せば良さそう
   ~mergeA~ 0 | merge(2 | 4 | nil, 1 | 3 | nil)
@@ -54,7 +54,7 @@ open MSORT .
   ~mergeA~ 0 | 1 | 2 | 3 | merge(4 | nil, nil)
   ~mergeB~ 0 | 1 | 2 | 3 | 4 | nil
 
-  -- LLがnilの場合のmergeCもありそう
+  -- LLがnil, RLが要素数1個以上の場合のmergeCもありそう
   -- merge(nil, nil) は考慮必要？あり得ない？msort→splitの流れではあり得なそうだが、split単体で使う場合にsplit(nil, nil, nil)=merge(msort(nil), msort(nil))=merge(nil, nil)はあり得るから定義必要そう
     -- そもそもmergeの引数はNatListとしか言ってないのでLLもRLもnilの場合は考慮必要そう
     -- なのでLLもRLもnilのmergeDの定義必要そう
