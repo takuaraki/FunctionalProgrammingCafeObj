@@ -17,14 +17,21 @@ mod! MSORT {
   eq msort(X | nil) = X | nil . -- msort2. 要素1個. 終了
   eq msort(X | Y | L) = split(L, X | nil, Y | nil) . -- msrot3. 要素2個以上. 分割開始. すでにこのタイミングで分割を1つ進めている
   -- split
-  eq split(nil, LL, RL) = merge(msort(LL), msort(RL)) . -- split1. 第1引数の要素0個. 分割終了&マージ開始（msort対象の要素数が偶数の場合）
-  eq split(X | nil, LL, RL) = merge(msort(X | LL), msort(RL)) . -- split2. 第1引数の要素1個. 分割終了&マージ開始（msort対象の要素数が奇数の場合）
+  eq split(nil, LL, RL) = merge(msort(LL), msort(RL)) . -- split1. 第1引数の要素0個. 分割終了&マージ開始
+  eq split(X | nil, LL, RL) = merge(msort(X | LL), msort(RL)) . -- split2. 第1引数の要素1個. 最後の分割(LLに割り振る)をしてマージ開始
   eq split(X | Y | L, LL, RL) = split(L, X | LL, Y | RL) . -- split3. 第1引数の要素2個以上. 分割を1つ進める
   -- merge
   eq merge(nil, nil) = nil . -- 下のメモのmergeD. 要素数0, 0
   eq merge(X | LL, nil) = X | LL . -- mergeB. 要素数1個以上, 0
   eq merge(nil, X | RL) = X | RL . -- mergeC. 要素数0, 1個以上
   eq merge(X | LL, Y | RL) = if X < Y then {X | merge(LL, Y | RL)} else {Y | merge(X | LL, RL)} . -- mergeA. 要素数1個以上, 要素数1個以上
+  
+"
+  -- 以下のような書き方でも動いたが、なんか気持ち悪いのでやめた
+  eq merge(LL, nil) = LL . -- merge(nil, nil) もこれで計算されそう
+  eq merge(nil, RL) = RL . -- これも merge(nil, nil) をカバーできてしまうのが気持ち悪い
+  eq merge(X | LL, Y | RL) = if X < Y then {X | merge(LL, Y | RL)} else {Y | merge(X | LL, RL)} .
+"
 }
 
 -- 検証用コード
