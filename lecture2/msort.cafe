@@ -27,9 +27,9 @@ mod! MSORT {
   eq merge(X | LL, Y | RL) = if X < Y then {X | merge(LL, Y | RL)} else {Y | merge(X | LL, RL)} . -- mergeA. 要素数1個以上, 要素数1個以上
   
 "
-  -- 以下のような書き方でも動いたが、なんか気持ち悪いのでやめた
+  -- 以下のような書き方でも動いたが、違和感があるのでやめた
   eq merge(LL, nil) = LL . -- merge(nil, nil) もこれで計算されそう
-  eq merge(nil, RL) = RL . -- これも merge(nil, nil) をカバーできてしまうのが気持ち悪い. redの際に書き換え規則が一意に定まらないことが気持ち悪いのかも
+  eq merge(nil, RL) = RL . -- これも merge(nil, nil) をカバーできてしまうのが違和感. redの際に書き換え規則が一意に定まらないことが気持ち悪いのかも
   eq merge(X | LL, Y | RL) = if X < Y then {X | merge(LL, Y | RL)} else {Y | merge(X | LL, RL)} .
 "
 }
