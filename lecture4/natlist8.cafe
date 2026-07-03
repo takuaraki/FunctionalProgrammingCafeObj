@@ -1,0 +1,25 @@
+view TRIV-ERR2NAT-ERR from TRIV-ERR to NAT-ERR {
+  sort Elt -> Nat,
+  sort Err -> ErrNat,
+  sort Elt&Err -> Nat&Err,
+  op err -> errNat,
+}
+
+mod! NATLIST7 {
+  -- モジュールのインポート. pr, ex, us
+  pr(NAT)
+
+  -- 関数の宣言. op
+  op 
+
+  -- 変数の宣言. var, vars
+  var 
+
+  -- 式の宣言. eq
+  eq 
+}
+
+-- 検証用コード
+open NATLIST7 .
+  red xxx .
+close

@@ -1,0 +1,22 @@
+view TRIV2NAT from TRIV to NAT {
+  sort Elt -> Nat,
+}
+
+mod! NATLIST1 {
+  -- モジュールのインポート. pr, ex, us
+  pr(NAT)
+
+  -- 関数の宣言. op
+  op 
+
+  -- 変数の宣言. var, vars
+  var 
+
+  -- 式の宣言. eq
+  eq 
+}
+
+-- 検証用コード
+open NATLIST1 .
+  red xxx .
+close

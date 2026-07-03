@@ -1,0 +1,18 @@
+mod! XXX {
+  -- モジュールのインポート. pr, ex, us
+  pr(NAT)
+
+  -- 関数の宣言. op
+  op 
+
+  -- 変数の宣言. var, vars
+  var 
+
+  -- 式の宣言. eq
+  eq 
+}
+
+-- 検証用コード
+open XXX .
+  red xxx .
+close
