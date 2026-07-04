@@ -1,18 +1,27 @@
-mod! XXX {
-  -- モジュールのインポート. pr, ex, us
-  pr(NAT)
+-- need NATLIST8 in natlist8
 
-  -- 関数の宣言. op
-  op 
-
-  -- 変数の宣言. var, vars
-  var 
-
-  -- 式の宣言. eq
-  eq 
+view TRIV-ERR2NATLIST8 from TRIV-ERR to NATLIST8 {
+  sort Elt -> NatList,
+  sort Err -> ErrNatList,
+  sort Elt&Err -> NatList&Err,
+  op err -> errNatList,
 }
 
--- 検証用コード
-open XXX .
-  red xxx .
+mod! NATLISTLIST {
+  pr(GLIST-ERR(E <= TRIV-ERR2NATLIST8) * {
+    sort List -> NatListList,
+    sort Nil -> NLLNil,
+    sort NnList -> NnNatListList,
+    sort ErrList -> ErrNatListList,
+    sort List&Err -> NatListList&Err,
+    op nil -> nllnil,
+    op errList -> errNatListList
+  })
+}
+
+open NATLISTLIST .
+  red hd(nllnil) .
+  red hd((4 | 3 | nlnil) | (2 | 1 | 0 | nlnil) | nllnil) .
+  red tl(nlnil) .
+  red tl((4 | 3 | nlnil) | (2 | 1 | 0 | nlnil) | nllnil) .
 close

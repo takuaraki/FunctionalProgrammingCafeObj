@@ -1,0 +1,24 @@
+CafeOBJ> in glist-err
+
+processing input : ./glist-err.cafe
+
+-- defining module! GLIST-ERR
+
+CafeOBJ> in natlist8
+
+processing input : ./natlist8.cafe
+
+-- defining module! NATLIST8
+-- opening module NATLIST8
+-- reduce in %NATLIST8 : (hd(nlnil)):ErrNat
+(errNat):ErrNat
+(0.0000 sec for parse, 0.0000 sec for 1 rewrites + 1 matches)
+-- reduce in %NATLIST8 : (hd(((4 | (3 | nlnil)) @ (2 | (1 | (0 | nlnil)))))):Nat&Err
+(4):NzNat
+(0.0001 sec for parse, 0.0001 sec for 4 rewrites + 6 matches)
+-- reduce in %NATLIST8 : (tl(nlnil)):ErrNatList
+(errNatList):ErrNatList
+(0.0000 sec for parse, 0.0000 sec for 1 rewrites + 1 matches)
+-- reduce in %NATLIST8 : (tl(((4 | (3 | nlnil)) @ (2 | (1 | (0 | nlnil)))))):NatList&Err
+(3 | (2 | (1 | (0 | nlnil)))):NatList
+(0.0000 sec for parse, 0.0000 sec for 4 rewrites + 6 matches)
