@@ -1,18 +1,29 @@
-mod! GLIST1 {
-  -- モジュールのインポート. pr, ex, us
-  pr(NAT)
-
-  -- 関数の宣言. op
-  op 
-
-  -- 変数の宣言. var, vars
-  var 
-
-  -- 式の宣言. eq
-  eq 
+-- EltとErrの2つのソートを持つ
+-- エラー出力するop errも定義
+mod* TRIV-ERR {
+  [Elt Err < Elt&Err]
+  op err : -> Err .
 }
 
--- 検証用コード
-open GLIST1 .
-  red xxx .
-close
+-- エラーハンドリングができる汎用リスト
+mod! GLIST2(E :: TRIV-ERR) {
+  [Nil NnList < List]
+
+  op nil : -> Nil {constr} .
+  op _|_ : Elt.E List -> NnList {constr} .
+  op hd : Nil -> Err.E .
+  op hd : NnList -> Elt.E .
+  op hd : List -> Elt&Err.E .
+  op tl : List -> List .
+  op _@_ : List List -> List .
+
+  var X : Elt.E .
+  vars L L2 : List .
+
+  eq hd(nil) = err.E .
+  eq hd(X | L) = X .
+  eq tl(nil) = nil .
+  eq tl(X | L) = L .
+  eq nil @ L2 = L2 .
+  eq (X | L) @ L2 = X | (L @ L2) .
+}

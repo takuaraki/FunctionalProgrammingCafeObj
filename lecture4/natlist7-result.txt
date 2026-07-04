@@ -1,0 +1,19 @@
+CafeOBJ> in natlist7
+
+processing input : ./natlist7.cafe
+
+-- defining view 
+-- defining module! NATLIST7
+-- opening module NATLIST7TRIV-ERR2NAT-ERR 
+-- reduce in %NATLIST7 : (hd(nlnil)):ErrNat
+(errNat):ErrNat
+(0.0000 sec for parse, 0.0000 sec for 1 rewrites + 1 matches)
+-- reduce in %NATLIST7 : (hd(((4 | (3 | nlnil)) @ (2 | (1 | (0 | nlnil)))))):Nat&Err
+(4):NzNat
+(0.0001 sec for parse, 0.0001 sec for 4 rewrites + 6 matches)
+-- reduce in %NATLIST7 : (tl(nlnil)):NatList
+(nlnil):NLNil
+(0.0000 sec for parse, 0.0000 sec for 1 rewrites + 1 matches)
+-- reduce in %NATLIST7 : (tl(((4 | (3 | nlnil)) @ (2 | (1 | (0 | nlnil)))))):NatList
+(3 | (2 | (1 | (0 | nlnil)))):NnNatList
+(0.0001 sec for parse, 0.0000 sec for 4 rewrites + 7 matches)
