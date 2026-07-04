@@ -1,22 +1,16 @@
+-- インスタンス化の方法１：viewをあらかじめ定義する
+
+-- TRIVモジュールのソートEltは、NATモジュールのソートNatで置き換えられる
 view TRIV2NAT from TRIV to NAT {
   sort Elt -> Nat,
 }
 
 mod! NATLIST1 {
-  -- モジュールのインポート. pr, ex, us
-  pr(NAT)
-
-  -- 関数の宣言. op
-  op 
-
-  -- 変数の宣言. var, vars
-  var 
-
-  -- 式の宣言. eq
-  eq 
+  -- TRIVを満たすモジュールEは、NATモジュールに置き換えられる
+  -- EのソートEltはNATモジュールのソートNatに置き換えられる
+  pr(GLIST1(E <= TRIV2NAT))
 }
 
--- 検証用コード
 open NATLIST1 .
-  red xxx .
+  red (4 | 3 | nil) @ (2 | 1 | 0 | nil) .
 close

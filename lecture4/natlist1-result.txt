@@ -1,0 +1,11 @@
+CafeOBJ> in glist1
+...
+
+CafeOBJ> natlist1
+...
+
+-- defining module! NATLIST1
+-- opening module NATLIST1
+-- reduce in %NATLIST1 : ((4 | (3 | nil)) @ (2 | (1 | (0 | nil)))):List
+(4 | (3 | (2 | (1 | (0 | nil))))):NnList
+(0.0000 sec for parse, 0.0000 sec for 3 rewrites + 5 matches)

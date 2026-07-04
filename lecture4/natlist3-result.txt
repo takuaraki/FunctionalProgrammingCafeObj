@@ -1,0 +1,9 @@
+CafeOBJ> in natlist3
+
+processing input : ./natlist3.cafe
+
+-- defining module! NATLIST3
+-- opening module NATLIST3
+-- reduce in %NATLIST3 : ((4 | (3 | nil)) @ (2 | (1 | (0 | nil)))):List
+(4 | (3 | (2 | (1 | (0 | nil))))):NnList
+(0.0001 sec for parse, 0.0001 sec for 3 rewrites + 5 matches)

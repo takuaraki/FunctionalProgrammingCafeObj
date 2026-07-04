@@ -1,18 +1,11 @@
-mod! XXX {
-  -- モジュールのインポート. pr, ex, us
-  pr(NAT)
+-- インスタンス化の方法２：インポート時に無名のviewを利用する
 
-  -- 関数の宣言. op
-  op 
-
-  -- 変数の宣言. var, vars
-  var 
-
-  -- 式の宣言. eq
-  eq 
+mod! NATLIST2 {
+  pr(GLIST1(E <= view from TRIV to NAT {
+    sort Elt -> Nat,
+  }))
 }
 
--- 検証用コード
-open XXX .
-  red xxx .
+open NATLIST2 .
+  red (4 | 3 | nil) @ (2 | 1 | 0 | nil) .
 close

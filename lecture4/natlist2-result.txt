@@ -1,0 +1,5 @@
+-- defining module! NATLIST2
+-- opening module NATLIST2
+-- reduce in %NATLIST2 : ((4 | (3 | nil)) @ (2 | (1 | (0 | nil)))):List
+(4 | (3 | (2 | (1 | (0 | nil))))):NnList
+(0.0001 sec for parse, 0.0001 sec for 3 rewrites + 5 matches)

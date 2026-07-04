@@ -1,18 +1,19 @@
-mod! XXX {
-  -- モジュールのインポート. pr, ex, us
-  pr(NAT)
-
-  -- 関数の宣言. op
-  op 
-
-  -- 変数の宣言. var, vars
-  var 
-
-  -- 式の宣言. eq
-  eq 
+-- インスタンス化の方法３：principal-sortを利用
+"
+CafeOBJ> show NAT
+sys:mod! NAT
+      principal-sort Nat
+{
+  ...
 }
 
--- 検証用コード
-open XXX .
-  red xxx .
+NATモジュールでprincipal-sort Natが定義されている.
+"
+
+mod! NATLIST3 {
+  pr(GLIST1(NAT))
+}
+
+open NATLIST3 .
+  red (4 | 3 | nil) @ (2 | 1 | 0 | nil) .
 close
