@@ -1,0 +1,17 @@
+CafeOBJ> in glist-err-ord
+
+processing input : ./glist-err-ord.cafe
+
+-- defining module! GLIST-ERR-ORD
+[Warning]: Redefining module GLIST-ERR-ORD 
+
+CafeOBJ> in natlist9
+
+processing input : ./natlist9.cafe
+
+-- defining module! NATLIST9
+-- defining view 
+-- opening module GQSORT(E <= TRIV-ERR-ORD2NATLIST9)TRIV-ERR-ORD2NATLIST9 
+-- reduce in %GQSORT(E <= TRIV-ERR-ORD2NATLIST9) : (qsort(((1 | (2 | nlnil)) | ((3 | (0 | (2 | nlnil))) | ((2 | nlnil) | ((0 | nlnil) | (nlnil | ((1 | (1 | nlnil)) | ((3 | (0 | (1 | nlnil))) | ((1 | (0 | nlnil)) | nil)))))))))):List
+(nlnil | ((0 | nlnil) | ((1 | (0 | nlnil)) | ((1 | (1 | nlnil)) | ((1 | (2 | nlnil)) | ((2 | nlnil) | ((3 | (0 | (1 | nlnil))) | ((3 | (0 | (2 | nlnil))) | nil)))))))):List
+(0.0002 sec for parse, 0.0010 sec for 183 rewrites + 335 matches)

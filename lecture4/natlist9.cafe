@@ -1,18 +1,30 @@
-mod! XXX {
-  -- モジュールのインポート. pr, ex, us
-  pr(NAT)
+-- need GLIST-ERR-ORD in glist-err-ord
+-- need TRIV-ERR-ORD2NAT-ERR in qgsort
 
-  -- 関数の宣言. op
-  op 
+-- ordを扱える自然数リストのモジュール
+mod! NATLIST9 {
+  pr(GLIST-ERR-ORD(E <= TRIV-ERR-ORD2NAT-ERR) * {
+    sort List -> NatList,
+    sort Nil -> NLNil,
+    sort NnList -> NnNatList,
+    sort ErrList -> ErrNatList,
+    sort List&Err -> NatList&Err,
+    op nil -> nlnil,
+    op errList -> errNatList
+  })
+}
 
-  -- 変数の宣言. var, vars
-  var 
-
-  -- 式の宣言. eq
-  eq 
+-- TRIV-ERR-ORDのEltをNatList.NATLIST9に、ErrをErrNatList.NATLIST9に変換するビュー
+-- ordはord.NATLIST9に変換する. NATLIST9はGLIST-ERR-ORDをインポートしているのでordが定義されている
+view TRIV-ERR-ORD2NATLIST9 from TRIV-ERR-ORD to NATLIST9 {
+  sort Elt -> NatList,
+  sort Err -> ErrNatList,
+  sort Elt&Err -> NatList&Err,
+  op err -> errNatList,
+  op ord -> ord,
 }
 
 -- 検証用コード
-open XXX .
-  red xxx .
+open GQSORT(E <= TRIV-ERR-ORD2NATLIST9) .
+  red qsort((1 | 2 | nlnil) | (3 | 0 | 2 | nlnil) | (2 | nlnil) | (0 | nlnil) | nlnil | (1 | 1 | nlnil) | (3 | 0 | 1 | nlnil) | (1 | 0 | nlnil) | nil) .
 close
