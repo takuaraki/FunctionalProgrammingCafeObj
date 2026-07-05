@@ -1,18 +1,26 @@
-mod! XXX {
-  -- モジュールのインポート. pr, ex, us
-  pr(NAT)
+-- need GLIST-ERR-ORD in glist-err-ord
+-- need TRIV-ERR-ORD2STRING-ERR in gqsort
 
-  -- 関数の宣言. op
-  op 
-
-  -- 変数の宣言. var, vars
-  var 
-
-  -- 式の宣言. eq
-  eq 
+mod! STRLIST1 {
+  pr(GLIST-ERR-ORD(E <= TRIV-ERR-ORD2STRING-ERR) * {
+    sort List -> StrList,
+    sort Nil -> SLNil,
+    sort NnList -> NnStrList,
+    sort ErrList -> ErrStrList,
+    sort List&Err -> StrList&Err,
+    op nil -> slnil,
+    op errList -> errStrList
+  })
 }
 
--- 検証用コード
-open XXX .
-  red xxx .
+view TRIV-ERR-ORD2STRLIST1 from TRIV-ERR-ORD to STRLIST1 {
+  sort Elt -> StrList,
+  sort Err -> ErrStrList,
+  sort Elt&Err -> StrList&Err,
+  op err -> errStrList,
+  op ord -> ord,
+}
+
+open GQSORT(E <= TRIV-ERR-ORD2STRLIST1) .
+  red qsort(("CafeOBJ" | "Fortran" | slnil) | ("Java" | "C" | "Fortran" | slnil) | ("Fortran" | slnil) | ("C" | slnil) | slnil | ("CafeOBJ" | "CafeOBJ" | slnil) | ("Java" | "C" | "CafeOBJ" | slnil) | ("CafeOBJ" | "C" | slnil) | nil) .
 close

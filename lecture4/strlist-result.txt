@@ -1,0 +1,10 @@
+CafeOBJ> in strlist
+
+processing input : ./strlist.cafe
+
+-- defining module! STRLIST1
+-- defining view 
+-- opening module GQSORT(E <= TRIV-ERR-ORD2STRLIST1)TRIV-ERR-ORD2STRLIST1 
+-- reduce in %GQSORT(E <= TRIV-ERR-ORD2STRLIST1) : (qsort((("CafeOBJ" | ("Fortran" | slnil)) | (("Java" | ("C" | ("Fortran" | slnil))) | (("Fortran" | slnil) | (("C" | slnil) | (slnil | (("CafeOBJ" | ("CafeOBJ" | slnil)) | (("Java" | ("C" | ("CafeOBJ" | slnil))) | (("CafeOBJ" | ("C" | slnil)) | nil)))))))))):List
+(slnil | (("C" | slnil) | (("CafeOBJ" | ("C" | slnil)) | (("CafeOBJ" | ("CafeOBJ" | slnil)) | (("CafeOBJ" | ("Fortran" | slnil)) | (("Fortran" | slnil) | (("Java" | ("C" | ("CafeOBJ" | slnil))) | (("Java" | ("C" | ("Fortran" | slnil))) | nil)))))))):List
+(0.0001 sec for parse, 0.0006 sec for 183 rewrites + 329 matches)
