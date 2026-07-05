@@ -1,0 +1,33 @@
+CafeOBJ> in gqsort
+
+processing input : ./gqsort.cafe
+
+-- defining module* TRIV-ERR-ORD
+-- defining module! GQSORT
+
+-- defining view 
+-- opening module GQSORT(E <= TRIV-ERR-ORD2NAT-ERR)TRIV-ERR-ORD2NAT-ERR 
+-- reduce in %GQSORT(E <= TRIV-ERR-ORD2NAT-ERR) : (qsort((4 | (7 | (5 | (1 | (0 | (3 | (6 | (2 | nil)))))))))):List
+(0 | (1 | (2 | (3 | (4 | (5 | (6 | (7 | nil)))))))):List
+(0.0001 sec for parse, 0.0006 sec for 64 rewrites + 105 matches)
+
+-- defining module! STRING-ERR
+-- reading in file  : string
+
+processing input : /opt/homebrew/Cellar/cafeobj/1.6.2/share/cafeobj-1.6/lib/string.cafe
+
+-- defining module! STRING
+-- reading in file  : character
+
+processing input : /opt/homebrew/Cellar/cafeobj/1.6.2/share/cafeobj-1.6/lib/character.cafe
+
+-- defining module! CHARACTER
+-- done reading in file: character
+
+-- done reading in file: string
+
+-- defining view 
+-- opening module GQSORT(E <= TRIV-ERR-ORD2STRING-ERR)TRIV-ERR-ORD2STRING-ERR 
+-- reduce in %GQSORT(E <= TRIV-ERR-ORD2STRING-ERR) : (qsort(("Lisp" | ("Python" | ("Pascal" | ("CafeOBJ" | ("C" | ("Java" | ("Prolog" | ("Fortran" | nil)))))))))):List
+("C" | ("CafeOBJ" | ("Fortran" | ("Java" | ("Lisp" | ("Pascal" | ("Prolog" | ("Python" | nil)))))))):List
+(0.0000 sec for parse, 0.0002 sec for 64 rewrites + 102 matches)

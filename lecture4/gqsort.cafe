@@ -1,18 +1,56 @@
-mod! XXX {
-  -- モジュールのインポート. pr, ex, us
-  pr(NAT)
-
-  -- 関数の宣言. op
-  op 
-
-  -- 変数の宣言. var, vars
-  var 
-
-  -- 式の宣言. eq
-  eq 
+-- エラーに加え、大小関係の比較op(ord)を持つモジュール
+mod* TRIV-ERR-ORD {
+  [Elt Err < Elt&Err]
+  op err : -> Err .
+  op ord : Elt Elt -> Bool .
 }
 
--- 検証用コード
-open XXX .
-  red xxx .
+-- 汎用クイックソート
+mod! GQSORT(E :: TRIV-ERR-ORD) {
+  pr(GLIST-ERR(E))
+
+  op qsort : List -> List .
+  op partition : Elt.E List List List -> List .
+
+  vars X Y : Elt.E .
+  vars L LL RL : List .
+
+  eq qsort(nil) = nil .
+  eq qsort(X | nil) = X | nil .
+  eq qsort(X | Y | L) = partition(X,Y | L,nil,nil) .
+  eq partition(X,nil,LL,RL) = qsort(LL) @ (X | qsort(RL)) .
+  eq partition(X,Y | L,LL,RL) = if ord.E(Y,X) then {partition(X,L,Y | LL,RL)} else {partition(X,L,LL,Y | RL)} .
+}
+
+-- TRIV-ERR-ORDのEltをNatに、ErrをErrNatに変換するビュー
+-- ordはNATモジュールの<に変換する
+view TRIV-ERR-ORD2NAT-ERR from TRIV-ERR-ORD to NAT-ERR {
+  sort Elt -> Nat,
+  sort Err -> ErrNat,
+  sort Elt&Err -> Nat&Err,
+  op err -> errNat,
+  op ord -> _<_,
+}
+
+open GQSORT(E <= TRIV-ERR-ORD2NAT-ERR) .
+  red qsort(4 | 7 | 5 | 1 | 0 | 3 | 6 | 2 | nil) .
+close
+
+-- NAT-ERRのSTRING版
+mod! STRING-ERR { 
+  pr(STRING)
+  [String ErrString < String&Err]
+  op errStr : -> ErrString {constr} .
+}
+
+view TRIV-ERR-ORD2STRING-ERR from TRIV-ERR-ORD to STRING-ERR {
+  sort Elt -> String,
+  sort Err -> ErrString,
+  sort Elt&Err -> String&Err,
+  op err -> errStr,
+  op ord -> string<,
+}
+
+open GQSORT(E <= TRIV-ERR-ORD2STRING-ERR) .
+  red qsort("Lisp" | "Python" | "Pascal" | "CafeOBJ" | "C" | "Java" | "Prolog" | "Fortran" | nil) .
 close
