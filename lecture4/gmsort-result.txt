@@ -1,14 +1,9 @@
-CafeOBJ> in gmsort
-
-processing input : ./gmsort.cafe
-
--- defining module* TRIV-ERR-ORD
 -- defining module! GMSORT
 -- defining view 
 -- opening module GMSORT(E <= TRIV-ERR-ORD2NAT-ERR)TRIV-ERR-ORD2NAT-ERR 
 -- reduce in %GMSORT(E <= TRIV-ERR-ORD2NAT-ERR) : (msort((4 | (7 | (5 | (1 | (0 | (3 | (6 | (2 | nil)))))))))):List
 (0 | (1 | (2 | (3 | (4 | (5 | (6 | (7 | nil)))))))):List
-(0.0001 sec for parse, 0.0006 sec for 79 rewrites + 175 matches)
+(0.0000 sec for parse, 0.0002 sec for 79 rewrites + 175 matches)
 -- defining module! STRING-ERR
 -- reading in file  : string
 
@@ -29,3 +24,15 @@ processing input : /opt/homebrew/Cellar/cafeobj/1.6.2/share/cafeobj-1.6/lib/char
 -- reduce in %GMSORT(E <= TRIV-ERR-ORD2STRING-ERR) : (msort(("Lisp" | ("Python" | ("Pascal" | ("CafeOBJ" | ("C" | ("Java" | ("Prolog" | ("Fortran" | nil)))))))))):List
 ("C" | ("CafeOBJ" | ("Fortran" | ("Java" | ("Lisp" | ("Pascal" | ("Prolog" | ("Python" | nil)))))))):List
 (0.0000 sec for parse, 0.0002 sec for 79 rewrites + 174 matches)
+-- defining module! NATLIST9
+-- defining view 
+-- opening module GMSORT(E <= TRIV-ERR-ORD2NATLIST9)TRIV-ERR-ORD2NATLIST9 
+-- reduce in %GMSORT(E <= TRIV-ERR-ORD2NATLIST9) : (msort(((1 | (2 | nlnil)) | ((3 | (0 | (2 | nlnil))) | ((2 | nlnil) | ((0 | nlnil) | (nlnil | ((1 | (1 | nlnil)) | ((3 | (0 | (1 | nlnil))) | ((1 | (0 | nlnil)) | nil)))))))))):List
+(nlnil | ((0 | nlnil) | ((1 | (0 | nlnil)) | ((1 | (1 | nlnil)) | ((1 | (2 | nlnil)) | ((2 | nlnil) | ((3 | (0 | (1 | nlnil))) | ((3 | (0 | (2 | nlnil))) | nil)))))))):List
+(0.0001 sec for parse, 0.0006 sec for 212 rewrites + 440 matches)
+-- defining module! STRLIST1
+-- defining view 
+-- opening module GMSORT(E <= TRIV-ERR-ORD2STRLIST1)TRIV-ERR-ORD2STRLIST1 
+-- reduce in %GMSORT(E <= TRIV-ERR-ORD2STRLIST1) : (msort((("CafeOBJ" | ("Fortran" | slnil)) | (("Java" | ("C" | ("Fortran" | slnil))) | (("Fortran" | slnil) | (("C" | slnil) | (slnil | (("CafeOBJ" | ("CafeOBJ" | slnil)) | (("Java" | ("C" | ("CafeOBJ" | slnil))) | (("CafeOBJ" | ("C" | slnil)) | nil)))))))))):List
+(slnil | (("C" | slnil) | (("CafeOBJ" | ("C" | slnil)) | (("CafeOBJ" | ("CafeOBJ" | slnil)) | (("CafeOBJ" | ("Fortran" | slnil)) | (("Fortran" | slnil) | (("Java" | ("C" | ("CafeOBJ" | slnil))) | (("Java" | ("C" | ("Fortran" | slnil))) | nil)))))))):List
+(0.0001 sec for parse, 0.0005 sec for 212 rewrites + 433 matches)
