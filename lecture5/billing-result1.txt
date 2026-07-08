@@ -1,0 +1,4 @@
+-- opening module BILLTRIV-ERR2BILL-ITEM 
+-- reduce in %BILL : (mkBill(cat,c)):Bill&Err
+((("orange" , 10 , 1000) | (("tomato" , 10 , 900) | nilBIL)) , 1900):Bill
+(0.0000 sec for parse, 0.0001 sec for 49 rewrites + 76 matches)

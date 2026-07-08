@@ -1,0 +1,7 @@
+-- opening module BILL
+-- reduce in %BILL : (mkBill(cat,c1)):Bill&Err
+((("tomato" , 20 , 1800) | (("orange" , 12 , 1200) | (("banana" , 10 , 1400) | (("potato" , 13 , 390) | (("apple" , 3 , 450) | nilBIL))))) , 5240):Bill
+(0.0000 sec for parse, 0.0006 sec for 174 rewrites + 282 matches)
+-- reduce in %BILL : (mkBill(cat,c2)):Bill&Err
+(errBill):ErrBill
+(0.0000 sec for parse, 0.0002 sec for 69 rewrites + 108 matches)

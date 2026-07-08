@@ -1,0 +1,4 @@
+-- opening module CATALOGTRIV-ERR-IF2TAG 
+-- reduce in %CATALOG : (cat):Catalog
+(('a , ("apple" , 150)) | (('o , ("orange" , 100)) | (('t , ("tomato" , 90)) | empCatalog))):Catalog
+(0.0000 sec for parse, 0.0000 sec for 1 rewrites + 1 matches)

@@ -1,0 +1,4 @@
+-- opening module CARTTRIV-ERR2CART-ITEM 
+-- reduce in %CART : (norm(c)):Cart
+(('o , 10) | (('t , 10) | empCart)):Cart
+(0.0000 sec for parse, 0.0000 sec for 14 rewrites + 20 matches)
