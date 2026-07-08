@@ -1,3 +1,5 @@
+in triv-err-ord
+
 -- ListのListもクイックソートできるようにordを定義した汎用リストモジュール
 mod! GLIST-ERR-ORD(E :: TRIV-ERR-ORD) {
   [Nil NnList < List]

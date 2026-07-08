@@ -1,5 +1,5 @@
--- need TRIV-ERR in glist2
-in glist2
+-- need TRIV-ERR in triv-err
+in triv-err
 
 -- Listを要素として扱える（Listのエラーも扱える）リスト
 mod! GLIST-ERR(E :: TRIV-ERR) {

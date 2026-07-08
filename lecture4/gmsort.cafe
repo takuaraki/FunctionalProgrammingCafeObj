@@ -1,14 +1,6 @@
 in nat-err
 in glist-err
 in glist-err-ord
-in natlist9
-
--- エラーに加え、大小関係の比較op(ord)を持つモジュール
-mod* TRIV-ERR-ORD {
-  [Elt Err < Elt&Err]
-  op err : -> Err .
-  op ord : Elt Elt -> Bool .
-}
 
 -- 汎用マージソート
 mod! GMSORT(E :: TRIV-ERR-ORD) {
@@ -72,6 +64,26 @@ open GMSORT(E <= TRIV-ERR-ORD2STRING-ERR) .
 close
 
 -- ***** 検証: Elt -> NatList *****
+mod! NATLIST9 {
+  pr(GLIST-ERR-ORD(E <= TRIV-ERR-ORD2NAT-ERR) * {
+    sort List -> NatList,
+    sort Nil -> NLNil,
+    sort NnList -> NnNatList,
+    sort ErrList -> ErrNatList,
+    sort List&Err -> NatList&Err,
+    op nil -> nlnil,
+    op errList -> errNatList
+  })
+}
+
+view TRIV-ERR-ORD2NATLIST9 from TRIV-ERR-ORD to NATLIST9 {
+  sort Elt -> NatList,
+  sort Err -> ErrNatList,
+  sort Elt&Err -> NatList&Err,
+  op err -> errNatList,
+  op ord -> ord,
+}
+
 open GMSORT(E <= TRIV-ERR-ORD2NATLIST9) .
   red msort((1 | 2 | nlnil) | (3 | 0 | 2 | nlnil) | (2 | nlnil) | (0 | nlnil) | nlnil | (1 | 1 | nlnil) | (3 | 0 | 1 | nlnil) | (1 | 0 | nlnil) | nil) .
 close

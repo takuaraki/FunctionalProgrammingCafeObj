@@ -1,0 +1,6 @@
+-- エラーに加え、大小関係の比較op(ord)を持つモジュール
+mod* TRIV-ERR-ORD {
+  [Elt Err < Elt&Err]
+  op err : -> Err .
+  op ord : Elt Elt -> Bool .
+}
