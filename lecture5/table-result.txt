@@ -1,0 +1,40 @@
+-- opening module TABLE(K <= TRIV2QID, V <= TRIV-ERR-IF2STRING-ERR)TRIV-ERR-IF2STRING-ERR 
+-- reduce in %TABLE(K <= TRIV2QID, V <= TRIV-ERR-IF2STRING-ERR) : (t):Table
+(('java , "Java") | (('obj , "OBJ3") | (('c , "C") | empTable))):Table
+(0.0000 sec for parse, 0.0000 sec for 13 rewrites + 19 matches)
+-- reduce in %TABLE(K <= TRIV2QID, V <= TRIV-ERR-IF2STRING-ERR) : (isReg(t,'obj)):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0000 sec for 19 rewrites + 28 matches)
+-- reduce in %TABLE(K <= TRIV2QID, V <= TRIV-ERR-IF2STRING-ERR) : (isReg(t,'mk)):Bool
+(false):Bool
+(0.0000 sec for parse, 0.0000 sec for 23 rewrites + 35 matches)
+-- reduce in %TABLE(K <= TRIV2QID, V <= TRIV-ERR-IF2STRING-ERR) : (lookup(t,'obj)):String&Err
+("OBJ3"):String
+(0.0000 sec for parse, 0.0000 sec for 23 rewrites + 34 matches)
+-- reduce in %TABLE(K <= TRIV2QID, V <= TRIV-ERR-IF2STRING-ERR) : (lookup(t,'mk)):String&Err
+(errStr):ErrString
+(0.0000 sec for parse, 0.0000 sec for 23 rewrites + 35 matches)
+-- reduce in %TABLE(K <= TRIV2QID, V <= TRIV-ERR-IF2STRING-ERR) : (update(t,'mk,"SML#")):Table
+(('java , "Java") | (('obj , "OBJ3") | (('c , "C") | (('mk , "SML#") | empTable)))):Table
+(0.0000 sec for parse, 0.0000 sec for 23 rewrites + 35 matches)
+-- reduce in %TABLE(K <= TRIV2QID, V <= TRIV-ERR-IF2STRING-ERR) : (update(t,'obj,"CafeOBJ")):Table
+(('java , "Java") | (('obj , "CafeOBJ") | (('c , "C") | empTable))):Table
+(0.0000 sec for parse, 0.0000 sec for 19 rewrites + 28 matches)
+-- reduce in %TABLE(K <= TRIV2QID, V <= TRIV-ERR-IF2STRING-ERR) : (insert(t,'mk,"SML#")):Table&Err
+(('mk , "SML#") | (('java , "Java") | (('obj , "OBJ3") | (('c , "C") | empTable)))):Table
+(0.0000 sec for parse, 0.0000 sec for 25 rewrites + 38 matches)
+-- reduce in %TABLE(K <= TRIV2QID, V <= TRIV-ERR-IF2STRING-ERR) : (insert(t,'obj,"CafeOBJ")):Table&Err
+(errTable):ErrTable
+(0.0000 sec for parse, 0.0000 sec for 21 rewrites + 30 matches)
+-- reduce in %TABLE(K <= TRIV2QID, V <= TRIV-ERR-IF2STRING-ERR) : (remove(t,'mk)):Table
+(('java , "Java") | (('obj , "OBJ3") | (('c , "C") | empTable))):Table
+(0.0000 sec for parse, 0.0000 sec for 23 rewrites + 35 matches)
+-- reduce in %TABLE(K <= TRIV2QID, V <= TRIV-ERR-IF2STRING-ERR) : (remove(t,'obj)):Table
+(('java , "Java") | (('c , "C") | empTable)):Table
+(0.0000 sec for parse, 0.0000 sec for 19 rewrites + 28 matches)
+-- reduce in %TABLE(K <= TRIV2QID, V <= TRIV-ERR-IF2STRING-ERR) : (delete(t,'mk)):Table&Err
+(errTable):ErrTable
+(0.0000 sec for parse, 0.0000 sec for 25 rewrites + 38 matches)
+-- reduce in %TABLE(K <= TRIV2QID, V <= TRIV-ERR-IF2STRING-ERR) : (delete(t,'obj)):Table&Err
+(('java , "Java") | (('c , "C") | empTable)):Table
+(0.0000 sec for parse, 0.0000 sec for 27 rewrites + 39 matches)
