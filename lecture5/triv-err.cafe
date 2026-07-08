@@ -1,0 +1,6 @@
+-- EltとErrの2つのソートを持つ
+-- エラー出力するop errも定義
+mod* TRIV-ERR {
+  [Elt Err < Elt&Err]
+  op err : -> Err .
+}
