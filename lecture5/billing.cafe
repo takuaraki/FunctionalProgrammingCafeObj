@@ -199,8 +199,7 @@ close
 open BILL .
   op cat : -> Catalog .
   ops c1 c2 : -> Cart .
-  eq cat = ('a,("apple",150)) | ('o,("orange",100)) | ('t,("tomato",90)) |
-  ('b,("banana",140)) | ('p,("potato",30)) | empCatalog .
+  eq cat = ('a,("apple",150)) | ('o,("orange",100)) | ('t,("tomato",90)) | ('b,("banana",140)) | ('p,("potato",30)) | empCatalog .
   eq c1 = ('p,3) | ('o,2) | ('a,3) | ('p,10) | ('b,10) | ('o,10) | ('t,20) | empCart .
   eq c2 = ('p,3) | ('o,2) | ('f,10) | ('a,3) | empCart .
 
