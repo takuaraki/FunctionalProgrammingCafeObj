@@ -1,5 +1,7 @@
--- need GLIST-ERR-ORD in glist-err-ord
 -- need TRIV-ERR-ORD2STRING-ERR in gqsort
+-- need GLIST-ERR-ORD in glist-err-ord
+in gqsort
+in glist-err-ord
 
 mod! STRLIST1 {
   pr(GLIST-ERR-ORD(E <= TRIV-ERR-ORD2STRING-ERR) * {

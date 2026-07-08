@@ -1,5 +1,7 @@
--- need GLIST-ERR-ORD in glist-err-ord
 -- need TRIV-ERR-ORD2NAT-ERR in qgsort
+-- need GLIST-ERR-ORD in glist-err-ord
+in gqsort
+in glist-err-ord
 
 -- ordを扱える自然数リストのモジュール
 mod! NATLIST9 {
