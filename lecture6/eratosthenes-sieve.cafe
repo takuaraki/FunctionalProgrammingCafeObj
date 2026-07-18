@@ -1,0 +1,28 @@
+in inf-list
+
+mod! ERATOSTHENES-SIEVE {
+  pr(NAT-INF-LIST)
+  op primes : -> InfList .
+  op sieve : InfList -> InfList .
+  op check : Nat InfList -> InfList .
+
+  vars X Y : Nat .
+  var NzX : NzNat .
+  var IL : InfList .
+
+  -- primes
+  eq primes = sieve(mkNILFrom(2)) .
+  -- sieve
+  eq sieve(X | IL) = X | sieve(check(X,IL)) .
+  -- check
+  eq check(0,IL) = IL .
+  eq check(NzX,Y | IL) = if NzX divides Y then {check(NzX,IL)} else {Y | check(NzX,IL)} .
+}
+
+open ERATOSTHENES-SIEVE .
+  red primes .
+  red take(primes,10) .
+  red take(primes,20) .
+  red take(primes,50) .
+  red take(primes,100) .
+close
