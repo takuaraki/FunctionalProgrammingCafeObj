@@ -1,0 +1,18 @@
+CafeOBJ> show NAT-IF
+module! NAT-IF
+{
+  imports {
+    protecting (NAT)
+  }
+  signature {
+    op if _ then { _ } else { _ } : Bool Nat Nat -> Nat { strat: (1 0 2 3) prec: 0 }
+  }
+  axioms {
+    var N1 : Nat
+    var N2 : Nat
+    eq (if true then { N1 } else { N2 })
+        = N1 .
+    eq (if false then { N1 } else { N2 })
+        = N2 .
+  }
+}

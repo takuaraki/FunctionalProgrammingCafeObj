@@ -1,0 +1,7 @@
+mod! NAT-IF {
+  pr(NAT)
+  op if_then{_}else{_} : Bool Nat Nat -> Nat .
+  vars N1 N2 : Nat .
+  eq if true then {N1} else {N2} = N1 .
+  eq if false then {N1} else {N2} = N2 .
+}

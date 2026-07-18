@@ -1,0 +1,14 @@
+mod! NAT-TRIPLE-IMLM {
+  pr(NAT)
+  [NatTriple]
+  op (_,_,_) : Nat Nat Nat -> NatTriple {constr} .
+  op 1st : NatTriple -> Nat {strat: (1 0)} .
+  vars FE SE TE : Nat .
+  eq 1st((FE,SE,TE)) = FE .
+}
+
+set trace whole on
+open NAT-TRIPLE-IMLM .
+  red 1st((1 + 1,2 + 2,3 + 3)) .
+close
+set trace whole off

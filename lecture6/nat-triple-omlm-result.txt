@@ -1,0 +1,8 @@
+-- opening module NAT-TRIPLE-OMLM
+-- reduce in %NAT-TRIPLE-OMLM : (1st(((1 + 1) , (2 + 2) , (3 + 3)))):Nat
+[1]: (1st(((1 + 1) , (2 + 2) , (3 + 3)))):Nat
+---> (1 + 1):NzNat
+[2]: (1 + 1):NzNat
+---> (2):NzNat
+(2):NzNat
+(0.0001 sec for parse, 0.0001 sec for 2 rewrites + 2 matches)
