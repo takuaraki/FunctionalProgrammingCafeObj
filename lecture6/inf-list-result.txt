@@ -1,0 +1,25 @@
+-- opening module NAT-INF-LIST
+-- reduce in %NAT-INF-LIST : (mkNILFrom(0)):InfList
+(0 | mkNILFrom(1)):InfList
+(0.0000 sec for parse, 0.0000 sec for 1 rewrites + 1 matches)
+-- reduce in %NAT-INF-LIST : (take(mkNILFrom(0),10)):List
+(0 | (1 | (2 | (3 | (4 | (5 | (6 | (7 | (8 | (9 | nil)))))))))):List
+(0.0000 sec for parse, 0.0001 sec for 41 rewrites + 51 matches)
+-- reduce in %NAT-INF-LIST : (drop(mkNILFrom(0),10)):InfList
+(10 | mkNILFrom((1 + 10))):InfList
+(0.0000 sec for parse, 0.0001 sec for 41 rewrites + 51 matches)
+-- reduce in %NAT-INF-LIST : (take(drop(mkNILFrom(0),997),10)):List
+(997 | (998 | (999 | (1000 | (1001 | (1002 | (1003 | (1004 | (1005 | (1006 | nil)))))))))):List
+(0.0000 sec for parse, 0.0066 sec for 4030 rewrites + 5037 matches)
+-- reduce in %NAT-INF-LIST : (take((take(mkNILFrom(0),10) @ drop(mkNILFrom(0),10)),20)):List
+(0 | (1 | (2 | (3 | (4 | (5 | (6 | (7 | (8 | (9 | (10 | (11 | (12 | (13 | (14 | (15 | (16 | (17 | (18 | (19 | nil)))))))))))))))))))):List
+(0.0000 sec for parse, 0.0003 sec for 154 rewrites + 204 matches)
+-- reduce in %NAT-INF-LIST : (take(mkNILFrom(0),20)):List
+(0 | (1 | (2 | (3 | (4 | (5 | (6 | (7 | (8 | (9 | (10 | (11 | (12 | (13 | (14 | (15 | (16 | (17 | (18 | (19 | nil)))))))))))))))))))):List
+(0.0000 sec for parse, 0.0001 sec for 81 rewrites + 101 matches)
+-- reduce in %NAT-INF-LIST : (zip(mkNILFrom(0),mkNILFrom(0))):InfList
+(0 | (0 | zip(mkNILFrom(1),mkNILFrom(1)))):InfList
+(0.0000 sec for parse, 0.0000 sec for 3 rewrites + 3 matches)
+-- reduce in %NAT-INF-LIST : (take(drop(zip(mkNILFrom(0),mkNILFrom(0)),997),10)):List
+(498 | (499 | (499 | (500 | (500 | (501 | (501 | (502 | (502 | (503 | nil)))))))))):List
+(0.0000 sec for parse, 0.0075 sec for 4532 rewrites + 5539 matches)

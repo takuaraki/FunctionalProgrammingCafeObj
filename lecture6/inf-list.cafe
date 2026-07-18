@@ -1,0 +1,57 @@
+in glist
+
+mod* INF-LIST(E :: TRIV) {
+  pr(NAT)
+  pr(GLIST(E))
+
+  [InfList]
+  op _|_ : Elt.E InfList -> InfList {strat: (1 0)} .
+
+  vars X Y : Elt.E .
+  vars IL IL2 : InfList .
+  var NzN : NzNat .
+  var N : Nat .
+  var L : List .
+
+  -- take
+  op take : InfList Nat -> List .
+  eq take(IL,0) = nil .
+  eq take(X | IL, NzN) = X | take(IL,p NzN) .
+
+  -- drop
+  op drop : InfList Nat -> InfList .
+  eq drop(IL,0) = IL .
+  eq drop(X | IL, NzN) = drop(IL,p NzN) .
+
+  -- @
+  op _@_ : List InfList -> InfList .
+  eq nil @ IL = IL .
+  eq (X | L) @ IL = X | (L @ IL) .
+
+  -- zip
+  op zip : InfList InfList -> InfList .
+  eq zip(X | IL,Y | IL2) = X | Y | zip(IL,IL2) .
+
+  -- if
+  op if_then{_}else{_} : Bool InfList InfList -> InfList .
+  eq if true then {IL} else {IL2} = IL .
+  eq if false then {IL} else {IL2} = IL2 .
+}
+
+mod! NAT-INF-LIST {
+  pr(INF-LIST(NAT)) .
+  op mkNILFrom : Nat -> InfList .
+  var N : Nat . vars IL1 IL2 : InfList .
+  eq mkNILFrom(N) = N | mkNILFrom(N + 1) .
+}
+
+open NAT-INF-LIST .
+  red mkNILFrom(0) .
+  red take(mkNILFrom(0),10) .
+  red drop(mkNILFrom(0),10) .
+  red take(drop(mkNILFrom(0),997),10) .
+  red take(take(mkNILFrom(0),10) @ drop(mkNILFrom(0),10),20) .
+  red take(mkNILFrom(0),20) .
+  red zip(mkNILFrom(0),mkNILFrom(0)) .
+  red take(drop(zip(mkNILFrom(0),mkNILFrom(0)),997),10) .
+close
