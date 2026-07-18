@@ -1,0 +1,33 @@
+in inf-list
+
+mod! HAMMING {
+  pr(NAT-INF-LIST)
+
+  op ham : -> InfList .
+  op 2* : InfList -> InfList .
+  op 3* : InfList -> InfList .
+  op 5* : InfList -> InfList .
+  op merge : InfList InfList -> InfList .
+
+  vars X Y : Nat .
+  vars IL IL2 : InfList .
+
+  -- ham
+  eq ham = 1 | merge(merge(2*(ham),3*(ham)),5*(ham)) .
+  -- 2*
+  eq 2*(X | IL) = 2 * X | 2*(IL) .
+  -- 3*
+  eq 3*(X | IL) = 3 * X | 3*(IL) .
+  -- 5*
+  eq 5*(X | IL) = 5 * X | 5*(IL) .
+  -- merge
+  eq merge(X | IL,Y | IL2) = if X < Y then {X | merge(IL,Y | IL2)} else {if Y < X then {Y | merge(X | IL,IL2)} else {X | merge(IL,IL2)} } .
+}
+
+open HAMMING .
+  red ham .
+  red take(ham,10) .
+  red take(ham,20) .
+  red take(ham,50) .
+  red take(ham,100) .
+close
