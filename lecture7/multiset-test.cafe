@@ -1,0 +1,65 @@
+in multiset
+in bool-if
+in nat-if
+
+mod! QID-NAT-PAIR principal-sort QNPair {
+  pr(QID)
+  pr(NAT)
+  [QNPair]
+
+  op (_,_) : Qid Nat -> QNPair {constr} .
+}
+
+mod! TEST {
+  pr(MULTISET(QID-NAT-PAIR))
+
+  op update : MSet Qid Nat -> MSet .
+  vars I J : Qid .
+  vars N N2 : Nat .
+  var MS : MSet .
+
+  eq update(emp,J,N2) = emp .
+  eq update((I,N) MS,J,N2) = if I == J then {(I,N2) MS} else {(I,N) update(MS,J,N2)} .
+}
+
+open TEST .
+  red update(('a,1) ('b,2) ('a,3),'a,99) .
+  red update(('a,3) ('b,2) ('a,1),'a,99) .
+close
+
+mod! TEST2 {
+  pr(BOOL-IF)
+  pr(NAT-IF)
+  pr(MULTISET(QID-NAT-PAIR))
+
+  vars I J : Qid .
+  vars N N2 : Nat .
+  var MS : MSet .
+
+  -- #
+  op # : MSet Qid -> Nat .
+  eq #(emp,J) = 0 .
+  eq #((I,N) MS,J) = if I == J then {1 + #(MS,J)} else {#(MS,J)} .
+
+  -- isValid
+  op isValid : MSet -> Bool .
+  eq isValid(emp) = true .
+  -- どれか1つの要素のQidが2個以上あるならfalse（着目しているものを除いたものの中に1個以上あればfalse）
+  eq isValid((I,N) MS) = if #(MS,I) > 0 then {false} else {isValid(MS)} .
+
+  -- update
+  op update : MSet Qid Nat -> MSet .
+  -- isValid（対象のQidが1個だけ）なら更新
+  ceq update((I,N) MS,I,N2) = (I,N2) MS if isValid((I,N) MS) .
+  -- not isValid（対象のQidが2個以上）か対象のQidがない場合は更新しない
+  ceq update(MS,J,N2) = MS if (not isValid(MS)) or #(MS,J) == 0 .
+}
+
+open TEST2 .
+  red update(('a,1) ('b,2) ('a,3),'a,99) .
+  red update(('a,3) ('b,2) ('a,1),'a,99) .
+  red update(('a,1) ('b,2) ('c,3),'a,99) .
+  red update(('c,3) ('b,2) ('a,1),'a,99) .
+  red update(('a,1) ('b,2) ('c,3),'d,99) .
+close
+
