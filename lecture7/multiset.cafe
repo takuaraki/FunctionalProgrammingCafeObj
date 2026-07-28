@@ -1,0 +1,21 @@
+mod! MULTISET(E :: TRIV) {
+  [Elt.E < MSet]
+
+  op emp : -> MSet {constr} .
+  op _ _ : MSet MSet -> MSet {constr assoc comm id: emp} .
+  op if_then{_}else{_} : Bool MSet MSet -> MSet .
+
+  vars MS1 MS2 : MSet .
+
+  eq if true then {MS1} else {MS2} = MS1 .
+  eq if false then {MS1} else {MS2} = MS2 .
+}
+
+open MULTISET(NAT) .
+  red (1 2) 3 == 1 (2 3) .
+  red 1 2 == 2 1 .
+  red 1 1 1 2 2 == 1 2 1 1 2 .
+  red emp 1 emp 2 emp 1 emp 1 emp 2 emp .
+  red emp .
+  red emp emp .
+close
