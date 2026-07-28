@@ -1,0 +1,6 @@
+mod! BOOL-IF {
+  op if_then{_}else{_} : Bool Bool Bool -> Bool .
+  vars B1 B2 : Bool .
+  eq if true then {B1} else {B2} = B1 .
+  eq if false then {B1} else {B2} = B2 .
+}

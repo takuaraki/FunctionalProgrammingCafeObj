@@ -1,0 +1,9 @@
+mod! GLIST(E :: TRIV) {
+  [Nil NnList < List]
+  op nil : -> Nil {constr} .
+  op _|_ : Elt.E List -> List {constr} .
+  op if_then{_}else{_} : Bool List List -> List .
+  vars L1 L2 : List .
+  eq if true then {L1} else {L2} = L1 .
+  eq if false then {L1} else {L2} = L2 .
+}

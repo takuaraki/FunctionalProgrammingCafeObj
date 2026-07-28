@@ -1,0 +1,140 @@
+in bool-if
+in nat-if
+in inf-list
+
+mod! LOC {
+  [Loc]
+  ops rs ms cs : -> Loc {constr} .
+}
+
+mod! TID {
+  [Tid]
+  ops t1 t2 : -> Tid {constr} .
+  op if_then{_}else{_} : Bool Tid Tid -> Tid .
+  vars T1 T2 : Tid .
+  eq if true then {T1} else {T2} = T1 .
+  eq if false then {T1} else {T2} = T2 .
+}
+
+-- Observable Component. ロックされているか or 各スレッドの場所
+mod! OCOM {
+  pr(TID)
+  pr(LOC)
+  [OCom]
+  op (locked:_) : Bool -> OCom {constr} .
+  op (pc[_]:_) : Tid Loc -> OCom {constr} .
+}
+
+-- 多重集合表現の状態
+mod! STATE principal-sort State {
+  pr(OCOM) pr(NAT-IF) pr(BOOL-IF)
+  [OCom < State]
+
+  op void : -> State {constr} .
+  op _ _ : State State -> State {constr assoc comm id: void} .
+
+  -- var, vars
+  vars T T2 : Tid .
+  vars B B2 : Bool .
+  var S : State .
+  vars L L2 : Loc .
+
+  -- #
+  op # : State Tid -> Nat .
+  eq #(void,T) = 0 .
+  eq #((locked: B) S,T) = #(S,T) .
+  eq #((pc[T2]: L) S,T) = if T2 == T then {1 + #(S,T)} else {#(S,T)} .
+
+  -- isValid
+  op isValid : State -> Bool .
+  eq isValid(void) = false .
+  eq isValid((locked: B)) = false .
+  eq isValid((pc[T]: L)) = false .
+  eq isValid((pc[T]: L) (locked: B)) = true .
+  eq isValid((locked: B) (locked: B2) S) = false .
+  eq isValid((pc[T]: L) (pc[T2]: L2) S)
+    = if #((pc[T2]: L2) S,T) > 0 
+      then {false}
+      else {isValid((pc[T2]: L2) S)} .
+
+  -- #cs
+  op #cs : State -> Nat .
+  eq #cs(void) = 0 .
+  eq #cs((locked: B) S) = #cs(S) .
+  eq #cs((pc[T2]: rs) S) = #cs(S) .
+  eq #cs((pc[T2]: ms) S) = #cs(S) .
+  eq #cs((pc[T2]: cs) S) = 1 + #cs(S) .
+}
+
+mod! FMUTEX {
+  pr(STATE)
+  op trans : State Tid -> State .
+
+  var T : Tid . var S : State . var B : Bool .
+
+  ceq trans((pc[T]: rs) (locked: true) S,T) = (pc[T]: rs) (locked: true) S if isValid((pc[T]: rs) (locked: true) S) .
+  ceq trans((pc[T]: rs) (locked: false) S,T) = (pc[T]: ms) (locked: false) S if isValid((pc[T]: rs) (locked: false) S) .
+  ceq trans((pc[T]: ms) (locked: B) S,T) = (pc[T]: cs) (locked: true) S if isValid((pc[T]: ms) (locked: B) S) .
+  ceq trans((pc[T]: cs) (locked: B) S,T) = (pc[T]: rs) (locked: false) S if isValid((pc[T]: cs) (locked: B) S) .
+  ceq trans(S,T) = S if (not isValid(S)) or (not #(S,T) > 0) .
+}
+
+-- シミュレーションの準備
+-- computation. 状態の無限列
+mod! COMP {
+  pr(INF-LIST(STATE) * {
+    sort InfList -> Comp,
+    sort List -> FComp
+  })
+}
+
+-- スレッドをランダムっぽく選択するスケジューラ
+mod! SCHED {
+  pr(NAT)
+  pr(INF-LIST(TID) * {sort InfList -> Sched} )
+  op sched : Nat -> Sched .
+  var N : Nat .
+
+  eq sched(N)
+    = if 2 divides N
+    then {t1 | sched(N quo 2)}
+    else {t2 | sched(N quo 2)} .
+}
+
+-- シミュレータ
+mod! SIM {
+  pr(FMUTEX) pr(COMP) pr(SCHED)
+
+  op sim : State Nat -> Comp .
+  op sub-sim : State Sched -> Comp .
+  op sim-check : State Nat Nat -> FComp .
+  op sub-sim-check : State Sched Nat -> FComp .
+  op mutex : State -> Bool .
+
+  var S : State .
+  vars N D : Nat .
+  var NzD : NzNat .
+  var T : Tid .
+  var TIL : Sched .
+
+  eq sim(S,N) = sub-sim(S,sched(N)) .
+  eq sub-sim(S,T | TIL) = S | sub-sim(trans(S,T),TIL) .
+  eq sim-check(S,N,D) = sub-sim-check(S,sched(N),D) .
+  eq sub-sim-check(S,T | TIL,0) = S | nil .
+  eq sub-sim-check(S,T | TIL,NzD)
+    = if mutex(S)
+    then {S | sub-sim-check(trans(S,T),TIL,p NzD)}
+    else {S | nil} .
+  eq mutex(S) = #cs(S) < 2 .
+}
+
+open SIM .
+  red take(sim((locked: false) (pc[t1]: rs) (pc[t2]: rs),123),10) .
+  red take(sim((locked: false) (pc[t1]: rs) (pc[t2]: rs),1234),10) .
+  red take(sim((locked: false) (pc[t1]: rs) (pc[t2]: rs),12345),10) .
+
+  red sim-check((locked: false) (pc[t1]: rs) (pc[t2]: rs),123,10) .
+  red sim-check((locked: false) (pc[t1]: rs) (pc[t2]: rs),1234,10) .
+  red sim-check((locked: false) (pc[t1]: rs) (pc[t2]: rs),12345,10) .
+close
+
