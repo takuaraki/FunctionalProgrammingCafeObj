@@ -1,0 +1,56 @@
+-- opening module SCHED
+-- reduce in %SCHED : (take(sched(123456789),10)):List
+(t2 | (t2 | (t2 | (t1 | (t2 | (t4 | (t1 | (t4 | (t4 | (t3 | nil)))))))))):List
+(0.0000 sec for parse, 0.0001 sec for 114 rewrites + 140 matches)
+-- reduce in %SCHED : (take(sched(123456789123456789),10)):List
+(t2 | (t2 | (t2 | (t1 | (t4 | (t4 | (t2 | (t2 | (t1 | (t1 | nil)))))))))):List
+(0.0000 sec for parse, 0.0001 sec for 105 rewrites + 127 matches)
+-- reduce in %SCHED : (take(sched(123456789123456789123456789),10)):List
+(t2 | (t2 | (t2 | (t1 | (t4 | (t4 | (t2 | (t2 | (t1 | (t2 | nil)))))))))):List
+(0.0000 sec for parse, 0.0001 sec for 105 rewrites + 127 matches)
+
+
+-- defining module! SIM
+-- opening module SIM
+-- reduce in %SIM : (take(sim((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs),123456789),10)):FComp
+((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs) | ((locked: false , pc1: rs , pc2: ms , pc3: rs , pc4: rs) | ((locked: true , pc1: rs , pc2: cs , pc3: rs , pc4: rs) | ((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs) | ((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs) | ((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs) | (trans((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs),t4) | (trans(trans((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs),t4),t1) | (trans(trans(trans((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs),t4),t1),t4) | (trans(trans(trans(trans((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs),t4),t1),t4),t4) | nil)))))))))):FComp
+(0.0000 sec for parse, 0.0002 sec for 131 rewrites + 581 matches)
+-- reduce in %SIM : (take(sim((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs),123456789123456789),10)):FComp
+((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs) | ((locked: false , pc1: rs , pc2: ms , pc3: rs , pc4: rs) | ((locked: true , pc1: rs , pc2: cs , pc3: rs , pc4: rs) | ((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs) | ((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs) | (trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4) | (trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4) | (trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2) | (trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2) | (trans(trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2),t1) | nil)))))))))):FComp
+(0.0000 sec for parse, 0.0002 sec for 121 rewrites + 738 matches)
+-- reduce in %SIM : (take(sim((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs),123456789123456789123456789),10)):FComp
+((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs) | ((locked: false , pc1: rs , pc2: ms , pc3: rs , pc4: rs) | ((locked: true , pc1: rs , pc2: cs , pc3: rs , pc4: rs) | ((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs) | ((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs) | (trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4) | (trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4) | (trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2) | (trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2) | (trans(trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2),t1) | nil)))))))))):FComp
+(0.0000 sec for parse, 0.0002 sec for 121 rewrites + 738 matches)
+
+
+-- opening module SIM
+-- reduce in %SIM : (sim-check((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs),123456789,10)):FComp
+((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs) | ((locked: false , pc1: rs , pc2: ms , pc3: rs , pc4: rs) | ((locked: true , pc1: rs , pc2: cs , pc3: rs , pc4: rs) | ((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs) | ((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs) | ((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs) | (if mutex(trans((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs),t4)) then { (trans((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs),t4) | (if mutex(trans(trans((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs),t4),t1)) then { (trans(trans((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs),t4),t1) | (if mutex(trans(trans(trans((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs),t4),t1),t4)) then { (trans(trans(trans((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs),t4),t1),t4) | (if mutex(trans(trans(trans(trans((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs),t4),t1),t4),t4)) then { (trans(trans(trans(trans((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs),t4),t1),t4),t4) | (trans(trans(trans(trans(trans((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs),t4),t1),t4),t4),t3) | nil)) } else { (trans(trans(trans(trans((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs),t4),t1),t4),t4) | nil) })) } else { (trans(trans(trans((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs),t4),t1),t4) | nil) })) } else { (trans(trans((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs),t4),t1) | nil) })) } else { (trans((locked: false , pc1: ms , pc2: ms , pc3: rs , pc4: rs),t4) | nil) }))))))):FComp
+(0.0000 sec for parse, 0.0011 sec for 342 rewrites + 4208 matches)
+-- reduce in %SIM : (sim-check((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs),123456789123456789,10)):FComp
+((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs) | ((locked: false , pc1: rs , pc2: ms , pc3: rs , pc4: rs) | ((locked: true , pc1: rs , pc2: cs , pc3: rs , pc4: rs) | ((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs) | ((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs) | (if mutex(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4)) then { (trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4) | (if mutex(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4)) then { (trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4) | (if mutex(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2)) then { (trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2) | (if mutex(trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2)) then { (trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2) | (if mutex(trans(trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2),t1)) then { (trans(trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2),t1) | (trans(trans(trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2),t1),t1) | nil)) } else { (trans(trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2),t1) | nil) })) } else { (trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2) | nil) })) } else { (trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2) | nil) })) } else { (trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4) | nil) })) } else { (trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4) | nil) })))))):FComp
+(0.0000 sec for parse, 0.0011 sec for 295 rewrites + 4952 matches)
+-- reduce in %SIM : (sim-check((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs),123456789123456789123456789,10)):FComp
+((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs) | ((locked: false , pc1: rs , pc2: ms , pc3: rs , pc4: rs) | ((locked: true , pc1: rs , pc2: cs , pc3: rs , pc4: rs) | ((locked: false , pc1: rs , pc2: rs , pc3: rs , pc4: rs) | ((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs) | (if mutex(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4)) then { (trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4) | (if mutex(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4)) then { (trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4) | (if mutex(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2)) then { (trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2) | (if mutex(trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2)) then { (trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2) | (if mutex(trans(trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2),t1)) then { (trans(trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2),t1) | (trans(trans(trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2),t1),t2) | nil)) } else { (trans(trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2),t1) | nil) })) } else { (trans(trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2),t2) | nil) })) } else { (trans(trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4),t2) | nil) })) } else { (trans(trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4),t4) | nil) })) } else { (trans((locked: false , pc1: ms , pc2: rs , pc3: rs , pc4: rs),t4) | nil) })))))):FComp
+(0.0000 sec for parse, 0.0011 sec for 295 rewrites + 4952 matches)
+
+--> 初期状態で相互排除性を満たさない状態を渡してみる
+-- reduce in %SIM : (sim-check((locked: false , pc1: cs , pc2: cs , pc3: rs , pc4: rs),123456789,10)):FComp
+((locked: false , pc1: cs , pc2: cs , pc3: rs , pc4: rs) | nil):FComp
+(0.0000 sec for parse, 0.0006 sec for 342 rewrites + 1922 matches)
+-- reduce in %SIM : (sim-check((locked: false , pc1: cs , pc2: rs , pc3: cs , pc4: rs),123456789,10)):FComp
+((locked: false , pc1: cs , pc2: rs , pc3: cs , pc4: rs) | nil):FComp
+(0.0000 sec for parse, 0.0006 sec for 342 rewrites + 1906 matches)
+-- reduce in %SIM : (sim-check((locked: false , pc1: cs , pc2: rs , pc3: rs , pc4: cs),123456789,10)):FComp
+((locked: false , pc1: cs , pc2: rs , pc3: rs , pc4: cs) | nil):FComp
+(0.0000 sec for parse, 0.0006 sec for 342 rewrites + 1898 matches)
+-- reduce in %SIM : (sim-check((locked: false , pc1: rs , pc2: cs , pc3: cs , pc4: rs),123456789,10)):FComp
+((locked: false , pc1: rs , pc2: cs , pc3: cs , pc4: rs) | nil):FComp
+(0.0000 sec for parse, 0.0005 sec for 342 rewrites + 1328 matches)
+-- reduce in %SIM : (sim-check((locked: false , pc1: rs , pc2: cs , pc3: rs , pc4: cs),123456789,10)):FComp
+((locked: false , pc1: rs , pc2: cs , pc3: rs , pc4: cs) | nil):FComp
+(0.0000 sec for parse, 0.0005 sec for 342 rewrites + 1322 matches)
+-- reduce in %SIM : (sim-check((locked: false , pc1: rs , pc2: rs , pc3: cs , pc4: cs),123456789,10)):FComp
+((locked: false , pc1: rs , pc2: rs , pc3: cs , pc4: cs) | nil):FComp
+(0.0000 sec for parse, 0.0004 sec for 342 rewrites + 722 matches)
+
