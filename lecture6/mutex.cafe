@@ -1,0 +1,127 @@
+in inf-list
+
+mod! LOC {
+  [Loc]
+  ops rs ms cs : -> Loc {constr} .
+}
+
+mod! STATE principal-sort State {
+  pr(LOC)
+  [State]
+  op (locked:_,pc1:_,pc2:_) : Bool Loc Loc -> State {constr} .
+}
+
+mod! TID {
+  [Tid]
+  ops t1 t2 : -> Tid {constr} .
+  op if_then{_}else{_} : Bool Tid Tid -> Tid .
+  vars T1 T2 : Tid .
+  eq if true then {T1} else {T2} = T1 .
+  eq if false then {T1} else {T2} = T2 .
+}
+
+mod! FMUTEX {
+  pr(STATE)
+  pr(TID)
+
+  op trans : State Tid -> State .
+
+  vars L1 L2 : Loc .
+  var B : Bool .
+
+  -- t1
+  -- t1以外のスレッドでロックされている時は、rsでループが回るだけ
+  eq trans((locked: true,pc1: rs,pc2: L2),t1) = (locked: true,pc1: rs,pc2: L2) .
+  -- ロックされていない時はrs→msへ移動
+  eq trans((locked: false,pc1: rs,pc2: L2),t1) = (locked: false,pc1: ms,pc2: L2) .
+  -- ms→cs. このときロックをtrueにする
+  eq trans((locked: B,pc1: ms,pc2: L2),t1) = (locked: true,pc1: cs,pc2: L2) .
+  -- cs→rsに戻る. このときロックをfalseにする
+  eq trans((locked: B,pc1: cs,pc2: L2),t1) = (locked: false,pc1: rs,pc2: L2) .
+
+  -- t2
+  eq trans((locked: true,pc1: L1,pc2: rs),t2) = (locked: true,pc1: L1,pc2: rs) .
+  eq trans((locked: false,pc1: L1,pc2: rs),t2) = (locked: false,pc1: L1,pc2: ms) .
+  eq trans((locked: B,pc1: L1,pc2: ms),t2) = (locked: true,pc1: L1,pc2: cs) .
+  eq trans((locked: B,pc1: L1,pc2: cs),t2) = (locked: false,pc1: L1,pc2: rs) .
+}
+
+-- シミュレーションの準備
+-- computation. 状態の無限列
+mod! COMP {
+  pr(INF-LIST(STATE) * {
+    sort InfList -> Comp,
+    sort List -> FComp
+  })
+}
+
+-- t1とt2をランダムっぽく選ぶスケジューラ. Nを大きい値にして使うこと
+-- スレッドIDの無限リスト
+mod! SCHED {
+  pr(NAT)
+  pr(INF-LIST(TID) * {sort InfList -> Sched} )
+  op sched : Nat -> Sched .
+  var N : Nat .
+
+  -- Nが2の倍数か？でt1/t2を決める. 次の判定はNを2で割った商
+  eq sched(N) = if 2 divides N then {t1 | sched(N quo 2)} else {t2 | sched(N quo 2)} .
+}
+
+-- スケジューラの動作検証
+open SCHED .
+  red take(sched(123),10) .
+  red take(sched(1234),10) .
+  red take(sched(12345),10) .
+close
+
+-- シミュレータ本体
+mod! SIM { 
+  pr(FMUTEX)
+  pr(COMP)
+  pr(SCHED)
+
+  op sim : State Nat -> Comp .
+  op sub-sim : State Sched -> Comp .
+  op mutex : State -> Bool .
+  op sim-check : State Nat Nat -> FComp .
+  op sub-sim-check : State Sched Nat -> FComp .
+
+  var S : State .
+  var N : Nat .
+  var NzD : NzNat .
+  var T : Tid .
+  var TIL : Sched .
+  vars L1 L2 : Loc .
+  var B : Bool .
+  var D : Nat .
+
+  -- 初期状態とスケジューラ用のNを与えてsub-simを返す
+  eq sim(S,N) = sub-sim(S,sched(N)) .
+  -- 実際のシミュレーション. 今選択されているスレッドを1回状態遷移させる
+  eq sub-sim(S, T | TIL) = S | sub-sim(trans(S,T),TIL) .
+  -- 相互排除性を満たしているか
+  eq mutex((locked: B,pc1: L1,pc2: L2)) = not (L1 == cs and L2 == cs) .
+  -- 相互排除性のチェック. 初期状態とスケジューラ用のN、何回状態遷移させるかを決めて開始
+  eq sim-check(S,N,D) = sub-sim-check(S,sched(N),D) .
+  -- 補助関数の正常終了
+  eq sub-sim-check(S,T | TIL,0) = S | nil .
+  -- 補助関数. 相互排除性を満たしていれば状態遷移を進める. 満たしていなければ強制終了
+  eq sub-sim-check(S,T | TIL,NzD) = if mutex(S) then {S | sub-sim-check(trans(S,T),TIL,p NzD)} else {S | nil} .
+}
+
+-- シミュレータの動作検証
+open SIM .
+  red take(sim((locked: false,pc1: rs,pc2: rs),123),10) .
+  red take(sim((locked: false,pc1: rs,pc2: rs),1234),10) .
+  red take(sim((locked: false,pc1: rs,pc2: rs),12345),10) .
+close
+
+-- 相互排除性チェック
+open SIM .
+  red sim-check((locked: false,pc1: rs,pc2: rs),123,10) .
+  red sim-check((locked: false,pc1: rs,pc2: rs),1234,10) .
+  red sim-check((locked: false,pc1: rs,pc2: rs),12345,10) .
+
+  --> 初期状態で相互排除性を満たさない状態を渡してみる
+  red sim-check((locked: false,pc1: cs,pc2: cs),12345,10) .
+close

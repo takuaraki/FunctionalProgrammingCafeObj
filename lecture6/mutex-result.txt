@@ -1,0 +1,41 @@
+-- opening module SCHED
+-- reduce in %SCHED : (take(sched(123),10)):List
+(t2 | (t2 | (t1 | (t2 | (t2 | (t2 | (t2 | (t1 | (t1 | (t1 | nil)))))))))):List
+(0.0000 sec for parse, 0.0001 sec for 64 rewrites + 80 matches)
+-- reduce in %SCHED : (take(sched(1234),10)):List
+(t1 | (t2 | (t1 | (t1 | (t2 | (t1 | (t2 | (t2 | (t1 | (t1 | nil)))))))))):List
+(0.0000 sec for parse, 0.0000 sec for 64 rewrites + 79 matches)
+-- reduce in %SCHED : (take(sched(12345),10)):List
+(t2 | (t1 | (t1 | (t2 | (t2 | (t2 | (t1 | (t1 | (t1 | (t1 | nil)))))))))):List
+(0.0000 sec for parse, 0.0000 sec for 64 rewrites + 78 matches)
+
+
+-- defining module! SIM
+-- opening module SIM
+-- reduce in %SIM : (take(sim((locked: false , pc1: rs , pc2: rs),123),10)):FComp
+((locked: false , pc1: rs , pc2: rs) | ((locked: false , pc1: rs , pc2: ms) | ((locked: true , pc1: rs , pc2: cs) | ((locked: true , pc1: rs , pc2: cs) | ((locked: false , pc1: rs , pc2: rs) | ((locked: false , pc1: rs , pc2: ms) | ((locked: true , pc1: rs , pc2: cs) | ((locked: false , pc1: rs , pc2: rs) | ((locked: false , pc1: ms , pc2: rs) | ((locked: true , pc1: cs , pc2: rs) | nil)))))))))):FComp
+(0.0000 sec for parse, 0.0001 sec for 86 rewrites + 144 matches)
+-- reduce in %SIM : (take(sim((locked: false , pc1: rs , pc2: rs),1234),10)):FComp
+((locked: false , pc1: rs , pc2: rs) | ((locked: false , pc1: ms , pc2: rs) | ((locked: false , pc1: ms , pc2: ms) | ((locked: true , pc1: cs , pc2: ms) | ((locked: false , pc1: rs , pc2: ms) | ((locked: true , pc1: rs , pc2: cs) | ((locked: true , pc1: rs , pc2: cs) | ((locked: false , pc1: rs , pc2: rs) | ((locked: false , pc1: rs , pc2: ms) | ((locked: false , pc1: ms , pc2: ms) | nil)))))))))):FComp
+(0.0000 sec for parse, 0.0001 sec for 86 rewrites + 133 matches)
+-- reduce in %SIM : (take(sim((locked: false , pc1: rs , pc2: rs),12345),10)):FComp
+((locked: false , pc1: rs , pc2: rs) | ((locked: false , pc1: rs , pc2: ms) | ((locked: false , pc1: ms , pc2: ms) | ((locked: true , pc1: cs , pc2: ms) | ((locked: true , pc1: cs , pc2: cs) | ((locked: false , pc1: cs , pc2: rs) | ((locked: false , pc1: cs , pc2: ms) | ((locked: false , pc1: rs , pc2: ms) | ((locked: false , pc1: ms , pc2: ms) | ((locked: true , pc1: cs , pc2: ms) | nil)))))))))):FComp
+(0.0000 sec for parse, 0.0001 sec for 86 rewrites + 135 matches)
+
+
+-- opening module SIM
+-- reduce in %SIM : (sim-check((locked: false , pc1: rs , pc2: rs),123,10)):FComp
+((locked: false , pc1: rs , pc2: rs) | ((locked: false , pc1: rs , pc2: ms) | ((locked: true , pc1: rs , pc2: cs) | ((locked: true , pc1: rs , pc2: cs) | ((locked: false , pc1: rs , pc2: rs) | ((locked: false , pc1: rs , pc2: ms) | ((locked: true , pc1: rs , pc2: cs) | ((locked: false , pc1: rs , pc2: rs) | ((locked: false , pc1: ms , pc2: rs) | ((locked: true , pc1: cs , pc2: rs) | ((locked: false , pc1: rs , pc2: rs) | nil))))))))))):FComp
+(0.0000 sec for parse, 0.0002 sec for 145 rewrites + 223 matches)
+-- reduce in %SIM : (sim-check((locked: false , pc1: rs , pc2: rs),1234,10)):FComp
+((locked: false , pc1: rs , pc2: rs) | ((locked: false , pc1: ms , pc2: rs) | ((locked: false , pc1: ms , pc2: ms) | ((locked: true , pc1: cs , pc2: ms) | ((locked: false , pc1: rs , pc2: ms) | ((locked: true , pc1: rs , pc2: cs) | ((locked: true , pc1: rs , pc2: cs) | ((locked: false , pc1: rs , pc2: rs) | ((locked: false , pc1: rs , pc2: ms) | ((locked: false , pc1: ms , pc2: ms) | ((locked: true , pc1: cs , pc2: ms) | nil))))))))))):FComp
+(0.0000 sec for parse, 0.0002 sec for 145 rewrites + 212 matches)
+-- reduce in %SIM : (sim-check((locked: false , pc1: rs , pc2: rs),12345,10)):FComp
+((locked: false , pc1: rs , pc2: rs) | ((locked: false , pc1: rs , pc2: ms) | ((locked: false , pc1: ms , pc2: ms) | ((locked: true , pc1: cs , pc2: ms) | ((locked: true , pc1: cs , pc2: cs) | nil))))):FComp
+(0.0000 sec for parse, 0.0002 sec for 145 rewrites + 215 matches)
+
+--> 初期状態で相互排除性を満たさない状態を渡してみる
+-- reduce in %SIM : (sim-check((locked: false , pc1: cs , pc2: cs),12345,10)):FComp
+((locked: false , pc1: cs , pc2: cs) | nil):FComp
+(0.0000 sec for parse, 0.0002 sec for 145 rewrites + 217 matches)
+
