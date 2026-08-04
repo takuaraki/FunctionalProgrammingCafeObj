@@ -5,6 +5,10 @@
 --
 -- An instruction set
 --
+
+in ast
+in misc
+
 mod! INSTRUCT principal-sort Instruct {
   pr(NAT)
   pr(VAR)
@@ -70,12 +74,77 @@ mod! VM {
   var E&E : Env&Err .
   var S&E : Stack&Err .
   var I&E : Instruct&Err .
-  -- run
-  -- exec
-  -- exec2
-}
 
-eof
+  -- run
+  eq run(IL) = exec(IL,0,empstk,empEnv) .
+
+  -- exec
+  eq exec(IL,PC,errStack,E&E) = errEnv .
+  eq exec(IL,PC,S&E,errEnv) = errEnv .
+  eq exec(IL,PC,Stk,Env) = exec2(nth(IL,PC),IL,PC,Stk,Env) .
+
+  -- exec2
+  -- push
+  eq exec2(push(N),IL,PC,Stk,Env) = exec(IL,PC + 1,N | Stk,Env) .
+  -- load
+  eq exec2(load(V),IL,PC,Stk,Env) = exec(IL,PC + 1,lookup(Env,V) | Stk,Env) .
+  -- store
+  eq exec2(store(V),IL,PC,empstk,Env) = errEnv .
+  eq exec2(store(V),IL,PC,N | Stk,Env) = exec(IL,PC + 1,Stk,update(Env,V,N)) .
+  -- add
+  eq exec2(add,IL,PC,empstk,Env) = errEnv .
+  eq exec2(add,IL,PC,N1 | empstk,Env) = errEnv .
+  eq exec2(add,IL,PC,N2 | N1 | Stk,Env) = exec(IL,PC + 1,N1 + N2 | Stk,Env) .
+  -- multiply 
+  eq exec2(multiply,IL,PC,empstk,Env) = errEnv .
+  eq exec2(multiply,IL,PC,N1 | empstk,Env) = errEnv .
+  eq exec2(multiply,IL,PC,N2 | N1 | Stk,Env) = exec(IL,PC + 1,N1 * N2 | Stk,Env) .
+  -- minus
+  eq exec2(minus,IL,PC,empstk,Env) = errEnv .
+  eq exec2(minus,IL,PC,N1 | empstk,Env) = errEnv .
+  eq exec2(minus,IL,PC,N2 | N1 | Stk,Env) = exec(IL,PC + 1,sd(N1,N2) | Stk,Env) .
+  -- divide
+  eq exec2(divide,IL,PC,empstk,Env) = errEnv .
+  eq exec2(divide,IL,PC,N1 | empstk,Env) = errEnv .
+  eq exec2(divide,IL,PC,N2 | N1 | Stk,Env) = exec(IL,PC + 1,N1 quo N2 | Stk,Env) .
+  -- mod
+  eq exec2(mod,IL,PC,empstk,Env) = errEnv .
+  eq exec2(mod,IL,PC,N1 | empstk,Env) = errEnv .
+  eq exec2(mod,IL,PC,N2 | N1 | Stk,Env) = exec(IL,PC + 1,N1 rem N2 | Stk,Env) .
+  -- lessThan
+  eq exec2(lessThan,IL,PC,empstk,Env) = errEnv .
+  eq exec2(lessThan,IL,PC,N1 | empstk,Env) = errEnv .
+  eq exec2(lessThan,IL,PC,N2 | N1 | Stk,Env) = exec(IL,PC + 1,if N1 < N2 then {1} else {0} | Stk,Env) .
+  -- greaterThan
+  eq exec2(greaterThan,IL,PC,empstk,Env) = errEnv .
+  eq exec2(greaterThan,IL,PC,N1 | empstk,Env) = errEnv .
+  eq exec2(greaterThan,IL,PC,N2 | N1 | Stk,Env) = exec(IL,PC + 1,if N1 > N2 then {1} else {0} | Stk,Env) .
+  -- equal
+  eq exec2(equal,IL,PC,empstk,Env) = errEnv .
+  eq exec2(equal,IL,PC,N1 | empstk,Env) = errEnv .
+  eq exec2(equal,IL,PC,N2 | N1 | Stk,Env) = exec(IL,PC + 1,if N1 == N2 then {1} else {0} | Stk,Env) .
+  -- notEqual
+  eq exec2(notEqual,IL,PC,empstk,Env) = errEnv .
+  eq exec2(notEqual,IL,PC,N1 | empstk,Env) = errEnv .
+  eq exec2(notEqual,IL,PC,N2 | N1 | Stk,Env) = exec(IL,PC + 1,if N1 == N2 then {0} else {1} | Stk,Env) .
+  -- and
+  eq exec2(and,IL,PC,empstk,Env) = errEnv .
+  eq exec2(and,IL,PC,N1 | empstk,Env) = errEnv .
+  eq exec2(and,IL,PC,N2 | N1 | Stk,Env) = exec(IL,PC + 1,if N1 == 0 or N2 == 0 then {0} else {1} | Stk,Env) .
+  -- or
+  eq exec2(or,IL,PC,empstk,Env) = errEnv .
+  eq exec2(or,IL,PC,N1 | empstk,Env) = errEnv .
+  eq exec2(or,IL,PC,N2 | N1 | Stk,Env) = exec(IL,PC + 1,if N1 == 0 and N2 == 0 then {0} else {1} | Stk,Env) .
+  -- jump
+  eq exec2(jump(N),IL,PC,Stk,Env) = exec(IL,PC + N,Stk,Env) .
+  -- bjump
+  eq exec2(bjump(N),IL,PC,Stk,Env) = exec(IL,sd(PC,N),Stk,Env) .
+  -- jumpOnCond
+  eq exec2(jumpOnCond(N),IL,PC,empstk,Env) = errEnv .
+  eq exec2(jumpOnCond(N),IL,PC,N1 | Stk,Env) = exec(IL,if N1 == 0 then {PC + 1} else {PC + N},Stk,Env) .
+  -- quit
+  eq exec2(quit,IL,PC,Stk,Env) = Env .
+}
 
 open VM .
   ops x y z : -> Var .

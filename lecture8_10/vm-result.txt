@@ -1,0 +1,13 @@
+-- defining module! VMTRIV-ERR2INSTRUCT 
+[Warning]: axiom : eq exec2(jumpOnCond(N),IL,PC,(N1 | Stk),Env) = exec(IL,(if (N1 == 0) then { (1 + PC) } else { (PC + N) }),Stk,Env)
+    contains error operators.
+-- opening module VM
+[Warning]: axiom : eq exec2(jumpOnCond(N),IL,PC,(N1 | Stk),Env) = exec(IL,(if (N1 == 0) then { (1 + PC) } else { (PC + N) }),Stk,Env)
+    contains error operators.
+    
+-- reduce in %VM : (run(il1)):Env&Err
+((x , 16) | ((y , 65536) | empEnv)):Env
+(0.0000 sec for parse, 0.0059 sec for 1414 rewrites + 3918 matches)
+-- reduce in %VM : (run(il2)):Env&Err
+((x , 64) | ((y , 18446744073709551616) | empEnv)):Env
+(0.0000 sec for parse, 0.0082 sec for 2104 rewrites + 5832 matches)
