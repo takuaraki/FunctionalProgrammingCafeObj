@@ -17,6 +17,10 @@
 -- - Function evalExp computes an expression under a given
 --   environment, returning the result (a natural number).
 --
+
+in ast
+in misc
+
 mod! INTERPRET {
   pr(STM)
   pr(ENV)
@@ -36,7 +40,42 @@ mod! INTERPRET {
   -- evalAssign
   -- evalIf
   -- evalWhile
-  -- evalExp
+
+  -- evalExp. 式の解釈実行
+  eq evalExp(E,errEnv) = errNat .
+  eq evalExp(n(N),EV) = N .
+  eq evalExp(V,EV) = lookup(EV,V) .
+  -- 左辺はMinilaの演算子, 右辺はcafeobjの演算子
+  eq evalExp(E1 + E2,EV) = evalExp(E1,EV) + evalExp(E2,EV) .
+  eq evalExp(E1 * E2,EV) = evalExp(E1,EV) * evalExp(E2,EV) .
+  eq evalExp(E1 - E2,EV) = sd(evalExp(E1,EV), evalExp(E2,EV)) .
+  eq evalExp(E1 / E2,EV) = evalExp(E1,EV) quo evalExp(E2,EV) .
+  eq evalExp(E1 % E2,EV) = evalExp(E1,EV) rem evalExp(E2,EV) .
+  -- MinilaはNatしか扱わないので、比較結果や論理演算結果は0か1で返す
+  eq evalExp(E1 === E2,EV) 
+    = if evalExp(E1,EV) == errNat or evalExp(E2,EV) == errNat
+      then {errNat}
+      else {if evalExp(E1,EV) == evalExp(E2,EV) then {1} else {0}} .
+  eq evalExp(E1 =!= E2,EV) 
+    = if evalExp(E1,EV) == errNat or evalExp(E2,EV) == errNat
+      then {errNat}
+      else {if evalExp(E1,EV) == evalExp(E2,EV) then {0} else {1}} .
+  eq evalExp(E1 < E2,EV) 
+    = if evalExp(E1,EV) == errNat or evalExp(E2,EV) == errNat
+      then {errNat}
+      else {if evalExp(E1,EV) < evalExp(E2,EV) then {1} else {0}} .
+  eq evalExp(E1 > E2,EV) 
+    = if evalExp(E1,EV) == errNat or evalExp(E2,EV) == errNat
+      then {errNat}
+      else {if evalExp(E1,EV) > evalExp(E2,EV) then {1} else {0}} .
+  eq evalExp(E1 && E2,EV) 
+    = if evalExp(E1,EV) == errNat or evalExp(E2,EV) == errNat
+      then {errNat}
+      else {if evalExp(E1,EV) == 0 or evalExp(E2,EV) == 0 then {0} else {1}} .
+  eq evalExp(E1 || E2,EV) 
+    = if evalExp(E1,EV) == errNat or evalExp(E2,EV) == errNat
+      then {errNat}
+      else {if evalExp(E1,EV) == 0 and evalExp(E2,EV) == 0 then {0} else {1}} .
 }
 
 eof
