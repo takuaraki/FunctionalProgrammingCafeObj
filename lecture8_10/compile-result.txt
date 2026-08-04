@@ -1,0 +1,21 @@
+-- defining module! COMPILE
+[Warning]: axiom : eq exec2(jumpOnCond(N:Nat),IL:IList,PC:Nat,(N1:Nat | Stk:Stack),Env:Env) = exec(IL,(if (N1 == 0) then { (1 + PC) } else { (PC + N) }),Stk,Env)
+    contains error operators.
+[Warning]: axiom : eq exec2(jumpOnCond(N:Nat),IL:IList,PC:Nat,(N1:Nat | Stk:Stack),Env:Env) = exec(IL,(if (N1 == 0) then { (1 + PC) } else { (PC + N) }),Stk,Env)
+    contains error operators.
+-- opening module VM + COMPILE
+[Warning]: axiom : eq exec2(jumpOnCond(N:Nat),IL:IList,PC:Nat,(N1:Nat | Stk:Stack),Env:Env) = exec(IL,(if (N1 == 0) then { (1 + PC) } else { (PC + N) }),Stk,Env)
+    contains error operators.
+
+-- reduce in %VM + COMPILE : (run(compile(p1))):Env&Err
+((x , 3628800) | ((y , 11) | empEnv)):Env
+(0.0000 sec for parse, 0.0255 sec for 6049 rewrites + 16218 matches)
+-- reduce in %VM + COMPILE : (run(compile(p2))):Env&Err
+((x , 3628800) | ((y , 11) | empEnv)):Env
+(0.0000 sec for parse, 0.0246 sec for 6050 rewrites + 16219 matches)
+-- reduce in %VM + COMPILE : (run(compile(p3))):Env&Err
+((x , 6) | ((y , 0) | ((z , 0) | empEnv))):Env
+(0.0000 sec for parse, 0.0058 sec for 1572 rewrites + 4155 matches)
+-- reduce in %VM + COMPILE : (run(compile(p4))):Env&Err
+((x , 20000000000000000) | ((y , 141421356) | ((z , 141421356) | ((tmp , 141421356) | empEnv)))):Env
+(0.0000 sec for parse, 1.0686 sec for 123409 rewrites + 317410 matches)
