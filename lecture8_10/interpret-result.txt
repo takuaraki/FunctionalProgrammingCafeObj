@@ -1,0 +1,14 @@
+-- defining module! INTERPRET
+-- opening module INTERPRETTRIV-ERR2NAT-ERR 
+-- reduce in %INTERPRET : (interpret(p1)):Env&Err
+((x , 3628800) | ((y , 11) | empEnv)):Env
+(0.0000 sec for parse, 0.0043 sec for 2909 rewrites + 6651 matches)
+-- reduce in %INTERPRET : (interpret(p2)):Env&Err
+((x , 3628800) | ((y , 11) | empEnv)):Env
+(0.0000 sec for parse, 0.0042 sec for 2910 rewrites + 6653 matches)
+-- reduce in %INTERPRET : (interpret(p3)):Env&Err
+((x , 6) | ((y , 0) | ((z , 0) | empEnv))):Env
+(0.0000 sec for parse, 0.0010 sec for 483 rewrites + 1164 matches)
+-- reduce in %INTERPRET : (interpret(p4)):Env&Err
+((x , 20000000000000000) | ((y , 141421356) | ((z , 141421356) | ((tmp , 141421356) | empEnv)))):Env
+(0.0000 sec for parse, 0.0414 sec for 21616 rewrites + 49400 matches)
