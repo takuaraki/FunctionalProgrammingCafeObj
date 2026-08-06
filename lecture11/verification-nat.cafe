@@ -1,0 +1,41 @@
+mod! PNAT1 {
+  [PNat]
+
+  -- 自然数の定義
+  op 0 : -> PNat {constr} .
+  op s : PNat -> PNat {constr} .
+
+  vars X Y : PNat .
+
+  eq (0 = s(Y)) = false .
+  eq (s(X) = s(Y)) = (X = Y) .
+
+  -- 足し算の定義
+  op _+_ : PNat PNat -> PNat .
+  eq 0 + Y = Y . -- (+1)
+  eq s(X) + Y = s(X + Y) . -- (+2)
+
+  -- 掛け算の定義
+  op _*_ : PNat PNat -> PNat .
+  eq 0 * Y = 0 . -- (*1)
+  eq s(X) * Y = (X * Y) + Y . -- (*2)
+
+  -- 階乗の定義
+  op fact1 : PNat -> PNat .
+  eq fact1(0) = s(0) . -- (f1-1)
+  eq fact1(s(X)) = s(X) * fact1(X) . -- (f1-2)
+
+  -- 別の方法で階乗を定義する. a tail-recursive version of factrial function
+  op fact2 : PNat -> PNat .
+  op sfact2 : PNat PNat -> PNat .
+  eq fact2(X) = sfact2(X,s(0)) . -- (f2)
+  eq sfact2(0,Y) = Y . -- (sf2-1)
+  eq sfact2(s(X),Y) = sfact2(X,s(X) * Y) . -- (sf2-2)
+}
+
+eof
+
+-- 検証用コード
+open XXX .
+  red xxx .
+close
