@@ -5,7 +5,7 @@ mod! PNAT1 {
   op 0 : -> PNat {constr} .
   op s : PNat -> PNat {constr} .
 
-  vars X Y : PNat .
+  vars X Y Z : PNat .
 
   eq (0 = s(Y)) = false .
   eq (s(X) = s(Y)) = (X = Y) .
@@ -32,10 +32,3 @@ mod! PNAT1 {
   eq sfact2(0,Y) = Y . -- (sf2-1)
   eq sfact2(s(X),Y) = sfact2(X,s(X) * Y) . -- (sf2-2)
 }
-
-eof
-
--- 検証用コード
-open XXX .
-  red xxx .
-close
