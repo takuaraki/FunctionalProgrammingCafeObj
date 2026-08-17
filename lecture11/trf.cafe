@@ -1,0 +1,53 @@
+in pnat3
+
+"
+補題6: Y * sfact2(X,Z) = sfact2(X,Y * Z)
+補題6の証明. Xに着目して構造的帰納法を用いる.
+"
+
+"I. Base case"
+open PNAT3 .
+  -- fresh constants
+  ops y z : -> PNat .
+  -- check
+  red y * sfact2(0,z) = sfact2(0,y * z) .
+close
+
+"II. Induction case"
+open PNAT3 .
+  -- fresh constants
+  ops x y z : -> PNat .
+  -- 補題3（掛け算の分配則）
+  eq (X + Y) * Z = (X * Z) + (Y * Z) . -- (d*o+)
+  -- IH
+  eq Y * sfact2(x,Z) = sfact2(x,Y * Z) .
+  -- check
+  red y * sfact2(s(x),z) = sfact2(s(x),y * z) .
+close
+
+
+"
+定理5 [fact2(Tail Recursive Factorial) の正当性]
+fact1(X) = fact2(X)
+定理5の証明. Xに着目して構造的帰納法を用いる.
+"
+
+"I. Base case"
+open PNAT3 .
+  -- check
+  red fact1(0) = fact2(0) .
+close
+
+"II. Induction case"
+open PNAT3 .
+  -- fresh constants
+  op x : -> PNat .
+  -- 補題6
+  eq Y * sfact2(X,Z) = sfact2(X,Y * Z) . -- (sf2-p)
+  -- IH
+  eq fact1(x) = fact2(x) .
+  -- check
+  red fact1(s(x)) = fact2(s(x)) .
+close
+
+"定理5の証明終了"
