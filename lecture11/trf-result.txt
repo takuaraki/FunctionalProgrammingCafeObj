@@ -1,0 +1,16 @@
+-- opening module PNAT3
+-- reduce in %PNAT3 : ((y * sfact2(0,z)) = sfact2(0,(y * z))):Bool
+(true):Bool
+(0.0001 sec for parse, 0.0001 sec for 3 rewrites + 13 matches)
+-- opening module PNAT3
+-- reduce in %PNAT3 : ((y * sfact2(s(x),z)) = sfact2(s(x),(y * z))):Bool
+(true):Bool
+(0.0001 sec for parse, 0.0003 sec for 7 rewrites + 117 matches)
+-- opening module PNAT3
+-- reduce in %PNAT3 : (fact1(0) = fact2(0)):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0000 sec for 5 rewrites + 8 matches)
+-- opening module PNAT3
+-- reduce in %PNAT3 : (fact1(s(x)) = fact2(s(x))):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0001 sec for 13 rewrites + 42 matches)

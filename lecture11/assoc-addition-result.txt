@@ -1,0 +1,8 @@
+-- opening module PNAT1
+-- reduce in %PNAT1 : (((0 + y) + z) = (0 + (y + z))):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0000 sec for 3 rewrites + 13 matches)
+-- opening module PNAT1
+-- reduce in %PNAT1 : (((s(x) + y) + z) = (s(x) + (y + z))):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0000 sec for 6 rewrites + 75 matches)

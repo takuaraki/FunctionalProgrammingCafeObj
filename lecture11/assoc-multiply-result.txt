@@ -1,0 +1,16 @@
+-- opening module PNAT2
+-- reduce in %PNAT2 : (((0 + y) * z) = ((0 * z) + (y * z))):Bool
+(true):Bool
+(0.0001 sec for parse, 0.0001 sec for 4 rewrites + 18 matches)
+-- opening module PNAT2
+-- reduce in %PNAT2 : (((s(x) + y) * z) = ((s(x) * z) + (y * z))):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0001 sec for 5 rewrites + 61 matches)
+-- opening module PNAT2
+-- reduce in %PNAT2 : (((0 * y) * z) = (0 * (y * z))):Bool
+(true):Bool
+(0.0001 sec for parse, 0.0000 sec for 4 rewrites + 6 matches)
+-- opening module PNAT2
+-- reduce in %PNAT2 : (((s(x) * y) * z) = (s(x) * (y * z))):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0001 sec for 5 rewrites + 82 matches)

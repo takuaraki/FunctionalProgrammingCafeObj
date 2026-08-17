@@ -1,0 +1,24 @@
+-- opening module PNAT2
+-- reduce in %PNAT2 : ((0 * 0) = 0):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0001 sec for 2 rewrites + 4 matches)
+-- opening module PNAT2
+-- reduce in %PNAT2 : ((s(x) * 0) = 0):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0000 sec for 4 rewrites + 8 matches)
+-- opening module PNAT2
+-- reduce in %PNAT2 : ((0 * s(y)) = ((0 * y) + 0)):Bool
+(true):Bool
+(0.0001 sec for parse, 0.0000 sec for 4 rewrites + 6 matches)
+-- opening module PNAT2
+-- reduce in %PNAT2 : ((s(x) * s(y)) = ((s(x) * y) + s(x))):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0002 sec for 7 rewrites + 76 matches)
+-- opening module PNAT2
+-- reduce in %PNAT2 : ((0 * y) = (y * 0)):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0000 sec for 3 rewrites + 6 matches)
+-- opening module PNAT2
+-- reduce in %PNAT2 : ((s(x) * y) = (y * s(x))):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0001 sec for 4 rewrites + 26 matches)
