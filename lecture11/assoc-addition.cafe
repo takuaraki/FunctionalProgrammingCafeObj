@@ -1,4 +1,4 @@
-in verification-nat
+in pnat1
 
 "
 定理1 [_+_ の結合則 (assoc+)]

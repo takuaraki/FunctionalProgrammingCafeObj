@@ -1,0 +1,70 @@
+in pnat2
+
+"
+定理3 [_*_ の結合則 (assoc*)]
+(X * Y) * Z = X * (Y * Z)
+定理3の証明. Xに着目して構造的帰納法を用いる.
+
+I. Base case
+W2S: (0 * Y) * Z = 0 * (Y * Z)
+
+II. Induction case
+IH: X * Y * Z = X * (Y * Z)
+W2S: (s(X) * Y) * Z = s(X) * (Y * Z)
+→ 補題3（分配則）: (X + Y) * Z = (X * Z) + (Y * Z) の証明が必要
+"
+
+
+"
+補題3（分配則）: (X + Y) * Z = (X * Z) + (Y * Z)
+補題3の証明. Xに着目して構造的帰納法を用いる.
+"
+
+"I. Base case"
+open PNAT2 .
+  -- fresh constants
+  ops y z : -> PNat .
+  -- check
+  red (0 + y) * z = (0 * z) + (y * z) .
+close
+
+"II. Induction case"
+open PNAT2 .
+  -- fresh constants
+  ops x y z : -> PNat .
+  -- IH
+  eq (x + Y) * Z = (x * Z) + (Y * Z) .
+  -- check
+  red (s(x) + y) * z = (s(x) * z) + (y * z) .
+close
+
+"補題3の証明終了"
+
+
+"
+定理3 [_*_ の結合則 (assoc*)]
+(X * Y) * Z = X * (Y * Z)
+定理3の証明. Xに着目して構造的帰納法を用いる.
+"
+
+"I. Base case"
+open PNAT2 .
+  -- fresh constants
+  ops y z : -> PNat .
+  -- check
+  red (0 * y) * z = 0 * (y * z) .
+close
+
+"II. Induction case"
+open PNAT2 .
+  -- fresh constants
+  ops x y z : -> PNat .
+  -- 補題3
+  eq (X + Y) * Z = (X * Z) + (Y * Z) . -- (d*o+)
+  -- IH
+  eq (x * Y) * Z = x * (Y * Z) .
+  -- check
+  red (s(x) * y) * z = s(x) * (y * z) .
+close
+
+"定理3の証明終了"

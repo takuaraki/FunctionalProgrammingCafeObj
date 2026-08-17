@@ -1,4 +1,4 @@
-in verification-nat
+in pnat1
 
 "
 定理2 [_+_ の可換則 (comm+)]
