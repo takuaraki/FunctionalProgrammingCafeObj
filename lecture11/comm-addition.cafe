@@ -1,0 +1,97 @@
+in verification-nat
+
+"
+定理2 [_+_ の可換則 (comm+)]
+X + Y = Y + X
+定理2の証明. Xに着目して構造的帰納法を用いる.
+
+I. Base case
+W2S: 0 + Y = Y + 0
+→ 補題1: X + 0 = X の証明が必要
+
+II. Induction case
+IH: X + Y = Y + X
+W2S: s(X) + Y = Y + s(X)
+→ 補題2: X + s(Y) = s(X + Y) の証明が必要
+"
+
+
+"
+補題1: X + 0 = X
+補題1の証明. Xに着目して構造的帰納法を用いる.
+"
+
+"I. Base case"
+open PNAT1 .
+  -- check
+  red 0 + 0 = 0 .
+close
+
+"II. Induction case"
+open PNAT1 .
+  -- fresh constants
+  op x : -> PNat .
+  -- IH
+  eq x + 0 = x .
+  -- check
+  red s(x) + 0 = s(x) .
+close
+
+"補題1の証明終了"
+
+
+"
+補題2: X + s(Y) = s(X + Y)
+補題2の証明. Xに着目して構造的帰納法を用いる.
+"
+
+"I. Base case"
+open PNAT1 .
+  -- fresh constants
+  op y : -> PNat .
+  -- check
+  red 0 + s(y) = s(0 + y) .
+close
+
+"II. Induction case"
+open PNAT1 .
+  -- fresh constants
+  ops x y : -> PNat .
+  -- IH
+  eq x + s(Y) = s(x + Y) .
+  -- check
+  red s(x) + s(y) = s(s(x) + y) .
+close
+
+"補題2の証明終了"
+
+
+"
+定理2 [_+_ の可換則 (comm+)]
+X + Y = Y + X
+定理2の証明. Xに着目して構造的帰納法を用いる.
+"
+
+"I. Base case"
+open PNAT1 .
+  -- fresh constants
+  op y : -> PNat .
+  -- 補題1
+  eq X + 0 = X . -- (rz+)
+  -- check
+  red 0 + y = y + 0 .
+close
+
+"II. Induction case"
+open PNAT1 .
+  -- fresh constants
+  ops x y : -> PNat .
+  -- 補題2
+  eq X + s(Y) = s(X + Y) . -- (rs+)
+  -- IH
+  eq x + Y = Y + x .
+  -- check
+  red s(x) + y = y + s(x) .
+close
+
+"定理2の証明終了"
