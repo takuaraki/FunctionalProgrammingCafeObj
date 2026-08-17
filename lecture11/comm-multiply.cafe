@@ -1,0 +1,97 @@
+in pnat2
+
+"
+定理4 [_*_ の可換則 (comm*)]
+X * Y = Y * X
+定理4の証明. Xに着目して構造的帰納法を用いる.
+
+I. Base case
+W2S: 0 * Y = Y * 0
+→ 補題4: X * 0 = 0 の証明が必要
+
+II. Induction case
+IH: x * Y = Y * x
+W2S: s(x) * y = y * s(x)
+→ 補題5: X * s(Y) = (X * Y) + X の証明が必要
+"
+
+
+"
+補題4: X * 0 = 0
+補題4の証明. Xに着目して構造的帰納法を用いる.
+"
+
+"I. Base case"
+open PNAT2 .
+  -- check
+  red 0 * 0 = 0 .
+close
+
+"II. Induction case"
+open PNAT2 .
+  -- fresh constants
+  op x : -> PNat .
+  -- IH
+  eq x * 0 = 0 .
+  -- check
+  red s(x) * 0 = 0 .
+close
+
+"補題4の証明終了"
+
+
+"
+補題5: X * s(Y) = (X * Y) + X
+補題5の証明. Xに着目して構造的帰納法を用いる.
+"
+
+"I. Base case"
+open PNAT2 .
+  -- fresh constants
+  op y : -> PNat .
+  -- check
+  red 0 * s(y) = (0 * y) + 0 .
+close
+
+"II. Induction case"
+open PNAT2 .
+  -- fresh constants
+  ops x y : -> PNat .
+  -- IH
+  eq x * s(Y) = (x * Y) + x .
+  -- check
+  red s(x) * s(y) = (s(x) * y) + s(x) .
+close
+
+"補題5の証明終了"
+
+
+"
+定理4 [_*_ の可換則 (comm*)]
+X * Y = Y * X
+定理4の証明. Xに着目して構造的帰納法を用いる.
+"
+
+"I. Base case"
+open PNAT2 .
+  -- fresh constants
+  op y : -> PNat .
+  -- 補題4
+  eq X * 0 = 0 . -- (rz*)
+  -- check
+  red 0 * y = y * 0 .
+close
+
+"II. Induction case"
+open PNAT2 .
+  -- fresh constants
+  ops x y : -> PNat .
+  -- 補題5
+  eq X * s(Y) = (X * Y) + X . -- (rs*)
+  -- IH
+  eq x * Y = Y * x .
+  -- check
+  red s(x) * y = y * s(x) .
+close
+
+"定理4の証明終了"
