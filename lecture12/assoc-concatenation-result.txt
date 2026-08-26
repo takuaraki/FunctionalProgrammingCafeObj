@@ -1,0 +1,18 @@
+
+--> 定理1 [_@_ の結合則 (assoc@)]
+--> (L1 @ L2) @ L3 = L1 @ (L2 @ L3)
+--> 定理1の証明. L1に着目して構造的帰納法を用いる.
+--> 
+--> I. Base case
+-- opening module LIST1(E) done.
+-- reduce in %LIST1(E) : (((nil @ l2) @ l3) = (nil @ (l2 @ l3))):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0000 sec for 3 rewrites + 13 matches)
+--> 
+--> II. Induction case
+-- opening module LIST1(E) done.
+-- reduce in %LIST1(E) : ((((e | l1) @ l2) @ l3) = ((e | l1) @ (l2 @ l3))):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0000 sec for 8 rewrites + 81 matches)
+--> 
+--> 定理1の証明終了
