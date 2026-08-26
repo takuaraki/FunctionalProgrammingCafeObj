@@ -1,0 +1,77 @@
+in list2
+
+--> 補題A: L @ nil = L
+--> 補題Aの証明. Lに着目して構造的帰納法を用いる.
+-->
+--> I. Base case
+"I. Base case"
+open LIST2 .
+  -- check
+  red nil @ nil = nil .
+close
+-->
+--> II. Induction case
+"II. Induction case"
+open LIST2 .
+  -- fresh constants
+  op l : -> List .
+  op e : -> Elt.E .
+  -- induction hypothesis
+  eq l @ nil = l .
+  -- check
+  red (e | l) @ nil = e | l .
+close
+-->
+--> 補題Aの証明終了
+-->
+-->
+--> 補題B: rev1(L1 @ L2) = rev1(L2) @ rev1(L1)
+--> 補題Bの証明. L1に着目して構造的帰納法を用いる.
+-->
+--> I. Base case
+open LIST2 .
+  -- fresh constants
+  op l2 : -> List .
+  -- 補題A
+  eq L1 @ nil = L1 .
+  -- check
+  red rev1(nil @ l2) = rev1(l2) @ rev1(nil) .
+close
+-->
+--> II. Induction case
+open LIST2 .
+  -- fresh constants
+  ops l1 l2 : -> List .
+  op e : -> Elt.E .
+  -- induction hypothesis
+  eq rev1(l1 @ L2) = rev1(L2) @ rev1(l1) .
+  -- check
+  red rev1((e | l1) @ l2) = rev1(l2) @ rev1(e | l1) .
+close
+-->
+--> 補題Bの証明終了
+-->
+-->
+--> 定理A: rev1(rev1(L)) = L
+--> 定理Aの証明. Lに着目して構造的帰納法を用いる.
+-->
+--> I. Base case
+open LIST2 .
+  -- check
+  red rev1(rev1(nil)) = nil .
+close
+-->
+--> II. Induction case
+open LIST2 .
+  -- fresh constants
+  op l : -> List .
+  op e : -> Elt.E .
+  -- induction hypothesis
+  eq rev1(rev1(l)) = l .
+  -- 補題B
+  eq rev1(L1 @ L2) = rev1(L2) @ rev1(L1) .
+  -- check
+  red rev1(rev1(e | l)) = e | l .
+close
+-->
+--> 定理Aの証明終了
