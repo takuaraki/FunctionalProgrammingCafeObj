@@ -1,0 +1,36 @@
+
+--> 補題1: sr2(L1,E2 | L2) = sr2(L1,nil) @ (E2 | L2)
+--> 補題1の証明. L1に着目して構造的帰納法を用いる.
+--> 
+--> I. Base case
+-- opening module LIST2(E) done.
+-- reduce in %LIST2(E) : (sr2(nil,(e2 | l2)) = (sr2(nil,nil) @ (e2 | l2))):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0000 sec for 7 rewrites + 14 matches)
+--> 
+--> II. Induction case
+-- opening module LIST2(E) done.
+-- reduce in %LIST2(E) : (sr2((e | l1),(e2 | l2)) = (sr2((e | l1),nil) @ (e2 | l2))):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0000 sec for 7 rewrites + 53 matches)
+--> 
+--> 補題1の証明終了
+--> 
+--> 
+--> 定理2 [再帰逆リストの正当性検証]
+--> rev1(L1) = rev2(L1)
+--> 定理2の証明. L1に着目して構造的帰納法を用いる.
+--> 
+--> I. Base case
+-- opening module LIST2(E) done.
+-- reduce in %LIST2(E) : (rev1(nil) = rev2(nil)):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0000 sec for 4 rewrites + 6 matches)
+--> 
+--> II. Induction case
+-- opening module LIST2(E) done.
+-- reduce in %LIST2(E) : (rev1((e | l1)) = rev2((e | l1))):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0000 sec for 7 rewrites + 35 matches)
+--> 
+--> 定理2の証明終了

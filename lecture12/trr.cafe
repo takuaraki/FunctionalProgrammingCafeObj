@@ -1,0 +1,52 @@
+in list2
+
+--> 補題1: sr2(L1,E2 | L2) = sr2(L1,nil) @ (E2 | L2)
+--> 補題1の証明. L1に着目して構造的帰納法を用いる.
+-->
+--> I. Base case
+open LIST2 .
+  -- fresh constants
+  op l2 : -> List .
+  op e2 : -> Elt.E .
+  -- check
+  red sr2(nil,e2 | l2) = sr2(nil,nil) @ (e2 | l2) .
+close
+-->
+--> II. Induction case
+open LIST2 .
+  -- fresh constants
+  ops l1 l2 : -> List .
+  ops e e2 : -> Elt.E .
+  -- induction hypothesis
+  eq sr2(l1,E2 | L2) = sr2(l1,nil) @ (E2 | L2) .
+  -- check
+  red sr2(e | l1,e2 | l2) = sr2(e | l1,nil) @ (e2 | l2) .
+close
+-->
+--> 補題1の証明終了
+-->
+-->
+--> 定理2 [再帰逆リストの正当性検証]
+--> rev1(L1) = rev2(L1)
+--> 定理2の証明. L1に着目して構造的帰納法を用いる.
+-->
+--> I. Base case
+open LIST2 .
+  -- check
+  red rev1(nil) = rev2(nil) .
+close
+-->
+--> II. Induction case
+open LIST2 .
+  -- fresh constants
+  op l1 : -> List .
+  op e : -> Elt.E .
+  -- induction hypothesis
+  eq rev1(l1) = rev2(l1) .
+  -- 補題1
+  eq sr2(L1,E2 | L2) = sr2(L1,nil) @ (E2 | L2) .
+  -- check
+  red rev1(e | l1) = rev2(e | l1) .
+close
+-->
+--> 定理2の証明終了
