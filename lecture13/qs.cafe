@@ -1,0 +1,297 @@
+mod! AMPLITUDE {
+  pr(RAT)
+  [NzRat < PosReal NegReal < NzComp]
+  [Rat PosReal NegReal < Real]
+  [Real NzComp < Comp]
+
+  op \sqrt : NzNat -> PosReal .
+  op \sqrt : PosReal -> PosReal .
+  op \sqrt : Real -> Real .
+  op _*_ : PosReal PosReal -> PosReal {prec: 40 r-assoc} .
+  op _*_ : NegReal NegReal -> PosReal {prec: 40 r-assoc} .
+  op _*_ : PosReal NegReal -> NegReal {prec: 40 r-assoc} .
+  op _*_ : NegReal PosReal -> NegReal {prec: 40 r-assoc} .
+  op _*_ : Real Real -> Real {prec: 40 r-assoc} .
+  op _*_ : NzComp NzComp -> NzComp {prec: 40 r-assoc} .
+  op _*_ : Comp Comp -> Comp {assoc comm prec: 40 r-assoc} .
+  op _/_ : PosReal PosReal -> PosReal .
+  op _/_ : Real PosReal -> Real .
+  op _/_ : Real NegReal -> Real .
+  op _/_ : NzComp PosReal -> NzComp .
+  op _/_ : NzComp NegReal -> NzComp .
+  op _/_ : Comp PosReal -> Comp .
+  op _/_ : Comp NegReal -> Comp .
+  op _+_ : PosReal PosReal -> PosReal {assoc comm prec: 41 r-assoc} .
+  op _+_ : Real Real -> Real {prec: 41 r-assoc} .
+  op _+_ : Comp Comp -> Comp {prec: 41 r-assoc} .
+  op |_|^2 : PosReal -> PosReal .
+  op |_|^2 : NegReal -> PosReal .
+  op |_|^2 : NzComp -> PosReal .
+  op |_|^2 : Real -> Real .
+  op |_|^2 : Comp -> Real .
+
+  vars PR PR1 : PosReal .
+  vars NR NR1 : NegReal .
+  vars R R1 R2 : Real .
+  var C : Comp .
+  var NzC : NzComp .
+
+  eq \sqrt(2) * \sqrt(2) = 2 .
+  eq \sqrt(1/4) = 1/2 .
+  eq \sqrt(1) = 1 .
+  eq C / 1 = C .
+  eq C * (1 / PR) = C / PR .
+  eq C * (1 / NR) = C / NR .
+  eq C * (-1 / PR) = -1 * (C / PR) .
+  eq C * (-1 / NR) = -1 * (C / NR) .
+  eq (C / PR) / PR1 = C / (PR * PR1) .
+  eq (C / PR) / NR1 = C / (PR * NR1) .
+  eq (C / NR) / PR1 = C / (NR * PR1) .
+  eq (C / NR) / NR1 = C / (NR * NR1) .
+  eq (-1) * (-1) * C = C .
+  eq | PR |^2 = PR * PR .
+  eq | NR |^2 = NR * NR .
+  eq | R |^2 = R * R .
+  eq | C / PR |^2 = | C |^2 / | PR |^2 .
+  eq | C / NR |^2 = | C |^2 / | NR |^2 .
+  eq (R1 / PR) + (R2 / PR) = (R1 + R2) / PR .
+  eq (R1 / NR) + (R2 / NR) = (R1 + R2) / NR .
+  eq | -1 * NzC |^2 = | NzC |^2 .
+  eq (-1 * NzC) / PR = -1 * (NzC / PR) .
+}
+
+mod! BIT {
+  [Bit]
+  ops 0 1 : -> Bit {constr} .
+  op ~_ : Bit -> Bit .
+  eq ~ 0 = 1 .
+  eq ~ 1 = 0 .
+}
+
+mod! QS {
+  pr(AMPLITUDE)
+  pr(BIT)
+  [ZeroState EmptyKet NzNekQState < QState]
+
+  op 00 : -> ZeroState {constr} .
+  op |> : -> EmptyKet {constr} .
+  op |_> : Bit -> NzNekQState {constr} .
+  op __ : Comp QState -> QState {constr prec: 30} .
+  op __ : NzRat NzNekQState -> NzNekQState {constr prec: 30} .
+  op __ : PosReal NzNekQState -> NzNekQState {constr prec: 30} .
+  op __ : NegReal NzNekQState -> NzNekQState {constr prec: 30} .
+  op __ : NzComp NzNekQState -> NzNekQState {constr prec: 30} .
+  op __ : Zero NzNekQState -> ZeroState {constr prec: 30} .
+  op __ : Comp EmptyKet -> ZeroState {constr prec: 30} .
+  op __ : Comp ZeroState -> ZeroState {constr prec: 30} .
+  op _@_ : QState QState -> QState {constr r-assoc prec: 40 id: |>} .
+  op _@_ : NzNekQState QState -> NzNekQState {constr r-assoc prec: 40 id: |>} .
+  op _@_ : QState NzNekQState -> NzNekQState {constr r-assoc prec: 40 id: |>} .
+  op _@_ : NzNekQState NzNekQState -> NzNekQState {constr r-assoc prec: 40 id: |>} .
+  op _+_ : QState QState -> QState {constr assoc prec: 60 id: 00} .
+  op _+_ : NzNekQState QState -> NzNekQState {constr assoc prec: 60 id: 00} .
+  op _+_ : QState NzNekQState -> NzNekQState {constr assoc prec: 60 id: 00} .
+  op _+_ : NzNekQState NzNekQState -> NzNekQState {constr assoc prec: 60 id: 00} .
+  op H[_]_ : Nat NzNekQState -> NzNekQState { strat: (1 2 0) }.
+  op H[_,_]_ : Nat QState NzNekQState -> NzNekQState { strat: (1 2 3 0) } .
+  op CX[_]_ : Nat NzNekQState -> NzNekQState { strat: (1 2 0) } .
+  op X[_]_ : Nat NzNekQState -> NzNekQState { strat: (1 2 0) } .
+  op Z[_]_ : Nat NzNekQState -> NzNekQState { strat: (1 2 0) } .
+  op M0[_]_ : Nat QState -> QState { strat: (1 2 0) } .
+  op M0[_,_]_ : Nat QState QState -> QState { strat: (1 2 3 0) } .
+  op M1[_]_ : Nat QState -> QState { strat: (1 2 0) } .
+  op M1[_,_]_ : Nat QState QState -> QState { strat: (1 2 3 0) } .
+  op prob : ZeroState -> Zero .
+  op prob : EmptyKet -> Zero .
+  op prob : NzNekQState -> PosReal .
+  op normalize : ZeroState -> ZeroState .
+  op normalize : EmptyKet -> EmptyKet .
+  op normalize : NzNekQState -> NzNekQState .
+  op normalize : NzNekQState PosReal -> NzNekQState .
+  op normalize : PosReal NzNekQState -> NzNekQState .
+
+  var N : Nat . var NzN : NzNat . var PR : PosReal .
+  vars NzNekS NzNekS1 NzNekS2 NzNekS3 : NzNekQState
+  vars QS QS1 : QState .
+  vars A A1 : Comp .
+  var NzA : NzComp . var B : Bit .
+
+  eq A 00 = 00 .
+  eq 0 NzNekS = 00 .
+  eq 1 NzNekS = NzNekS .
+  eq A (A1 NzNekS) = (A * A1) NzNekS .
+  eq (A NzNekS1) @ NzNekS2 = A (NzNekS1 @ NzNekS2) .
+  eq NzNekS1 @ (A NzNekS2) = A (NzNekS1 @ NzNekS2) .
+  eq (A NzNekS) + QS + (A1 NzNekS) + QS1 = (A + A1) NzNekS + QS + QS1 .
+  eq A (NzNekS1 + NzNekS2) = (A NzNekS1) + (A NzNekS2) .
+  eq (NzNekS1 + NzNekS2) @ NzNekS3 = (NzNekS1 @ NzNekS3) + (NzNekS2 @ NzNekS3) .
+  eq NzNekS1 @ (NzNekS2 + NzNekS3) = (NzNekS1 @ NzNekS2) + (NzNekS1 @ NzNekS3) .
+
+  -- Hadamard (H) gate
+  eq H[N] NzNekS = H[N,|>] NzNekS .
+  eq H[N,QS] (NzA NzNekS) = NzA (H[N,QS] NzNekS) .
+  eq H[N,QS] (NzNekS1 + NzNekS2) = H[N,QS] NzNekS1 + H[N,QS] NzNekS2 .
+  eq H[0,QS] | 0 > @ QS1 = (1 / \sqrt(2)) (QS @ | 0 > @ QS1) + (1 / \sqrt(2)) (QS @ | 1 > @ QS1) .
+  eq H[0,QS] | 1 > @ QS1 = (1 / \sqrt(2)) (QS @ | 0 > @ QS1) + (-1 / \sqrt(2)) (QS @ | 1 > @ QS1) .
+  eq H[NzN,QS] | B > @ NzNekS1 = H[sd(NzN,1),QS @ | B >] NzNekS1 .
+
+  -- Control-not (CX) gate
+  eq CX[N] (NzA NzNekS) = NzA (CX[N] NzNekS) .
+  eq CX[N] (NzNekS1 + NzNekS2) = CX[N] NzNekS1 + CX[N] NzNekS2 .
+  eq CX[0] | 0 > @ | B > @ QS = | 0 > @ | B > @ QS .
+  eq CX[0] | 1 > @ | B > @ QS = | 1 > @ | ~ B > @ QS .
+  eq CX[NzN] | B > @ NzNekS = | B > @ (CX[sd(NzN,1)] NzNekS) .
+
+  -- Pauli X gate
+  eq X[N] (NzA NzNekS) = NzA (X[N] NzNekS) .
+  eq X[N] (NzNekS1 + NzNekS2) = X[N] NzNekS1 + X[N] NzNekS2 .
+  eq X[0] | 0 > @ QS = | 1 > @ QS .
+  eq X[0] | 1 > @ QS = | 0 > @ QS .
+  eq X[NzN] | B > @ NzNekS = | B > @ (X[sd(NzN,1)] NzNekS) .
+
+  -- Pauli Z gate
+  eq Z[N] (NzA NzNekS) = NzA (Z[N] NzNekS) .
+  eq Z[N] (NzNekS1 + NzNekS2) = Z[N] NzNekS1 + Z[N] NzNekS2 .
+  eq Z[0] | 0 > @ QS = | 0 > @ QS .
+  eq Z[0] | 1 > @ QS = (-1) (| 1 > @ QS) .
+  eq Z[NzN] | B > @ NzNekS = | B > @ (Z[sd(NzN,1)] NzNekS) .
+
+  -- M0
+  eq M0[N] NzNekS = M0[N,|>] NzNekS .
+  eq M0[N,QS] (NzA NzNekS) = NzA (M0[N,QS] NzNekS) .
+  eq M0[N,QS] (NzNekS1 + NzNekS2) = M0[N,QS] NzNekS1 + M0[N,QS] NzNekS2 .
+  eq M0[0,QS] | 0 > @ QS1 = QS @ QS1 .
+  eq M0[0,QS] | 1 > @ QS1 = 00 .
+  eq M0[NzN,QS] | B > @ NzNekS = M0[sd(NzN,1),QS @ | B >] NzNekS .
+
+  -- M1
+  eq M1[N] NzNekS = M1[N,|>] NzNekS .
+  eq M1[N,QS] (NzA NzNekS) = NzA (M1[N,QS] NzNekS) .
+  eq M1[N,QS] (NzNekS1 + NzNekS2) = M1[N,QS] NzNekS1 + M1[N,QS] NzNekS2 .
+  eq M1[0,QS] | 0 > @ QS1 = 00 .
+  eq M1[0,QS] | 1 > @ QS1 = QS @ QS1 .
+  eq M1[NzN,QS] | B > @ NzNekS = M1[sd(NzN,1),QS @ | B >] NzNekS .
+
+  -- prob
+  eq prob(00) = 0 .
+  eq prob(| B > @ QS) = 1 .
+  eq prob((| B > @ QS) + NzNekS2) = 1 + prob(NzNekS2) .
+  eq prob(NzA NzNekS) = | NzA |^2 .
+  eq prob((NzA NzNekS1) + NzNekS2) = | NzA |^2 + prob(NzNekS2) .
+
+  -- normalize
+  eq normalize(|>) = |> .
+  eq normalize(00) = 00 .
+  eq normalize(NzNekS) = normalize(NzNekS, prob(NzNekS)) .
+  eq normalize(| B > @ QS, PR) = (1 / \sqrt(PR)) (| B > @ QS) .
+  eq normalize((| B > @ QS) + NzNekS2, PR) = (1 / \sqrt(PR)) (| B > @ QS) + normalize(NzNekS2, PR) .
+  eq normalize(NzA NzNekS, PR) = (NzA / \sqrt(PR)) NzNekS .
+  eq normalize((NzA NzNekS1) + NzNekS2, PR) = (NzA / \sqrt(PR)) NzNekS1 + normalize(NzNekS2, PR) .
+  eq normalize(PR, NzNekS) = normalize(NzNekS, PR * prob(NzNekS)) .
+}
+
+--> H Gate
+open QS .
+  ops a b : -> NzComp .
+
+  red H[0] | 0 > .
+  red H[0] | 1 > .
+  red H[0] (a | 0 > + b | 1 >) .
+  red H[1] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >) .
+  red H[0] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >) .
+close
+-->
+--> CX Gate
+open QS .
+  ops a b : -> NzComp .
+
+  red CX[0] | 00 > .
+  red CX[0] | 01 > .
+  red CX[0] | 10 > .
+  red CX[0] | 11 > .
+  red CX[0] (H[0] (| 0 > @ | 0 >)) .
+  red CX[1] (H[1] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >)) .
+close
+-->
+--> X Gate
+open QS .
+  ops a b : -> NzComp .
+
+  red X[0] | 0 > .
+  red X[0] | 1 > .
+  red X[0] (a | 0 > + b | 1 >) .
+  red X[2] (a (| 0 > @ | 1 > @ | 1 >) + b (| 0 > @ | 1 > @ | 0 >)) .
+close
+-->
+--> Z Gate
+open QS .
+  ops a b : -> NzComp .
+
+  red Z[0] | 0 > .
+  red Z[0] | 1 > .
+  red Z[0] (a | 0 > + b | 1 >) .
+  red Z[2] (a (| 1 > @ | 0 > @ | 0 >) + (-1 * b) (| 1 > @ | 0 > @ | 1 >)) .
+  red Z[2] (X[2] (a (| 1 > @ | 1 > @ | 1 >) + (-1 * b) (| 1 > @ | 1 > @ | 0 >))) .
+close
+-->
+--> M0
+open QS .
+  ops a b : -> NzComp .
+
+  red M0[0] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >) .
+  red M0[1] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >) .
+  red M0[2] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >) .
+  red M0[1] (H[0] (CX[0] (CX[1] (H[1] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >))))) .
+  red M0[0] (M0[1] (H[0] (CX[0] (CX[1] (H[1] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >)))))) .
+close
+-->
+--> M1
+open QS .
+  ops a b : -> NzComp .
+
+  red M1[0] ((a | 0 > + b | 1 >) @ | 1 > @ | 1 >) .
+  red M1[1] ((a | 0 > + b | 1 >) @ | 1 > @ | 1 >) .
+  red M1[2] ((a | 0 > + b | 1 >) @ | 1 > @ | 1 >) .
+  red M1[1] (H[0] (CX[0] (CX[1] (H[1] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >))))) .
+  red M0[0] (M1[1] (H[0] (CX[0] (CX[1] (H[1] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >)))))) .
+  red M1[0] (M0[1] (H[0] (CX[0] (CX[1] (H[1] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >)))))) .
+  red M1[0] (M1[1] (H[0] (CX[0] (CX[1] (H[1] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >)))))) .
+close
+-->
+--> prob
+open QS .
+  ops a b : -> NzComp .
+  red prob(M0[0] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >)) .
+  red prob(M0[1] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >) ) .
+close
+open QS .
+  ops a b : -> NzComp .
+  eq | a |^2 + | b |^2 = 1 .
+  red prob(M0[1] (H[0] (CX[0] (CX[1] (H[1] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >)))))) .
+  red prob(M0[0] (M0[1] (H[0] (CX[0] (CX[1] (H[1] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >))))))) .
+close
+-->
+--> Normalization
+open QS .
+  ops a b : -> NzComp .
+
+  red normalize(M0[0] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >)) .
+  red normalize(M0[1] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >) ) .
+close
+open QS .
+  ops a b : -> NzComp .
+  eq | a |^2 + | b |^2 = 1 .
+  red red (a | 0 > + b | 1 >) @ | 0 > @ | 0 > .
+  red prob(M0[0] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >)) .
+  red normalize(M0[0] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >)) .
+
+  ops qs1 qs2 : -> NzNekQState .
+  eq qs1 = M0[0] (M0[1] (H[0] (CX[0] (CX[1] (H[1] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >)))))) .
+  eq qs2 = M1[0] (M1[1] (H[0] (CX[0] (CX[1] (H[1] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >)))))) .
+  red qs1 .
+  red prob(qs1) .
+  red normalize(qs1) .
+  red qs2 .
+  red prob(qs2) .
+  red normalize(qs2) .
+close
