@@ -1,0 +1,11 @@
+
+-- opening module SPP-SOUP
+[Warning]: axiom : ceq measureAndCorrect(S,P) = (([ normalize(P,(M0 [ 0 ] (M0 [ 1 ] S))) , (P * prob((M0 [ 0 ] (M0 [ 1 ] S)))) ]) (([ normalize(P,(X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S)))) , (P * prob((X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S))))) ]) (([ normalize(P,(Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S)))) , (P * prob((Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S))))) ]) ([ normalize(P,(Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S))))) , (P * prob((Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S)))))) ]))))
+       if (((M0 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and (((M0 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState) and (((M1 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and ((M1 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState))))
+ done.    contains error operators.
+-- reduce in %SPP-SOUP : (teleportStep(([ ((a (| 0 >)) + (b (| 1 >))) , 1 ]))):SPP-Soup
+(([ ((a (| 0 >)) + (b (| 1 >))) , 1/4 ]) (([ ((a (| 0 >)) + (b (| 1 >))) , 1/4 ]) (([ ((a (| 0 >)) + (b (| 1 >))) , 1/4 ]) ([ ((a (| 0 >)) + (b (| 1 >))) , 1/4 ])))):SPP-Soup
+(0.0000 sec for parse, 0.1970 sec for 1071 rewrites + 31074 matches)
+-- reduce in %SPP-SOUP : (combine(teleportStep(([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])))):SPP-Soup
+([ ((a (| 0 >)) + (b (| 1 >))) , 1 ]):StateProbPair
+(0.0000 sec for parse, 0.2010 sec for 1083 rewrites + 31343 matches)

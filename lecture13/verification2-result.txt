@@ -1,0 +1,68 @@
+
+--> (1) Base case
+--> (i) arbitrary non-zero complex numbers
+-- opening module QT
+[Warning]: axiom : ceq measureAndCorrect(S:NzNekQState,P:PosReal) = (([ normalize(P,(M0 [ 0 ] (M0 [ 1 ] S))) , (P * prob((M0 [ 0 ] (M0 [ 1 ] S)))) ]) (([ normalize(P,(X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S)))) , (P * prob((X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S))))) ]) (([ normalize(P,(Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S)))) , (P * prob((Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S))))) ]) ([ normalize(P,(Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S))))) , (P * prob((Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S)))))) ]))))
+       if (((M0 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and (((M0 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState) and (((M1 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and ((M1 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState))))
+ done.    contains error operators.
+[Warning]: axiom : eq qs(init) = ([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])
+    contains error operators.
+-- reduce in %QT : (qs(init) = ([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0000 sec for 6 rewrites + 128 matches)
+
+--> (ii) a is 1, and b is 0 because of the normalization condition
+-- opening module QT
+[Warning]: axiom : ceq measureAndCorrect(S:NzNekQState,P:PosReal) = (([ normalize(P,(M0 [ 0 ] (M0 [ 1 ] S))) , (P * prob((M0 [ 0 ] (M0 [ 1 ] S)))) ]) (([ normalize(P,(X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S)))) , (P * prob((X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S))))) ]) (([ normalize(P,(Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S)))) , (P * prob((Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S))))) ]) ([ normalize(P,(Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S))))) , (P * prob((Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S)))))) ]))))
+       if (((M0 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and (((M0 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState) and (((M1 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and ((M1 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState))))
+ done.    contains error operators.
+[Warning]: axiom : eq qs(init) = ([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])
+    contains error operators.
+-- reduce in %QT : (qs(init) = ([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0000 sec for 12 rewrites + 50 matches)
+
+--> (iii) a is 0, and b is 1 because of the normalization condition
+-- opening module QT
+[Warning]: axiom : ceq measureAndCorrect(S:NzNekQState,P:PosReal) = (([ normalize(P,(M0 [ 0 ] (M0 [ 1 ] S))) , (P * prob((M0 [ 0 ] (M0 [ 1 ] S)))) ]) (([ normalize(P,(X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S)))) , (P * prob((X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S))))) ]) (([ normalize(P,(Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S)))) , (P * prob((Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S))))) ]) ([ normalize(P,(Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S))))) , (P * prob((Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S)))))) ]))))
+       if (((M0 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and (((M0 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState) and (((M1 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and ((M1 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState))))
+ done.    contains error operators.
+[Warning]: axiom : eq qs(init) = ([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])
+    contains error operators.
+-- reduce in %QT : (qs(init) = ([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0000 sec for 12 rewrites + 36 matches)
+
+--> (2) Induction case
+--> (i) a is not 0, and b is not 0
+-- opening module QT
+[Warning]: axiom : ceq measureAndCorrect(S:NzNekQState,P:PosReal) = (([ normalize(P,(M0 [ 0 ] (M0 [ 1 ] S))) , (P * prob((M0 [ 0 ] (M0 [ 1 ] S)))) ]) (([ normalize(P,(X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S)))) , (P * prob((X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S))))) ]) (([ normalize(P,(Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S)))) , (P * prob((Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S))))) ]) ([ normalize(P,(Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S))))) , (P * prob((Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S)))))) ]))))
+       if (((M0 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and (((M0 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState) and (((M1 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and ((M1 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState))))
+ done.    contains error operators.
+[Warning]: axiom : eq qs(init) = ([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])
+    contains error operators.
+-- reduce in %QT : (qs(teleport(s)) = ([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])):Bool
+(true):Bool
+(0.0000 sec for parse, 0.3220 sec for 1093 rewrites + 31524 matches)
+
+--> (ii) a is 1, and b is 0 because of the normalization condition
+-- opening module QT
+[Warning]: axiom : ceq measureAndCorrect(S:NzNekQState,P:PosReal) = (([ normalize(P,(M0 [ 0 ] (M0 [ 1 ] S))) , (P * prob((M0 [ 0 ] (M0 [ 1 ] S)))) ]) (([ normalize(P,(X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S)))) , (P * prob((X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S))))) ]) (([ normalize(P,(Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S)))) , (P * prob((Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S))))) ]) ([ normalize(P,(Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S))))) , (P * prob((Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S)))))) ]))))
+       if (((M0 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and (((M0 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState) and (((M1 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and ((M1 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState))))
+ done.    contains error operators.
+[Warning]: axiom : eq qs(init) = ([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])
+    contains error operators.
+-- reduce in %QT : (qs(teleport(s)) = ([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0200 sec for 537 rewrites + 7572 matches)
+
+--> (iii) a is 0, and b is 1 because of the normalization condition
+-- opening module QT
+[Warning]: axiom : ceq measureAndCorrect(S:NzNekQState,P:PosReal) = (([ normalize(P,(M0 [ 0 ] (M0 [ 1 ] S))) , (P * prob((M0 [ 0 ] (M0 [ 1 ] S)))) ]) (([ normalize(P,(X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S)))) , (P * prob((X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S))))) ]) (([ normalize(P,(Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S)))) , (P * prob((Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S))))) ]) ([ normalize(P,(Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S))))) , (P * prob((Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S)))))) ]))))
+       if (((M0 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and (((M0 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState) and (((M1 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and ((M1 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState))))
+ done.    contains error operators.
+[Warning]: axiom : eq qs(init) = ([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])
+    contains error operators.
+-- reduce in %QT : (qs(teleport(s)) = ([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0200 sec for 547 rewrites + 7621 matches)

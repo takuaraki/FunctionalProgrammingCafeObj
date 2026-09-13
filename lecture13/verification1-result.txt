@@ -1,0 +1,25 @@
+
+-- opening module QT
+[Warning]: axiom : ceq measureAndCorrect(S:NzNekQState,P:PosReal) = (([ normalize(P,(M0 [ 0 ] (M0 [ 1 ] S))) , (P * prob((M0 [ 0 ] (M0 [ 1 ] S)))) ]) (([ normalize(P,(X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S)))) , (P * prob((X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S))))) ]) (([ normalize(P,(Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S)))) , (P * prob((Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S))))) ]) ([ normalize(P,(Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S))))) , (P * prob((Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S)))))) ]))))
+       if (((M0 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and (((M0 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState) and (((M1 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and ((M1 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState))))
+ done.    contains error operators.
+[Warning]: axiom : eq qs(init) = ([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])
+    contains error operators.
+-- reduce in %QT : (qs(teleport(init)) = ([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])):Bool
+(true):Bool
+(0.0000 sec for parse, 0.3130 sec for 1093 rewrites + 31523 matches)
+-- opening module QT
+[Warning]: axiom : ceq measureAndCorrect(S:NzNekQState,P:PosReal) = (([ normalize(P,(M0 [ 0 ] (M0 [ 1 ] S))) , (P * prob((M0 [ 0 ] (M0 [ 1 ] S)))) ]) (([ normalize(P,(X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S)))) , (P * prob((X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S))))) ]) (([ normalize(P,(Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S)))) , (P * prob((Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S))))) ]) ([ normalize(P,(Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S))))) , (P * prob((Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S)))))) ]))))
+       if (((M0 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and (((M0 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState) and (((M1 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and ((M1 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState))))
+ done.    contains error operators.
+[Warning]: axiom : eq qs(init) = ([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])
+    contains error operators.
+-- opening module QT
+[Warning]: axiom : ceq measureAndCorrect(S:NzNekQState,P:PosReal) = (([ normalize(P,(M0 [ 0 ] (M0 [ 1 ] S))) , (P * prob((M0 [ 0 ] (M0 [ 1 ] S)))) ]) (([ normalize(P,(X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S)))) , (P * prob((X [ 0 ] (M0 [ 0 ] (M1 [ 1 ] S))))) ]) (([ normalize(P,(Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S)))) , (P * prob((Z [ 0 ] (M1 [ 0 ] (M0 [ 1 ] S))))) ]) ([ normalize(P,(Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S))))) , (P * prob((Z [ 0 ] (X [ 0 ] (M1 [ 0 ] (M1 [ 1 ] S)))))) ]))))
+       if (((M0 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and (((M0 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState) and (((M1 [ 0 ] (M0 [ 1 ] S)) :is NzNekQState) and ((M1 [ 0 ] (M1 [ 1 ] S)) :is NzNekQState))))
+ done.    contains error operators.
+[Warning]: axiom : eq qs(init) = ([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])
+    contains error operators.
+-- reduce in %QT : (qs(teleport(init)) = ([ ((a (| 0 >)) + (b (| 1 >))) , 1 ])):Bool
+(true):Bool
+(0.0000 sec for parse, 0.0200 sec for 547 rewrites + 7620 matches)
