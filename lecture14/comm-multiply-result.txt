@@ -1,0 +1,128 @@
+
+--> Lemma 4 [Right zero of _*_ (rz*)]
+--> X * 0 = 0
+--> Proof. By induction on X.
+-- opening module PNAT2 done.
+** Beginning a new proof in % done.
+:goal { ** root -----------------------------------------
+  -- context module: %
+  -- sentence to be proved
+    eq [rz*]: X:PNat * 0 = 0 .
+}
+** Initial goal (root) is generated. **
+**> Induction will be conducted on X:PNat 
+[si]=> :goal{root} done. done.
+** Generated 2 goals
+(consumed 0.0010 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "1".
+>> Remaining 2 goals.
+--> I. Base case
+[rd]=> :goal{1} done.
+[rd] discharged: 
+  eq [INDUCTION-BASE]: 0 * 0 = 0
+[rd] discharged goal "1".
+(consumed 0.0010 sec, including 2 rewrites + 5 matches)
+>> Next target goal is "2".
+>> Remaining 1 goal.
+--> II. Induction case
+[rd]=> :goal{2} done.
+[rd] discharged: 
+  eq [STEP]: s(X#PNat) * 0 = 0
+[rd] discharged goal "2".
+(consumed 0.0010 sec, including 4 rewrites + 9 matches)
+** All goals are successfully discharged.
+--> End of Proof of Lemma 4
+--> 
+--> Lemma 5 [Right successor of _*_ (rs*)]
+--> X * s(Y) = (X * Y) + X
+--> Proof. By induction on X.
+-- opening module PNAT2 done. done.
+:goal { ** root -----------------------------------------
+  -- context module: %
+  -- sentence to be proved
+    eq [rs*]: X:PNat * s(Y:PNat) = X * Y + X .
+}
+** Initial goal (root) is generated. **
+**> Induction will be conducted on X:PNat 
+[si]=> :goal{root} done. done.
+** Generated 2 goals
+(consumed 0.0020 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "1".
+>> Remaining 2 goals.
+--> I. Base case
+[tc]=> :goal{1} done.
+** Generated 1 goal
+(consumed 0.0010 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "1-1".
+>> Remaining 2 goals.
+
+[rd]=> :goal{1-1} done.
+[rd] discharged: 
+  eq [TC INDUCTION-BASE]: 0 * s(Y@PNat) = 0 * Y@PNat + 0
+[rd] discharged goal "1-1".
+(consumed 0.0010 sec, including 4 rewrites + 7 matches)
+>> Next target goal is "2".
+>> Remaining 1 goal.
+--> II. Induction case
+[tc]=> :goal{2} done.
+** Generated 1 goal
+(consumed 0.0020 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "2-1".
+>> Remaining 1 goal.
+
+[rd]=> :goal{2-1} done.
+[rd] discharged: 
+  eq [TC STEP]: s(X#PNat) * s(Y@PNat) = s(X#PNat) * Y@PNat +
+      s(X#PNat)
+[rd] discharged goal "2-1".
+(consumed 0.0020 sec, including 6 rewrites + 75 matches)
+** All goals are successfully discharged.
+--> End of Proof of Lemma 5
+--> 
+
+-- defining module! PNAT2-RZRS* done.
+--> 
+--> Theorem 4. [Commutativity of _*_ (comm*)]
+--> X * Y = Y * X
+--> Proof. By induction on X."
+-- opening module PNAT2-RZRS* done. done.
+:goal { ** root -----------------------------------------
+  -- context module: %
+  -- sentence to be proved
+    eq [comm*]: X:PNat * Y:PNat = Y * X .
+}
+** Initial goal (root) is generated. **
+**> Induction will be conducted on X:PNat 
+[si]=> :goal{root} done. done.
+** Generated 2 goals
+(consumed 0.0010 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "1".
+>> Remaining 2 goals.
+--> I. Base case
+[tc]=> :goal{1} done.
+** Generated 1 goal
+(consumed 0.0020 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "1-1".
+>> Remaining 2 goals.
+
+[rd]=> :goal{1-1} done.
+[rd] discharged: 
+  eq [TC INDUCTION-BASE]: 0 * Y@PNat = Y@PNat * 0
+[rd] discharged goal "1-1".
+(consumed 0.0010 sec, including 3 rewrites + 8 matches)
+>> Next target goal is "2".
+>> Remaining 1 goal.
+--> II. Induction case
+[tc]=> :goal{2} done.
+** Generated 1 goal
+(consumed 0.0020 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "2-1".
+>> Remaining 1 goal.
+
+[rd]=> :goal{2-1} done.
+[rd] discharged: 
+  eq [TC STEP]: s(X#PNat) * Y@PNat = Y@PNat * s(X#PNat)
+[rd] discharged goal "2-1".
+(consumed 0.0010 sec, including 4 rewrites + 49 matches)
+** All goals are successfully discharged.
+--> End of Proof of Theorem 4

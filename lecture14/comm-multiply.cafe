@@ -1,0 +1,54 @@
+in pnat2
+
+--> Lemma 4 [Right zero of _*_ (rz*)]
+--> X * 0 = 0
+--> Proof. By induction on X.
+open PNAT2 .
+  :goal { eq [rz*] : X * 0 = 0 . }
+  :ind on (X:PNat)
+  :apply (si)
+  --> I. Base case
+  :apply (rd)
+  --> II. Induction case
+:apply (rd)
+close
+--> End of Proof of Lemma 4
+-->
+--> Lemma 5 [Right successor of _*_ (rs*)]
+--> X * s(Y) = (X * Y) + X
+--> Proof. By induction on X.
+open PNAT2 .
+  :goal { eq [rs*] : X * s(Y) = (X * Y) + X . }
+  :ind on (X:PNat)
+  :apply (si)
+  --> I. Base case
+  :apply (tc)
+  :apply (rd)
+  --> II. Induction case
+  :apply (tc)
+  :apply (rd)
+close
+--> End of Proof of Lemma 5
+-->
+mod! PNAT2-RZRS* {
+  pr(PNAT2)
+  vars X Y : PNat .
+  eq X * 0 = 0 .
+  eq X * s(Y) = (X * Y) + X .
+}
+-->
+--> Theorem 4. [Commutativity of _*_ (comm*)]
+--> X * Y = Y * X
+--> Proof. By induction on X."
+open PNAT2-RZRS* .
+  :goal { eq [comm*] : X * Y = Y * X . }
+  :ind on (X:PNat)
+  :apply (si)
+  --> I. Base case
+  :apply (tc)
+  :apply (rd)
+  --> II. Induction case
+  :apply (tc)
+  :apply (rd)
+close
+--> End of Proof of Theorem 4
