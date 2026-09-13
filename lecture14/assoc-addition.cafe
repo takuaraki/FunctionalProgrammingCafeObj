@@ -1,0 +1,19 @@
+in pnat1
+
+--> Theorem 1. [_+_ is associative (assoc+)]
+--> (X + Y) + Z = X + (Y + Z)
+--> Proof. By induction on X.
+
+open PNAT1 .
+  :goal { eq [assoc+] : (X + Y) + Z = X + (Y + Z) . }
+  :ind on (X:PNat)
+  :apply (si)
+  --> I. Base case
+  :apply (tc)
+  :apply (rd)
+  --> II. Induction case
+  :apply (tc)
+  :apply (rd)
+close
+
+--> End of Proof of Theorem 1
