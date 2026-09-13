@@ -1,0 +1,17 @@
+in list1
+
+--> Theorem 7. [Associativity of _@_ (assoc@)]
+--> (L1 @ L2) @ L3 = L1 @ (L2 @ L3)
+--> Proof. By induction on L1.
+open LIST1 .
+  :goal { eq [assoc@] : (L1 @ L2) @ L3 = L1 @ (L2 @ L3) .}
+  :ind on (L1:List)
+  :apply (si)
+  --> I. Base case
+  :apply (tc)
+  :apply (rd)
+  --> II. Induction case
+  :apply (tc)
+  :apply (rd)
+close
+--> End of Proof of Theorem 7

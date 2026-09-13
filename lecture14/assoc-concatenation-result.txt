@@ -1,0 +1,48 @@
+
+--> Theorem 7. [Associativity of _@_ (assoc@)]
+--> (L1 @ L2) @ L3 = L1 @ (L2 @ L3)
+--> Proof. By induction on L1.
+-- opening module LIST1(E) done. done.
+:goal { ** root -----------------------------------------
+  -- context module: %
+  -- sentence to be proved
+    eq [assoc@]: L1:List @ L2:List @ L3:List
+        = L1 @ L2 @ L3 .
+}
+** Initial goal (root) is generated. **
+**> Induction will be conducted on L1:List 
+[si]=> :goal{root} done. done.
+** Generated 2 goals
+(consumed 0.0050 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "1".
+>> Remaining 2 goals.
+--> I. Base case
+[tc]=> :goal{1} done.
+** Generated 1 goal
+(consumed 0.0040 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "1-1".
+>> Remaining 2 goals.
+
+[rd]=> :goal{1-1} done.
+[rd] discharged: 
+  eq [TC INDUCTION-BASE]: nil @ L2@List @ L3@List
+      = nil @ L2@List @ L3@List
+[rd] discharged goal "1-1".
+(consumed 0.0030 sec, including 3 rewrites + 22 matches)
+>> Next target goal is "2".
+>> Remaining 1 goal.
+--> II. Induction case
+[tc]=> :goal{2} done.
+** Generated 1 goal
+(consumed 0.0030 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "2-1".
+>> Remaining 1 goal.
+
+[rd]=> :goal{2-1} done.
+[rd] discharged: 
+  eq [TC STEP]: L1#Elt | L1#List @ L2@List @ L3@List
+      = L1#Elt | L1#List @ L2@List @ L3@List
+[rd] discharged goal "2-1".
+(consumed 0.0020 sec, including 5 rewrites + 74 matches)
+** All goals are successfully discharged.
+--> End of Proof of Theorem 7
