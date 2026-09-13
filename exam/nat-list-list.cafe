@@ -1,0 +1,25 @@
+in nat-list
+
+mod! NAT-LIST-LIST {
+  pr(NAT-LIST)
+  [NatListList]
+
+  op nll-nil : -> NatListList {constr} .
+  op _|_ : NatList NatListList -> NatListList {constr} .
+  op _@_ : NatListList NatListList -> NatListList .
+  op rev : NatListList -> NatListList .
+  op fold-@ : NatListList NatList -> NatList .
+  op map-rev : NatListList -> NatListList .
+
+  vars L L2 : NatList .
+  vars LL LL2 : NatListList .
+
+  eq [nll-@1]: nll-nil @ LL2 = LL2 .
+  eq [nll-@2]: (L | LL) @ LL2 = L | (LL @ LL2) .
+  eq [nll-rev1]: rev(nll-nil) = nll-nil .
+  eq [nll-rev2]: rev(L | LL) = rev(LL) @ (L | nll-nil) .
+  eq [f@1]: fold-@(nll-nil, L2) = L2 .
+  eq [f@2]: fold-@(L | LL, L2) = fold-@(LL, L2 @ L) .
+  eq [mr1]: map-rev(nll-nil) = nll-nil .
+  eq [mr2]: map-rev(L | LL) = rev(L) | map-rev(LL) .
+}

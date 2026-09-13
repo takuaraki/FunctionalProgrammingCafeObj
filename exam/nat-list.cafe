@@ -1,0 +1,17 @@
+mod! NAT-LIST {
+  pr(NAT)
+  [NatList]
+  
+  op nl-nil : -> NatList {constr} .
+  op _|_ : Nat NatList -> NatList {constr} .
+  op _@_ : NatList NatList -> NatList .
+  op rev : NatList -> NatList .
+
+  var X : Nat .
+  vars L L2 : NatList .
+
+  eq [nl-@1]: nl-nil @ L2 = L2 .
+  eq [nl-@2]: (X | L) @ L2 = X | (L @ L2) .
+  eq [nl-rev1]: rev(nl-nil) = nl-nil .
+  eq [nl-rev2]: rev(X | L) = rev(L) @ (X | nl-nil) .
+}
