@@ -1,0 +1,84 @@
+
+--> Lemma 8 [Property of sr2 (sr2-p)]
+--> sr2(L1,E2 | L2) = sr2(L1,nil) @ (E2 | L2)
+--> Proof. By induction on L1.
+-- opening module LIST2(E) done. done.
+:goal { ** root -----------------------------------------
+  -- context module: %
+  -- sentence to be proved
+    eq [sr2-p]: sr2(L1:List, E2:Elt | L2:List)
+        = sr2(L1, nil) @ E2 | L2 .
+}
+** Initial goal (root) is generated. **
+**> Induction will be conducted on L1:List 
+[si]=> :goal{root} done. done.
+** Generated 2 goals
+(consumed 0.0020 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "1".
+>> Remaining 2 goals.
+--> I. Base case
+[tc]=> :goal{1} done.
+** Generated 1 goal
+(consumed 0.0020 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "1-1".
+>> Remaining 2 goals.
+
+[rd]=> :goal{1-1} done.
+[rd] discharged: 
+  eq [TC INDUCTION-BASE]: sr2(nil, E2@Elt | L2@List)
+      = sr2(nil, nil) @ E2@Elt | L2@List
+[rd] discharged goal "1-1".
+(consumed 0.0020 sec, including 4 rewrites + 7 matches)
+>> Next target goal is "2".
+>> Remaining 1 goal.
+--> II. Induction case
+[tc]=> :goal{2} done.
+** Generated 1 goal
+(consumed 0.0030 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "2-1".
+>> Remaining 1 goal.
+
+[rd]=> :goal{2-1} done.
+[rd] discharged: 
+  eq [TC STEP]: sr2(L1#Elt | L1#List, E2@Elt | L2@List)
+      = sr2(L1#Elt | L1#List, nil) @ E2@Elt | L2@List
+[rd] discharged goal "2-1".
+(consumed 0.0050 sec, including 7 rewrites + 76 matches)
+** All goals are successfully discharged.
+--> End of Proof of Lemma 8
+--> 
+
+-- defining module! LIST2-SR2-P done.
+--> 
+--> Theorem 8. [Correctness of a tail recursive rev (ctrr)]
+--> rev1(L1) = rev2(L1)
+--> Proof. By induction on L1.
+-- opening module LIST2-SR2-P(E.LIST2) done. done.
+:goal { ** root -----------------------------------------
+  -- context module: %
+  -- sentence to be proved
+    eq [ctrr]: rev1(L1:List) = rev2(L1) .
+}
+** Initial goal (root) is generated. **
+**> Induction will be conducted on L1:List 
+[si]=> :goal{root} done. done.
+** Generated 2 goals
+(consumed 0.0040 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "1".
+>> Remaining 2 goals.
+--> I. Base case
+[rd]=> :goal{1} done.
+[rd] discharged: 
+  eq [INDUCTION-BASE]: rev1(nil) = rev2(nil)
+[rd] discharged goal "1".
+(consumed 0.0020 sec, including 4 rewrites + 8 matches)
+>> Next target goal is "2".
+>> Remaining 1 goal.
+--> II. Induction case
+[rd]=> :goal{2} done.
+[rd] discharged: 
+  eq [STEP]: rev1(L1#Elt | L1#List) = rev2(L1#Elt | L1#List)
+[rd] discharged goal "2".
+(consumed 0.0020 sec, including 7 rewrites + 58 matches)
+** All goals are successfully discharged.
+--> End of Proof of Theorem 8

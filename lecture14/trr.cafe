@@ -1,0 +1,38 @@
+in list2
+
+--> Lemma 8 [Property of sr2 (sr2-p)]
+--> sr2(L1,E2 | L2) = sr2(L1,nil) @ (E2 | L2)
+--> Proof. By induction on L1.
+open LIST2 .
+  :goal { eq [sr2-p] : sr2(L1,E2 | L2) = sr2(L1,nil) @ (E2 | L2) . }
+  :ind on (L1:List)
+  :apply (si)
+  --> I. Base case
+  :apply (tc)
+  :apply (rd)
+  --> II. Induction case
+  :apply (tc)
+  :apply (rd)
+close
+--> End of Proof of Lemma 8
+-->
+mod! LIST2-SR2-P {
+  pr(LIST2)
+  vars E E2 : Elt.E .
+  vars L1 L2 : List .
+  eq [sr2-p] : sr2(L1,E2 | L2) = sr2(L1,nil) @ (E2 | L2) .
+}
+-->
+--> Theorem 8. [Correctness of a tail recursive rev (ctrr)]
+--> rev1(L1) = rev2(L1)
+--> Proof. By induction on L1.
+open LIST2-SR2-P .
+  :goal { eq [ctrr] : rev1(L1) = rev2(L1) . }
+  :ind on (L1:List)
+  :apply (si)
+  --> I. Base case
+  :apply (rd)
+  --> II. Induction case
+  :apply (rd)
+close
+--> End of Proof of Theorem 8
