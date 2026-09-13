@@ -1,0 +1,22 @@
+in multi-hop
+
+mod* QT {
+  pr(SPP-SOUP)
+  [Sys]
+
+  op init : -> Sys {constr} .
+  op teleport : Sys -> Sys {constr} .
+  op qs : Sys -> SPP-Soup .
+
+  var S : Sys .
+
+  -- arbitrary complex numbers
+  ops a b : -> Comp .
+  eq | a |^2 + | b |^2 = 1 .
+
+  -- init
+  eq qs(init) = [a | 0 > + b | 1 >, 1] .
+
+  -- teleport
+  eq qs(teleport(S)) = teleportHop(qs(S)) .
+}

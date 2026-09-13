@@ -1,0 +1,83 @@
+in teleportation
+
+-- Theorem 1. (\forall S : Sys)(\forall a, b : Comp)
+-- qs(teleport(S) = [a | 0 > + b | 1 >, 1]
+-- Proof. By structural induction on S
+-- (1) Base case
+-- The case is split into 3 sub-cases.
+-- a is not n0, and b is not 0
+
+-- (i) arbitrary non-zero complex numbers
+open QT .
+  -- fresh constants
+  ops a' b' : -> NzComp .
+  -- case splitting
+  eq a = a' .
+  eq b = b' .
+  eq | a' |^2 + | b' |^2 = 1 .
+  -- check
+  red qs(init) = [a | 0 > + b | 1 >, 1] .
+close
+
+-- (ii) a is 1, and b is 0 because of the normalization condition
+open QT .
+  -- case splitting
+  eq a = 1 .
+  eq b = 0 .
+  -- check
+  red qs(init) = [a | 0 > + b | 1 >, 1] .
+close
+
+-- (iii) a is 0, and b is 1 because of the normalization condition
+open QT .
+  -- case splitting
+  eq a = 0 .
+  eq b = 1 .
+  -- check
+  red qs(init) = [a | 0 > + b | 1 >, 1] .
+close
+
+-- (2) Induction case
+-- The case is split into 3 sub-cases.
+
+-- (i) a is not 0, and b is not 0
+open QT .
+  -- fresh constants
+  op s : -> Sys .
+  ops a' b' : -> NzComp .
+  -- case splitting
+  eq a = a' .
+  eq b = b' .
+  eq | a' |^2 + | b' |^2 = 1 .
+  -- IH
+  eq qs(s) = [a | 0 > + b | 1 >, 1] .
+  -- check
+  red qs(teleport(s)) = [a | 0 > + b | 1 >, 1] .
+close
+
+-- (ii) a is 1, and b is 0 because of the normalization condition
+open QT .
+  op s : -> Sys .
+  -- case splitting
+  eq a = 1 .
+  eq b = 0 .
+  -- IH
+  eq qs(s) = [a | 0 > + b | 1 >, 1] .
+  -- check
+  red qs(teleport(s)) = [a | 0 > + b | 1 >, 1] .
+close
+
+-- (iii) a is 0, and b is 1 because of the normalization condition
+open QT .
+  -- fresh constants
+  op s : -> Sys .
+  -- case splitting
+  eq a = 0 .
+  eq b = 1 .
+  -- IH
+  eq qs(s) = [a | 0 > + b | 1 >, 1] .
+  -- check
+  red qs(teleport(s)) = [a | 0 > + b | 1 >, 1] .
+close
+--
+-- End of Proof

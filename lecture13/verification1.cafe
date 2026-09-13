@@ -1,0 +1,38 @@
+in teleportation
+
+-- One hop
+--
+-- Theorem 1. (\forall complex numbers a, b)
+-- qs(teleport(init)) = [a | 0 > + b | 1 >, 1]
+--
+-- Proof. By case splitting
+-- The case is split into 3 sub-cases.
+-- a is not 0, and b is not 0
+open QT .
+  -- fresh constants
+  ops a' b' : -> NzComp .
+  -- case splitting
+  eq a = a' .
+  eq b = b' .
+  eq | a' |^2 + | b' |^2 = 1 .
+  -- check
+  red qs(teleport(init)) = [a | 0 > + b | 1 >, 1] .
+close
+
+-- a is 1, and b is 0 because of the normalization condition
+open QT .
+  -- case splitting
+  eq a = 1 .
+  eq b = 0 .
+  -- check
+  close
+  open QT .
+  -- case splitting
+  eq a = 0 .
+  eq b = 1 .
+  -- check
+  red qs(teleport(init)) = [a | 0 > + b | 1 >, 1] .
+close
+--
+-- End of Proof
+--
