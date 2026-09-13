@@ -1,4 +1,4 @@
-mod! PNAT1 {
+mod! PNAT2 {
   [PNat]
 
   op 0 : -> PNat {constr} .
@@ -10,7 +10,7 @@ mod! PNAT1 {
   eq (s(X) = s(Y)) = (X = Y) .
 
   -- +
-  op _+_ : PNat PNat -> PNat .
+  op _+_ : PNat PNat -> PNat {assoc comm} .
   eq 0 + Y = Y . -- (+1)
   eq s(X) + Y = s(X + Y) . -- (+2)
 
