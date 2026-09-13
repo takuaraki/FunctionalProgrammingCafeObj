@@ -205,10 +205,10 @@ close
 open QS .
   ops a b : -> NzComp .
 
-  red CX[0] | 00 > .
-  red CX[0] | 01 > .
-  red CX[0] | 10 > .
-  red CX[0] | 11 > .
+  red CX[0] (| 0 > @ | 0 >) .
+  red CX[0] (| 0 > @ | 1 >) .
+  red CX[0] (| 1 > @ | 0 >) .
+  red CX[0] (| 1 > @ | 1 >) .
   red CX[0] (H[0] (| 0 > @ | 0 >)) .
   red CX[1] (H[1] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >)) .
 close
@@ -281,7 +281,7 @@ close
 open QS .
   ops a b : -> NzComp .
   eq | a |^2 + | b |^2 = 1 .
-  red red (a | 0 > + b | 1 >) @ | 0 > @ | 0 > .
+  red (a | 0 > + b | 1 >) @ | 0 > @ | 0 > .
   red prob(M0[0] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >)) .
   red normalize(M0[0] ((a | 0 > + b | 1 >) @ | 0 > @ | 0 >)) .
 
