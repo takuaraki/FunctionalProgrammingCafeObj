@@ -1,0 +1,109 @@
+
+--> Lemma 4 [distributive law of _*_ over _+_ (d*o+)]
+--> (X + Y) * Z = (X * Z) + (Y * Z)
+--> Proof. By induction on X.
+-- opening module PNAT2 done.
+** Beginning a new proof in % done.
+-- reading in file  : int
+-- reading in file  : nat
+-- reading in file  : nznat
+ done.
+-- done reading in file: nznat
+ done.
+-- done reading in file: nat
+ done.
+-- done reading in file: int
+
+:goal { ** root -----------------------------------------
+  -- context module: %
+  -- sentence to be proved
+    eq [d*o+]: X:PNat + Y:PNat * Z:PNat = X * Z + Y * Z .
+}
+** Initial goal (root) is generated. **
+**> Induction will be conducted on X:PNat 
+[si]=> :goal{root} done. done.
+** Generated 2 goals
+(consumed 0.0040 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "1".
+>> Remaining 2 goals.
+--> I. Base case
+[tc]=> :goal{1} done.
+** Generated 1 goal
+(consumed 0.0020 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "1-1".
+>> Remaining 2 goals.
+
+[rd]=> :goal{1-1} done.
+[rd] discharged: 
+  eq [TC INDUCTION-BASE]: 0 + Y@PNat * Z@PNat
+      = 0 * Z@PNat + Y@PNat * Z@PNat
+[rd] discharged goal "1-1".
+(consumed 0.0060 sec, including 4 rewrites + 27 matches)
+>> Next target goal is "2".
+>> Remaining 1 goal.
+--> II. Induction case
+[tc]=> :goal{2} done.
+** Generated 1 goal
+(consumed 0.0020 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "2-1".
+>> Remaining 1 goal.
+
+[rd]=> :goal{2-1} done.
+[rd] discharged: 
+  eq [TC STEP]: s(X#PNat) + Y@PNat * Z@PNat
+      = s(X#PNat) * Z@PNat + Y@PNat * Z@PNat
+[rd] discharged goal "2-1".
+(consumed 0.0020 sec, including 5 rewrites + 102 matches)
+** All goals are successfully discharged.
+--> End of Proof of Lemma 4
+--> 
+
+-- defining module! PNAT2-D*O+ done.
+
+--> Theorem 3 [Associativity of _*_ (assoc*)]
+--> (X * Y) * Z = X * (Y * Z)
+--> Proof. By induction on X.
+-- opening module PNAT2-D*O+ done. done.
+:goal { ** root -----------------------------------------
+  -- context module: %
+  -- sentence to be proved
+    eq [assoc*]: X:PNat * Y:PNat * Z:PNat
+        = X * Y * Z .
+}
+** Initial goal (root) is generated. **
+**> Induction will be conducted on X:PNat 
+[si]=> :goal{root} done. done.
+** Generated 2 goals
+(consumed 0.0020 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "1".
+>> Remaining 2 goals.
+--> I. Base case
+[tc]=> :goal{1} done.
+** Generated 1 goal
+(consumed 0.0010 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "1-1".
+>> Remaining 2 goals.
+
+[rd]=> :goal{1-1} done.
+[rd] discharged: 
+  eq [TC INDUCTION-BASE]: 0 * Y@PNat * Z@PNat
+      = 0 * Y@PNat * Z@PNat
+[rd] discharged goal "1-1".
+(consumed 0.0030 sec, including 4 rewrites + 10 matches)
+>> Next target goal is "2".
+>> Remaining 1 goal.
+--> II. Induction case
+[tc]=> :goal{2} done.
+** Generated 1 goal
+(consumed 0.0050 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "2-1".
+>> Remaining 1 goal.
+
+[rd]=> :goal{2-1} done.
+[rd] discharged: 
+  eq [TC STEP]: s(X#PNat) * Y@PNat * Z@PNat
+      = s(X#PNat) * Y@PNat * Z@PNat
+[rd] discharged goal "2-1".
+(consumed 0.0020 sec, including 5 rewrites + 131 matches)
+** All goals are successfully discharged.
+--> End of Proof of Theorem 3

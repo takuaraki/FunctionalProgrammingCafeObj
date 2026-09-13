@@ -1,0 +1,39 @@
+in pnat2
+
+--> Lemma 4 [distributive law of _*_ over _+_ (d*o+)]
+--> (X + Y) * Z = (X * Z) + (Y * Z)
+--> Proof. By induction on X.
+open PNAT2 .
+  :goal { eq [d*o+] : (X + Y) * Z = (X * Z) + (Y * Z) . }
+  :ind on (X:PNat)
+  :apply (si)
+  --> I. Base case
+  :apply (tc)
+  :apply (rd)
+  --> II. Induction case
+  :apply (tc)
+  :apply (rd)
+close
+--> End of Proof of Lemma 4
+-->
+mod! PNAT2-D*O+ {
+  pr(PNAT2)
+  vars X Y Z : PNat .
+  eq (X + Y) * Z = (X * Z) + (Y * Z) .
+}
+
+--> Theorem 3 [Associativity of _*_ (assoc*)]
+--> (X * Y) * Z = X * (Y * Z)
+--> Proof. By induction on X.
+open PNAT2-D*O+ .
+  :goal { eq [assoc*] : (X * Y) * Z = X * (Y * Z) . }
+  :ind on (X:PNat)
+  :apply (si)
+  --> I. Base case
+  :apply (tc)
+  :apply (rd)
+  --> II. Induction case
+  :apply (tc)
+  :apply (rd)
+close
+--> End of Proof of Theorem 3
