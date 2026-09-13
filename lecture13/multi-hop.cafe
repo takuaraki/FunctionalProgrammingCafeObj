@@ -1,0 +1,60 @@
+in qs
+
+mod! STATE-PROB-PAIR {
+  pr(AMPLITUDE)
+  pr(QS)
+  [StateProbPair]
+
+  op [_,_] : NzNekQState PosReal -> StateProbPair {constr} .
+  op state : StateProbPair -> NzNekQState .
+  op prob : StateProbPair -> PosReal .
+
+  var S : NzNekQState .
+  var P : PosReal .
+
+  eq state([S, P]) = S .
+  eq prob([S, P]) = P .
+}
+
+mod! SPP-SOUP {
+  pr(STATE-PROB-PAIR)
+  [StateProbPair < SPP-Soup]
+
+  op e : -> SPP-Soup {constr} .
+  op __ : SPP-Soup SPP-Soup -> SPP-Soup {constr assoc comm id: e} .
+  op teleportStep : StateProbPair -> SPP-Soup .
+  op prepareBell : NzNekQState -> NzNekQState .
+  op measureAndCorrect : NzNekQState PosReal -> SPP-Soup .
+  op teleportHop : SPP-Soup -> SPP-Soup .
+  op combine : SPP-Soup -> SPP-Soup .
+  op combine1 : StateProbPair SPP-Soup -> SPP-Soup .
+
+  var SPP : StateProbPair .
+  var SPP-S : SPP-Soup .
+  vars S S2 : NzNekQState .
+  vars P P1 P2 : PosReal .
+
+  eq teleportStep([S, P]) = measureAndCorrect(prepareBell(S @ | 0 > @ | 0 >), P) .
+  eq prepareBell(S) = H[0] (CX[0] (CX[1] (H[1] S))) .
+  ceq measureAndCorrect(S, P)
+  = [normalize(P, M0[0] (M0[1] S)), P * prob(M0[0] (M0[1] S))]
+  [normalize(P, X[0] (M0[0] (M1[1] S))), P * prob(X[0] (M0[0] (M1[1] S)))]
+  [normalize(P, Z[0] (M1[0] (M0[1] S))), P * prob(Z[0] (M1[0] (M0[1] S)))]
+  [normalize(P, Z[0] (X[0] (M1[0] (M1[1] S)))), P * prob(Z[0] (X[0] (M1[0] (M1[1] S))))]
+  if (M0[0] (M0[1] S) :is NzNekQState) and (M0[0] (M1[1] S) :is NzNekQState) and
+  (M1[0] (M0[1] S) :is NzNekQState) and (M1[0] (M1[1] S) :is NzNekQState) .
+  eq teleportHop(e) = e .
+  eq teleportHop([S, P] SPP-S) = combine(teleportStep([S, P]) teleportHop(SPP-S)) .
+  eq combine(e) = e .
+  eq combine([S,P1] SPP-S) = combine1([S,P1], combine(SPP-S)) .
+  eq combine1([S,P1], e) = [S,P1] .
+  eq combine1([S,P1], [S,P2] SPP-S) = [S, P1 + P2] SPP-S .
+  ceq combine1([S,P1], [S2,P2] SPP-S) = [S2,P2] combine1([S,P1], SPP-S) if not (S = S2) .
+}
+
+open SPP-SOUP .
+  ops a b : -> NzComp .
+  eq | a |^2 + | b |^2 = 1 .
+  red teleportStep([a | 0 > + b | 1 >, 1]) .
+  red combine(teleportStep([a | 0 > + b | 1 >, 1])) .
+close
