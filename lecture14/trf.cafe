@@ -1,0 +1,37 @@
+in pnat3
+
+--> Lemma 6 [Property of sfact2 (sf2-p)]
+--> Y * sfact2(X,Z) = sfact2(X,Y * Z)
+--> Proof. By induction on X.
+open PNAT3-D*O+ .
+  :goal { eq [sf2-p] : Y * sfact2(X,Z) = sfact2(X,Y * Z) . }
+  :ind on (X:PNat)
+  :apply (si)
+  --> I. Base case
+  :apply (tc)
+  :apply (rd)
+  --> II. Induction case
+  :apply (tc)
+  :apply (rd)
+close
+--> End of Proof of Lemma 6
+-->
+mod! PNAT3-SF2-P {
+  pr(PNAT3)
+  vars X Y Z : PNat .
+  eq [sf2-p] : Y * sfact2(X,Z) = sfact2(X,Y * Z) .
+}
+-->
+--> Theorem 5 [Correctness of tail recursive fact (ctrf)]
+--> fact1(X) = fact2(X)
+--> Proof. By induction on X.
+open PNAT3-SF2-P .
+  :goal { eq [ctrf] : fact1(X) = fact2(X) . }
+  :ind on (X:PNat)
+  :apply (si)
+  --> I. Base case
+  :apply (rd)
+  --> II. Induction case
+  :apply (rd)
+close
+--> End of Proof of Theorem 5

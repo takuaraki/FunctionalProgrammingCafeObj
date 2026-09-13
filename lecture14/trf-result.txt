@@ -1,0 +1,84 @@
+
+--> Lemma 6 [Property of sfact2 (sf2-p)]
+--> Y * sfact2(X,Z) = sfact2(X,Y * Z)
+--> Proof. By induction on X.
+-- opening module PNAT3-D*O+ done. done.
+:goal { ** root -----------------------------------------
+  -- context module: %
+  -- sentence to be proved
+    eq [sf2-p]: Y:PNat * sfact2(X:PNat, Z:PNat)
+        = sfact2(X, Y * Z) .
+}
+** Initial goal (root) is generated. **
+**> Induction will be conducted on X:PNat 
+[si]=> :goal{root} done. done.
+** Generated 2 goals
+(consumed 0.0040 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "1".
+>> Remaining 2 goals.
+--> I. Base case
+[tc]=> :goal{1} done.
+** Generated 1 goal
+(consumed 0.0050 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "1-1".
+>> Remaining 2 goals.
+
+[rd]=> :goal{1-1} done.
+[rd] discharged: 
+  eq [TC INDUCTION-BASE]: Y@PNat * sfact2(0, Z@PNat)
+      = sfact2(0, Y@PNat * Z@PNat)
+[rd] discharged goal "1-1".
+(consumed 0.0020 sec, including 3 rewrites + 30 matches)
+>> Next target goal is "2".
+>> Remaining 1 goal.
+--> II. Induction case
+[tc]=> :goal{2} done.
+** Generated 1 goal
+(consumed 0.0040 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "2-1".
+>> Remaining 1 goal.
+
+[rd]=> :goal{2-1} done.
+[rd] discharged: 
+  eq [TC STEP]: Y@PNat * sfact2(s(X#PNat), Z@PNat)
+      = sfact2(s(X#PNat), Y@PNat * Z@PNat)
+[rd] discharged goal "2-1".
+(consumed 0.0030 sec, including 7 rewrites + 182 matches)
+** All goals are successfully discharged.
+--> End of Proof of Lemma 6
+--> 
+
+-- defining module! PNAT3-SF2-P done.
+--> 
+--> Theorem 5 [Correctness of tail recursive fact (ctrf)]
+--> fact1(X) = fact2(X)
+--> Proof. By induction on X.
+-- opening module PNAT3-SF2-P done. done.
+:goal { ** root -----------------------------------------
+  -- context module: %
+  -- sentence to be proved
+    eq [ctrf]: fact1(X:PNat) = fact2(X) .
+}
+** Initial goal (root) is generated. **
+**> Induction will be conducted on X:PNat 
+[si]=> :goal{root} done. done.
+** Generated 2 goals
+(consumed 0.0020 sec, including 0 rewrites + 0 matches)
+>> Next target goal is "1".
+>> Remaining 2 goals.
+--> I. Base case
+[rd]=> :goal{1} done.
+[rd] discharged: 
+  eq [INDUCTION-BASE]: fact1(0) = fact2(0)
+[rd] discharged goal "1".
+(consumed 0.0020 sec, including 4 rewrites + 7 matches)
+>> Next target goal is "2".
+>> Remaining 1 goal.
+--> II. Induction case
+[rd]=> :goal{2} done.
+[rd] discharged: 
+  eq [STEP]: fact1(s(X#PNat)) = fact2(s(X#PNat))
+[rd] discharged goal "2".
+(consumed 0.0030 sec, including 13 rewrites + 51 matches)
+** All goals are successfully discharged.
+--> End of Proof of Theorem 5
